@@ -1,0 +1,129 @@
+---
+// Nada de import en frontmatter porque usarás script cliente
+---
+<div class="flex flex-col gap-3 w-full">
+  <label class="text-sm font-medium">URL, Texto o PDF (public)</label>
+  <input
+    type="text"
+    placeholder="https://mi-negocio.com/mi-carta.pdf"
+    class="qr-input w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring focus:ring-blue-200 outline-none"
+  />
+
+  <div class="grid grid-cols-2 gap-3">
+    <div>
+      <label class="text-sm font-medium">Color de puntos</label>
+      <input type="color" class="qr-color w-full h-10 p-0 border rounded" value="#000000" />
+    </div>
+    <div>
+      <label class="text-sm font-medium">Color de fondo</label>
+      <input type="color" class="qr-bg w-full h-10 p-0 border rounded" value="#ffffff" />
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <label class="text-sm font-medium">Tamaño</label>
+    <input type="range" min="150" max="400" step="50" value="250" class="qr-size flex-1" />
+    <span class="qr-size-display text-sm font-mono">250px</span>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <button class="cta black text-sm px-3 py-2 qr-generate">Generar QR</button>
+    <button class="cta white text-sm px-3 py-2 qr-download hidden">Descargar PNG</button>
+  </div>
+
+  <div class="w-full flex items-center justify-center bg-slate-100 rounded p-4 min-h-[250px]">
+    <canvas class="qr-canvas hidden"></canvas>
+    <div class="qr-placeholder text-slate-500 text-sm">Tu QR aparecerá aquí</div>
+  </div>
+</div>
+
+<script is:inline>
+(() => {
+  const root = document.currentScript.closest("div");
+  const input = root.querySelector(".qr-input");
+  const colorInput = root.querySelector(".qr-color");
+  const bgInput = root.querySelector(".qr-bg");
+  const sizeRange = root.querySelector(".qr-size");
+  const sizeDisplay = root.querySelector(".qr-size-display");
+  const generateBtn = root.querySelector(".qr-generate");
+  const canvas = root.querySelector(".qr-canvas");
+  const placeholder = root.querySelector(".qr-placeholder");
+  const dl = root.querySelector(".qr-download");
+
+  sizeRange.addEventListener("input", () => {
+    sizeDisplay.textContent = sizeRange.value + "px";
+  });
+
+  generateBtn.addEventListener("click", () => {
+    const text = input.value.trim();
+    if (!text) {
+      alert("Introduce una URL, texto o enlace al PDF");
+      return;
+    }
+
+    const size = parseInt(sizeRange.value, 10);
+    canvas.width = size;
+    canvas.height = size;
+
+    // Usar la librería QRCode.js si está disponible
+    // Si la instalaste con npm: import QRCode from "qrcode"; pero client-side
+    // Sino usar CDN:
+    if (window.QRCode) {
+      // Usa QRCode.js estilo antiguo
+      // Borrar previos
+      const parent = canvas.parentElement;
+      parent.innerHTML = "";
+      parent.appendChild(canvas);
+      QRCode.toCanvas(canvas, text, {
+        width: size,
+        color: {
+          dark: colorInput.value,
+          light: bgInput.value
+        },
+        errorCorrectionLevel: 'H'
+      }, (error) => {
+        if (error) {
+          console.error(error);
+          alert("Error generando QR");
+          return;
+        }
+        placeholder.classList.add("hidden");
+        canvas.classList.remove("hidden");
+        dl.classList.remove("hidden");
+      });
+    } else {
+      // Si QRCode no está cargada, cargar via CDN
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js";
+      script.onload = () => {
+        // repetir la generación ahora que la librería exista
+        QRCode.toCanvas(canvas, text, {
+          width: size,
+          color: { dark: colorInput.value, light: bgInput.value },
+          errorCorrectionLevel: 'H'
+        }, (error) => {
+          if (error) {
+            console.error(error);
+            alert("Error generando QR");
+            return;
+          }
+          placeholder.classList.add("hidden");
+          canvas.classList.remove("hidden");
+          dl.classList.remove("hidden");
+        });
+      };
+      script.onerror = () => {
+        alert("No se pudo cargar la librería QR");
+      };
+      document.body.appendChild(script);
+    }
+  });
+
+  dl.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.download = "qr.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+})();
+</script>

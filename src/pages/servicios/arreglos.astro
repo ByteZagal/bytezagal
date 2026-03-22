@@ -1,0 +1,62 @@
+---
+import "../../styles/globals.css";
+import Seo from "../../components/Seo.astro";
+import Footer from "../../components/Footer.astro";
+import FaqService from "../../components/FaqService.astro";
+
+import { org, website, localBusiness } from "../../seo/structured";
+
+const title = "Arreglo y rescate de webs en Vitoria-Gasteiz — Auditoría + fixes";
+const description =
+  "Auditoría, fixes críticos y mejoras de webs en Vitoria-Gasteiz. Planes de rescate y soporte continuo.";
+
+const planes = [
+  { name: "Auditoría Exprés", price: "125 €", feat: ["Revisión de rendimiento/A11y/SEO", "Informe de riesgos y quick-wins"] },
+  { name: "Fix Pack", price: "290 €", feat: ["Hasta 3 incidencias mayores", "Mejoras de rendimiento (CWV)", "Endurecimiento seguridad base"] },
+  { name: "Rescate", price: "a medida", feat: ["Refactor por módulos", "Plan de migración", "Soporte continuo"] },
+];
+
+const faqs = [
+  { question: "¿Cuánto cuesta arreglar mi web?", answer: "Auditoría exprés desde 125 €, rescates completos a medida." },
+  { question: "¿Qué tipo de problemas podéis solucionar?", answer: "Errores críticos, rendimiento, accesibilidad, seguridad y caídas." },
+  { question: "¿En qué plazos hacéis los arreglos?", answer: "2–3 días para fixes simples, más tiempo para rescates complejos." },
+];
+---
+<html lang="es">
+  <head>
+    <Seo title={title} description={description} canonicalPath="/servicios/arreglos" jsonLd={[org, website, localBusiness]} />
+  </head>
+  <body class="bg-orbital text-slate-800">
+    <main class="mx-auto max-w-6xl px-4 py-16">
+      <h1 class="text-4xl font-extrabold">Arreglos y rescate de webs en Vitoria-Gasteiz</h1>
+      <p class="mt-2 text-slate-600">Rescatamos, optimizamos y dejamos estable tu sistema, con foco en rendimiento, accesibilidad y SEO local.</p>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {planes.map((p) => (
+          <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
+            <h2 class="text-xl font-semibold">{p.name}</h2>
+            <p class="mt-2 text-3xl font-extrabold">{p.price}</p>
+            <ul class="mt-4 space-y-2 text-slate-700">{p.feat.map((f) => <li>• {f}</li>)}</ul>
+            <div class="mt-6 flex flex-col gap-2">
+              <a href={`https://wa.me/34650850163?text=Hola,%20quiero%20saber%20más%20sobre%20${encodeURIComponent(p.name)}%20(Arreglos)`} target="_blank" rel="noopener noreferrer" class="inline-block bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition hover:bg-green-800 active:scale-95 text-center focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-700">Escribir por WhatsApp</a>
+              <a href="/contratame" class="inline-block cta white">Ver otros paquetes</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <FaqService faqs={faqs} />
+
+      <div class="mt-16">
+        <h2 class="text-2xl font-bold">Proyectos relacionados en Gasteiz</h2>
+        <ul class="mt-4 space-y-2 text-slate-700">
+          <li><a href="/proyectos/parrockia" class="underline">ParROCKia — Web local rescatada</a></li>
+          <li><a href="/proyectos/txorion" class="underline">TxoriON — PWA cívica escalable</a></li>
+        </ul>
+      </div>
+
+      <div class="mt-12 text-center"><a href="/" class="cta white">← Volver al inicio</a></div>
+    </main>
+    <Footer />
+  </body>
+</html>

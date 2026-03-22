@@ -1,0 +1,19 @@
+# Dependencias/compilados
+node_modules/
+dist/
+.astro/
+
+# Entornos/locks locales
+.env
+.env.local
+.env.*.local
+
+# Hosting/servicios
+.vercel/
+.netlify/
+
+# IDE/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

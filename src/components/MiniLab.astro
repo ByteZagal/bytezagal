@@ -1,0 +1,93 @@
+---
+import ParticleSystem from "../components/minilab/ParticleSystem.astro";
+import RotatingCube from "../components/minilab/RotatingCube.astro";
+import WebpConverter from "../components/minilab/WebpConverter.astro";
+import PaletteExtractor from "../components/minilab/PaletteExtractor.astro";
+import QrGenerator from "../components/minilab/QrGenerator.astro";
+import LocalSeoPack from "../components/minilab/LocalSeoPack.astro";
+import LoginDemo from "../components/minilab/LoginDemo.astro";
+
+const items = [
+  {
+    key: "particle",
+    title: "Efecto Partículas Interactivo",
+    desc: "Un fondo animado que reacciona en tiempo real, ideal para webs modernas que buscan sorprender al usuario.",
+    comp: "particle",
+  },
+  {
+    key: "cube",
+    title: "Cubo 3D Rotatorio",
+    desc: "Animación en tres dimensiones con tu logo en cada cara, perfecto para mostrar marca y creatividad.",
+    comp: "cube",
+  },
+  {
+    key: "webp",
+    title: "Conversor de Imágenes a WebP",
+    desc: "Sube una foto y conviértela a formato WebP, más ligero y rápido para mejorar el SEO y la velocidad de tu web.",
+    comp: "webp",
+  },
+  {
+    key: "palette",
+    title: "Extractor de Paleta de Colores",
+    desc: "Sube un logo o foto y descubre los colores dominantes con sus códigos listos para diseño, branding o marketing digital.",
+    comp: "palette",
+  },
+  {
+    key: "qr",
+    title: "Generador de Códigos QR",
+    desc: "Crea al instante un QR para menús, redes sociales o productos. Personaliza colores y descárgalo en alta calidad.",
+    comp: "qr",
+  },
+  {
+    key: "seo",
+    title: "Kit de SEO Local",
+    desc: "Rellena los datos de tu negocio y genera automáticamente etiquetas meta, JSON-LD y hasta un QR para reseñas de Google.",
+    comp: "seo",
+  },
+  {
+    key: "login",
+    title: "Login Animado Estilo Hacker",
+    desc: "Ejemplo de formulario con validación en vivo y animaciones profesionales. Ideal para proyectos que buscan un toque tecnológico.",
+    comp: "login",
+  },
+];
+---
+
+<section id="minilab" class="relative py-24">
+  <div class="mx-auto max-w-7xl px-4">
+    <h2 class="text-4xl font-extrabold tracking-tight text-slate-900 text-center">
+      MiniLab: Experimentos Web
+    </h2>
+    <p class="mt-3 text-slate-600 text-center text-lg max-w-2xl mx-auto">
+      Aquí muestro pequeñas demos interactivas que combinan <strong>tecnología útil</strong> con
+      <strong>efectos llamativos</strong>. Todas funcionan directamente en tu navegador, sin backend.
+    </p>
+
+    <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {items.map((it) => (
+        <article
+          class="rounded-2xl bg-white ring-1 ring-slate-200 shadow-lg overflow-hidden flex flex-col transition-transform hover:scale-[1.02] hover:shadow-xl"
+        >
+          <header class="px-5 pt-5 pb-3 border-b">
+            <h3 class="text-xl font-semibold">{it.title}</h3>
+            <p class="text-sm text-slate-600">{it.desc}</p>
+          </header>
+
+          <div class="p-5 flex-1">
+            <div
+              class="relative rounded-xl border bg-slate-50 overflow-hidden p-4 min-h-[280px] flex items-center justify-center"
+            >
+              {it.comp === "particle" && <ParticleSystem />}
+              {it.comp === "cube" && <RotatingCube />}
+              {it.comp === "webp" && <WebpConverter />}
+              {it.comp === "palette" && <PaletteExtractor />}
+              {it.comp === "qr" && <QrGenerator />}
+              {it.comp === "seo" && <LocalSeoPack />}
+              {it.comp === "login" && <LoginDemo />}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  image?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, canonicalPath, image, jsonLd } = Astro.props;
+const canonical = new URL(canonicalPath, Astro.site);
+
+// JSON-LD por defecto para tu negocio (LocalBusiness / ProfessionalService)
+const defaultBusiness = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "ByteZagal",
+  "image": "https://bytezagal.es/icon.png",
+  "url": "https://bytezagal.es/",
+  "telephone": "+34 650 850 163",
+  "email": "bytezagal.contacto@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Andalucía Kalea",
+    "addressLocality": "Vitoria-Gasteiz",
+    "postalCode": "01003",
+    "addressCountry": "ES"
+  },
+  "priceRange": "149-640 EUR"
+};
+
+// Si jsonLd existe, lo usamos; si no, aplicamos defaultBusiness
+const structuredData = jsonLd ?? defaultBusiness;
+---
+<title>{title}</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical.href} />
+<meta name="theme-color" content="#0d0d0d" />
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/icon.png" />
+<link rel="icon" type="image/png" href="/icon.png" />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical.href} />
+<meta property="og:type" content="website" />
+{image && <meta property="og:image" content={image} />}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{image && <meta name="twitter:image" content={image} />}
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(Array.isArray(structuredData) ? structuredData : [structuredData])}
+/>

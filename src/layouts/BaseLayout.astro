@@ -1,0 +1,94 @@
+---
+import Seo from '../components/Seo.astro';
+import Footer from '../components/Footer.astro';
+import { org, website, localBusiness } from '../seo/structured';
+import '../styles/globals.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  bodyClass?: string;
+}
+const { title, description, canonicalPath, jsonLd, bodyClass } = Astro.props;
+const jsonLdEffective = jsonLd ?? [org, website, localBusiness];
+---
+<html lang="es" class="no-scrollbar">
+  <head>
+    <Seo {title} {description} {canonicalPath} jsonLd={jsonLdEffective} />
+
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://wa.me" crossorigin />
+    <link rel="dns-prefetch" href="//instagram.com" />
+    <link rel="dns-prefetch" href="//www.tiktok.com" />
+    <link rel="dns-prefetch" href="//github.com" />
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Animación global CLS-safe -->
+    <style is:inline>
+      [data-reveal]{opacity:0;transform:translateY(8px)}
+      .reveal-in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
+      @media (prefers-reduced-motion: reduce){
+        [data-reveal]{opacity:1 !important;transform:none !important}
+        .reveal-in{transition:none !important}
+      }
+    </style>
+  </head>
+  <body class={`bg-orbital ${bodyClass ?? ''}`}>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <slot name="header" />
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Service Worker -->
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+      }
+    </script>
+
+    <!-- Script reveal global -->
+    <script is:inline>
+      (function(){
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const single = Array.from(document.querySelectorAll('[data-reveal]'));
+        const groups = Array.from(document.querySelectorAll('[data-reveal-stagger]'));
+
+        function show(el, delay=0){
+          if(reduce){ el.classList.add('reveal-in'); return; }
+          setTimeout(()=> el.classList.add('reveal-in'), delay);
+        }
+
+        if (!('IntersectionObserver' in window)) {
+          single.forEach(el => show(el));
+          groups.forEach(g => Array.from(g.children).forEach((c,i)=>show(c,i*80)));
+          return;
+        }
+
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{
+            if(!e.isIntersecting) return;
+            const t = e.target;
+            if (t.hasAttribute('data-reveal-stagger')) {
+              Array.from(t.children).forEach((child,i)=>show(child,i*90));
+            } else {
+              const d = parseInt(t.getAttribute('data-reveal-delay')||'0',10);
+              show(t, d);
+            }
+            io.unobserve(t);
+          });
+        },{threshold:0.12});
+
+        single.forEach(el=>io.observe(el));
+        groups.forEach(el=>io.observe(el));
+      })();
+    </script>
+  </body>
+</html>

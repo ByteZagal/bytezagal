@@ -1,0 +1,20 @@
+Listado de rutas de carpetas
+El número de serie del volumen es C6F6-D26B
+C:.
+¦   index.astro
+¦   tree.txt
+¦   
++---contratame
+¦       index.astro
+¦       
++---proyectos
+¦       index.astro
+¦       parrockia.astro
+¦       pisonauta.astro
+¦       txorion.astro
+¦       
++---servicios
+        arreglos.astro
+        digitalizacion.astro
+        ecommerce.astro
+        

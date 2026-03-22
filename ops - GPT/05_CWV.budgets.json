@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "targets_p75": { "LCP_ms": 2500, "INP_ms": 200, "CLS": 0.1 },
+  "routes": [
+    { "path": "/", "LCP_ms_budget": 2500, "INP_ms_budget": 200, "CLS_budget": 0.1, "notes": "Hero H1/Avatar LCP. Sin lazy. Si hay imagen grande, fetchpriority/preload." },
+    { "path": "/proyectos", "LCP_ms_budget": 2500, "INP_ms_budget": 200, "CLS_budget": 0.1, "notes": "Cards con skeleton; solo transform/opacity." },
+    { "path": "/contratame", "LCP_ms_budget": 2500, "INP_ms_budget": 200, "CLS_budget": 0.1, "notes": "Tabla/paquetes estable; sin layout shifts." },
+    { "path": "/servicios/digitalizacion", "LCP_ms_budget": 2500, "INP_ms_budget": 200, "CLS_budget": 0.1, "notes": "FAQPage opcional por ruta: evitar duplicar JSON-LD." },
+    { "path": "/servicios/ecommerce", "LCP_ms_budget": 2500, "INP_ms_budget": 200, "CLS_budget": 0.1, "notes": "Mantener imágenes de ejemplo optimizadas." },
+    { "path": "/servicios/arreglos", "LCP_ms_budget": 2500, "INP_ms_budget": 200, "CLS_budget": 0.1, "notes": "Animaciones suaves y accesibles." }
+  ]
+}

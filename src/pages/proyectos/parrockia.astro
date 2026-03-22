@@ -1,0 +1,64 @@
+---
+import "../../styles/globals.css";
+import Seo from "../../components/Seo.astro";
+import Footer from "../../components/Footer.astro";
+
+const title = "ParROCKia — Web local en Vitoria-Gasteiz por ByteZagal";
+const description =
+  "Sitio web de la taberna ParROCKia en Vitoria-Gasteiz. Proyecto real optimizado para SEO local.";
+---
+
+<html lang="es">
+  <head>
+    <Seo
+      title={title}
+      description={description}
+      canonicalPath="/proyectos/parrockia"
+    />
+  </head>
+  <body class="bg-orbital text-slate-800">
+    <main class="mx-auto max-w-4xl px-4 py-16">
+      <h1 class="text-4xl font-extrabold">
+        ParROCKia — Web local en Vitoria-Gasteiz
+      </h1>
+      <p class="mt-4 text-slate-600">
+        Proyecto real: la web de la taberna ParROCKia, en el barrio de la Kutxi.
+        Optimizada para SEO local, con diseño accesible y rápido.
+      </p>
+
+      <div class="mt-8">
+        <img
+          src="/parrockia.webp"
+          alt="Captura de la web ParROCKia, taberna punk-rock en Vitoria-Gasteiz"
+          class="rounded-xl shadow-lg"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="mt-6">
+        <h2 class="text-2xl font-bold">Tecnologías</h2>
+        <ul class="mt-2 flex flex-wrap gap-2">
+          <li class="chip">React</li>
+          <li class="chip">Tailwind</li>
+          <li class="chip">PHP (API)</li>
+        </ul>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="https://tabernaparrockia.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta black"
+        >
+          Ver web en vivo
+        </a>
+        <a href="/contratame" class="cta white">
+          Quiero algo así en mi negocio
+        </a>
+        <a href="/proyectos" class="cta white">← Volver a proyectos</a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

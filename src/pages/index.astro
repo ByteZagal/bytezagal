@@ -1,0 +1,67 @@
+---
+import "../styles/globals.css";
+import Seo from "../components/Seo.astro";
+import Hero from "../components/Hero.astro";
+import SobreMi from "../components/SobreMi.astro";
+import Projects from "../components/Projects.astro";
+import Process from "../components/Process.astro";
+import Services from "../components/Services.astro";
+import MiniLab from "../components/MiniLab.astro";
+import Contacto from "../components/Contacto.astro";
+import Footer from "../components/Footer.astro";
+import FaqHome from "../components/FaqHome.astro";
+
+import { org, website, localBusiness } from "../seo/structured";
+
+const title = "Pedro Aguilar — Desarrollador web en Vitoria-Gasteiz";
+const description =
+  "Webs claras, rápidas y accesibles para pymes en Vitoria-Gasteiz. Tiendas online, digitalización y arreglos de software.";
+
+const faqHome = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta una web básica en Vitoria-Gasteiz?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Desde 149 € con entrega en 3–4 días y soporte inicial." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta una tienda online?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Desde 640 €, con catálogo inicial, pagos seguros y SEO básico." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta arreglar mi web?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Rescates desde 249 €, incluye auditoría y correcciones críticas." }
+    },
+    {
+      "@type": "Question",
+      "name": "¿En cuánto tiempo tendré mi web?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Entre 3 y 7 días para webs básicas, una semana para tiendas." }
+    }
+  ]
+};
+---
+<!doctype html>
+<html lang="es" class="h-full">
+  <head>
+    <Seo title={title} description={description} canonicalPath="/" jsonLd={[org, website, localBusiness, faqHome]} />
+  </head>
+  <body class="bg-orbital text-slate-800 antialiased">
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+    <Hero />
+    <main id="contenido">
+      <SobreMi />
+      <Projects />
+      <Process />
+      <Services />
+      <MiniLab />
+      <Contacto />
+      <FaqHome />
+      <Footer />
+    </main>
+  </body>
+</html>

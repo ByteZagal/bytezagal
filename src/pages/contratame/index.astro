@@ -1,0 +1,66 @@
+---
+import "../../styles/globals.css";
+import Seo from "../../components/Seo.astro";
+import Footer from "../../components/Footer.astro";
+
+const title = "Contrátame — Desarrollo web en Vitoria-Gasteiz";
+const description =
+  "Elige un paquete inicial o pide una propuesta a medida. Conoce precios base y accede a todos los detalles de cada servicio.";
+---
+<html lang="es">
+  <head>
+    <Seo title={title} description={description} canonicalPath="/contratame" />
+  </head>
+  <body class="bg-orbital text-slate-800">
+    <main class="mx-auto max-w-6xl px-4 py-16">
+      <h1 class="text-4xl font-extrabold text-center">Contrátame</h1>
+      <p class="mt-4 text-slate-600 text-center max-w-2xl mx-auto">
+        Elige un paquete inicial o accede a los detalles completos de cada servicio.
+        Precios base claros y accesibles para empezar a trabajar juntos.
+      </p>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        <!-- Digitalización -->
+        <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
+          <h2 class="text-xl font-semibold">Lanzamiento</h2>
+          <p class="mt-2 text-3xl font-extrabold">149 €</p>
+          <p class="mt-2 text-slate-600">Landing + SEO básico + analítica.</p>
+          <div class="mt-6">
+            <a href="/servicios/digitalizacion" class="cta black w-full text-center">Ver paquetes</a>
+          </div>
+        </article>
+
+        <!-- Ecommerce -->
+        <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
+          <h2 class="text-xl font-semibold">Tienda Starter</h2>
+          <p class="mt-2 text-3xl font-extrabold">640 €</p>
+          <p class="mt-2 text-slate-600">Catálogo hasta 50 productos, pagos, emails.</p>
+          <div class="mt-6">
+            <a href="/servicios/ecommerce" class="cta black w-full text-center">Ver paquetes</a>
+          </div>
+        </article>
+
+        <!-- Arreglos -->
+        <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
+          <h2 class="text-xl font-semibold">Rescate / Arreglo</h2>
+          <p class="mt-2 text-3xl font-extrabold">249 €</p>
+          <p class="mt-2 text-slate-600">Auditoría + fixes críticos + plan de mejora.</p>
+          <div class="mt-6">
+            <a href="/servicios/arreglos" class="cta black w-full text-center">Ver paquetes</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="mt-12 flex justify-center gap-6">
+        <a href="/servicios/ecommerce" class="underline">Ver Ecommerce</a>
+        <a href="/servicios/digitalizacion" class="underline">Ver Digitalización</a>
+        <a href="/servicios/arreglos" class="underline">Ver Arreglos</a>
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/" class="cta white">← Volver al inicio</a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

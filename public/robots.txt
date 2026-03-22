@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Evita bloquear recursos críticos
+Disallow: /login
+
+Sitemap: https://bytezagal.es/sitemap.xml

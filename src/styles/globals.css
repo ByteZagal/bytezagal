@@ -1,0 +1,207 @@
+/* ==========================================================================
+   ByteZagal — globals.css (Tailwind v4)
+   ========================================================================== */
+
+@import "tailwindcss";
+
+
+/* ==========================================================================
+   RESETS Y ACCESIBILIDAD
+   ========================================================================== */
+
+/* Scroll suave por defecto (desactivado si reduce-motion) */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Enfocado accesible (tab/focus) */
+:focus-visible {
+  outline: 2px solid #059669;       /* verde accesible */
+  outline-offset: 2px;
+}
+
+/* Enlaces externos → subrayado un poco separado del texto */
+a[href^="http"] {
+  text-underline-offset: 2px;
+}
+
+/* Enlace "saltar al contenido" (para lectores de pantalla y tab) */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  z-index: 50;
+}
+
+/* ==========================================================================
+   ANIMACIONES REUTILIZABLES (CLS-safe)
+   ========================================================================== */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease both;
+}
+
+/* ==========================================================================
+   FONDO ORBITAL GLOBAL
+   — Se aplica añadiendo class="bg-orbital" al <body>
+   — Consta de dos capas fijas: círculos y líneas
+   ========================================================================== */
+
+.bg-orbital {
+  background: #fff;
+  position: relative;
+  isolation: isolate; /* para que ::before/::after queden detrás */
+}
+
+/* Círculos (capa 1) */
+.bg-orbital::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8, \
+  <svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1200' viewBox='0 0 1600 1200'> \
+    <defs><filter id='softShadow'><feDropShadow dx='0' dy='10' stdDeviation='8' flood-opacity='0.14'/></filter></defs> \
+    <g fill='%23D3D8E1' filter='url(%23softShadow)'> \
+      <circle cx='210' cy='240' r='54'/> \
+      <circle cx='760' cy='130' r='42'/> \
+      <circle cx='1240' cy='260' r='64'/> \
+      <circle cx='980' cy='560' r='52'/> \
+      <circle cx='340' cy='820' r='70'/> \
+    </g> \
+  </svg>");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 1600px 1200px;
+  opacity: 0.98;
+}
+
+/* Líneas (capa 2) */
+.bg-orbital::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8, \
+  <svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1200' viewBox='0 0 1600 1200'> \
+    <defs><filter id='lineShadow'><feDropShadow dx='0' dy='1' stdDeviation='1' flood-opacity='0.24'/></filter></defs> \
+    <g stroke='%23AEB5BF' stroke-linecap='round' stroke-width='2' filter='url(%23lineShadow)'> \
+      <line x1='120' y1='210' x2='520' y2='40' /> \
+      <line x1='1320' y1='190' x2='1540' y2='80' /> \
+      <line x1='300' y1='640' x2='980' y2='480' /> \
+      <line x1='1140' y1='780' x2='440' y2='1060'/> \
+      <line x1='420' y1='360' x2='650' y2='260' /> \
+      <line x1='1080' y1='420' x2='1280' y2='520'/> \
+      <line x1='180' y1='980' x2='520' y2='900' /> \
+    </g> \
+  </svg>");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 1600px 1200px;
+  opacity: 0.95;
+}
+
+/* Versión móvil (SVG más simple y escalado distinto) */
+@media (max-width: 640px) {
+  .bg-orbital::before {
+    background-image: url("data:image/svg+xml;utf8, \
+    <svg xmlns='http://www.w3.org/2000/svg' width='900' height='1400' viewBox='0 0 900 1400'> \
+      <defs><filter id='softShadow'><feDropShadow dx='0' dy='8' stdDeviation='6' flood-opacity='0.14'/></filter></defs> \
+      <g fill='%23D3D8E1' filter='url(%23softShadow)'> \
+        <circle cx='120' cy='170' r='48'/> \
+        <circle cx='520' cy='120' r='36'/> \
+        <circle cx='740' cy='300' r='54'/> \
+        <circle cx='540' cy='700' r='46'/> \
+        <circle cx='260' cy='1050' r='60'/> \
+      </g> \
+    </svg>");
+    background-size: 900px 1400px;
+  }
+  .bg-orbital::after {
+    background-image: url("data:image/svg+xml;utf8, \
+    <svg xmlns='http://www.w3.org/2000/svg' width='900' height='1400' viewBox='0 0 900 1400'> \
+      <defs><filter id='lineShadow'><feDropShadow dx='0' dy='1' stdDeviation='1' flood-opacity='0.24'/></filter></defs> \
+      <g stroke='%23AEB5BF' stroke-linecap='round' stroke-width='2' filter='url(%23lineShadow)'> \
+        <line x1='50' y1='200' x2='320' y2='70' /> \
+        <line x1='720' y1='220' x2='880' y2='140' /> \
+        <line x1='180' y1='760' x2='660' y2='600' /> \
+        <line x1='680' y1='980' x2='160' y2='1180'/> \
+        <line x1='240' y1='420' x2='420' y2='360' /> \
+      </g> \
+    </svg>");
+    background-size: 900px 1400px;
+  }
+}
+
+/* ==========================================================================
+   UTILIDADES PERSONALIZADAS
+   ========================================================================== */
+
+/* Botones CTA (negro y blanco) */
+@layer components {
+  .cta {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition;
+  }
+  .cta.black {
+    @apply bg-black text-white hover:bg-slate-800;
+  }
+  .cta.white {
+    @apply bg-white text-gray-900 border border-gray-300 hover:bg-gray-50;
+  }
+}
+
+/* Chips de skills */
+.chip {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm bg-slate-100 text-slate-700;
+}
+
+/* Secciones orbitales */
+.section-orbital {
+  @apply py-20 md:py-28;
+}
+
+/* Fade de imágenes */
+.img-fade {
+  transition: opacity 0.3s ease;
+}
+
+/* Scrollbars ocultas (opcional) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

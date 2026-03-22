@@ -1,0 +1,60 @@
+---
+const logo = "/icon.png"; // usa tu icono cuadrado
+---
+<div class="lab-cube">
+  <div class="cube">
+    {Array.from({ length: 6 }).map((_, i) => (
+      <div class="face">
+        <img src={logo} alt="Logo ByteZagal" width="48" height="48" loading="lazy" />
+      </div>
+    ))}
+  </div>
+</div>
+
+<style is:global>
+  .lab-cube {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .cube {
+    width: 160px;
+    height: 160px;
+    transform-style: preserve-3d;
+    animation: spin 10s linear infinite;
+  }
+  .cube .face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 0px;
+    backdrop-filter: blur(2px);
+  }
+  .cube .face:nth-child(1) {
+    transform: translateZ(80px);
+  }
+  .cube .face:nth-child(2) {
+    transform: rotateY(90deg) translateZ(80px);
+  }
+  .cube .face:nth-child(3) {
+    transform: rotateY(180deg) translateZ(80px);
+  }
+  .cube .face:nth-child(4) {
+    transform: rotateY(-90deg) translateZ(80px);
+  }
+  .cube .face:nth-child(5) {
+    transform: rotateX(90deg) translateZ(80px);
+  }
+  .cube .face:nth-child(6) {
+    transform: rotateX(-90deg) translateZ(80px);
+  }
+  @keyframes spin {
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+</style>

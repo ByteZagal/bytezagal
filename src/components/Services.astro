@@ -1,0 +1,52 @@
+---
+import { ShoppingCart, Workflow, Wrench } from "lucide-astro";
+
+const services = [
+  {
+    title: "Tiendas Online",
+    desc: "E-commerce rápidos, seguros y adaptados a móvil.",
+    icon: ShoppingCart,
+    href: "/servicios/ecommerce",
+  },
+  {
+    title: "Digitalización de Negocio",
+    desc: "Web, presencia local, automatizaciones y kit digital.",
+    icon: Workflow,
+    href: "/servicios/digitalizacion",
+  },
+  {
+    title: "Arreglos de Software",
+    desc: "Mejoras, migraciones o rescates de proyectos existentes.",
+    icon: Wrench,
+    href: "/servicios/arreglos",
+  },
+];
+---
+<section class="section-orbital px-4 py-20">
+  <div class="mx-auto max-w-6xl text-center">
+    <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+      Servicios
+    </h2>
+    <p class="mt-2 text-lg text-slate-600">
+      Soluciones claras y enfocadas para pymes de Vitoria-Gasteiz.
+    </p>
+  </div>
+
+  <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {services.map((s) => (
+      <a
+        href={s.href}
+        class="group flex h-full flex-col items-center rounded-2xl bg-white p-8 ring-1 ring-slate-200 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl focus-within:-translate-y-1"
+      >
+        <div class="flex h-14 w-14 items-center justify-center rounded-full bg-orange-50 text-orange-600 group-hover:bg-orange-100">
+          <s.icon class="h-7 w-7" aria-hidden="true" />
+        </div>
+        <h3 class="mt-6 text-xl font-semibold text-slate-900">{s.title}</h3>
+        <p class="mt-3 text-base text-slate-600 text-center">{s.desc}</p>
+        <span class="mt-5 text-sm font-medium text-orange-600 group-hover:underline">
+          Ver paquetes y precios →
+        </span>
+      </a>
+    ))}
+  </div>
+</section>

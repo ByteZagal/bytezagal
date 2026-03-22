@@ -1,0 +1,56 @@
+---
+/**
+ * FAQ global para la página principal
+ * Visible en Home, con JSON-LD FAQPage
+ */
+const faqs = [
+  {
+    question: "¿Cuánto cuesta una web básica en Vitoria-Gasteiz?",
+    answer: "Desde 149 € con entrega en 3–4 días y soporte inicial.",
+  },
+  {
+    question: "¿Cuánto cuesta una tienda online?",
+    answer: "Desde 640 €, con catálogo inicial, pagos seguros y SEO básico.",
+  },
+  {
+    question: "¿Cuánto cuesta arreglar mi web?",
+    answer: "Rescates desde 249 €, incluye auditoría y correcciones críticas.",
+  },
+  {
+    question: "¿En cuánto tiempo tendré mi web?",
+    answer: "Entre 3 y 7 días para webs básicas, una semana para tiendas.",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.answer,
+    },
+  })),
+};
+---
+<section aria-labelledby="faq-home" class="mx-auto mt-16 max-w-5xl rounded-2xl bg-white p-6 shadow ring-1 ring-slate-200" data-reveal>
+  <h2 id="faq-home" class="text-2xl font-extrabold text-slate-900">
+    Preguntas frecuentes
+  </h2>
+  <div class="mt-6 grid gap-4">
+    {faqs.map((f) => (
+      <details class="rounded-lg border border-slate-200 p-4">
+        <summary class="font-semibold cursor-pointer">{f.question}</summary>
+        <p class="mt-2 text-slate-600">{f.answer}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(jsonLd)}
+/>

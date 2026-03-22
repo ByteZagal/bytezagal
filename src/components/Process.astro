@@ -1,0 +1,60 @@
+---
+import { Lightbulb, Laptop, FlaskConical, Wrench, Rocket } from "lucide-astro";
+
+const steps = [
+  {
+    title: "Briefing",
+    desc: "Escucho tu idea y necesidades.",
+    icon: Lightbulb,
+  },
+  {
+    title: "Desarrollo",
+    desc: "Código limpio, SEO y rendimiento.",
+    icon: Laptop,
+  },
+  {
+    title: "Testing",
+    desc: "Rendimiento y accesibilidad.",
+    icon: FlaskConical,
+  },
+  {
+    title: "Iteración",
+    desc: "Mejoras sobre datos reales.",
+    icon: Wrench,
+  },
+  {
+    title: "Lanzamiento",
+    desc: "Deploy y seguimiento.",
+    icon: Rocket,
+  },
+];
+---
+<section class="section-orbital px-4 py-20">
+  <div class="mx-auto max-w-6xl text-center">
+    <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+      Proceso de Trabajo
+    </h2>
+    <p class="mt-2 text-lg text-slate-600">
+      Del briefing al lanzamiento con métricas claras.
+    </p>
+  </div>
+
+  <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+    {steps.map((step) => (
+      <div
+        class="group relative flex flex-col items-center rounded-2xl bg-white p-8 shadow-lg ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl focus-within:-translate-y-1 focus-within:shadow-xl"
+        tabindex="0"
+      >
+        <div class="flex h-14 w-14 items-center justify-center rounded-full bg-teal-50 text-teal-600 group-hover:bg-teal-100">
+          <step.icon class="h-7 w-7" aria-hidden="true" />
+        </div>
+        <h3 class="mt-6 text-xl font-semibold text-slate-900">
+          {step.title}
+        </h3>
+        <p class="mt-3 text-base text-slate-600 text-center">
+          {step.desc}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

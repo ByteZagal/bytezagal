@@ -1,0 +1,62 @@
+---
+import "../../styles/globals.css";
+import Seo from "../../components/Seo.astro";
+import Footer from "../../components/Footer.astro";
+import FaqService from "../../components/FaqService.astro";
+
+import { org, website, localBusiness } from "../../seo/structured";
+
+const title = "Tienda online en Vitoria-Gasteiz — Diseño y pagos seguros";
+const description =
+  "E-commerce rápidos y seguros para pymes en Vitoria-Gasteiz. Catálogo, pagos, SEO y soporte local.";
+
+const planes = [
+  { name: "Paquete Básico", price: "640 €", feat: ["Catálogo hasta 50 productos", "Checkout seguro", "Email transaccional", "SEO base"] },
+  { name: "Paquete de Crecimiento", price: "1.140 €", feat: ["Catálogo ilimitado", "Cupones y B2B", "Automatizaciones básicas", "Métricas y eventos"] },
+  { name: "Paquete Completo", price: "1.900 €", feat: ["Marketplace multi-vendedor", "Integraciones avanzadas", "Automatizaciones + CRM", "Auditoría SEO técnica"] },
+];
+
+const faqs = [
+  { question: "¿Cuánto cuesta una tienda online en Vitoria-Gasteiz?", answer: "Desde 640 €, catálogo inicial y pagos seguros incluidos." },
+  { question: "¿Qué medios de pago puedo integrar?", answer: "Bizum, PayPal y transferencia, con pasarela segura y factura." },
+  { question: "¿Cuánto tarda en estar operativa la tienda?", answer: "Una semana aprox. para el plan básico." },
+];
+---
+<html lang="es">
+  <head>
+    <Seo title={title} description={description} canonicalPath="/servicios/ecommerce" jsonLd={[org, website, localBusiness]} />
+  </head>
+  <body class="bg-orbital text-slate-800">
+    <main class="mx-auto max-w-6xl px-4 py-16">
+      <h1 class="text-4xl font-extrabold">Tiendas online en Vitoria-Gasteiz</h1>
+      <p class="mt-2 text-slate-600">Implementación cuidando rendimiento, accesibilidad y conversión, con soporte cercano en la ciudad.</p>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {planes.map((p) => (
+          <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
+            <h2 class="text-xl font-semibold">{p.name}</h2>
+            <p class="mt-2 text-3xl font-extrabold">{p.price}</p>
+            <ul class="mt-4 space-y-2 text-slate-700">{p.feat.map((f) => <li>• {f}</li>)}</ul>
+            <div class="mt-6 flex flex-col gap-2">
+              <a href={`https://wa.me/34650850163?text=Hola,%20quiero%20saber%20más%20sobre%20${encodeURIComponent(p.name)}%20(Ecommerce)`} target="_blank" rel="noopener noreferrer" class="inline-block bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition hover:bg-green-800 active:scale-95 text-center focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-700">Escribir por WhatsApp</a>
+              <a href="/contratame" class="inline-block cta white">Ver otros paquetes</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <FaqService faqs={faqs} />
+
+      <div class="mt-16">
+        <h2 class="text-2xl font-bold">Proyectos relacionados en Gasteiz</h2>
+        <ul class="mt-4 space-y-2 text-slate-700">
+          <li><a href="/proyectos/parrockia" class="underline">ParROCKia — Web local optimizada</a></li>
+          <li><a href="/proyectos/pisonauta" class="underline">PisoNauta — PWA de convivencia</a></li>
+        </ul>
+      </div>
+
+      <div class="mt-12 text-center"><a href="/" class="cta white">← Volver al inicio</a></div>
+    </main>
+    <Footer />
+  </body>
+</html>

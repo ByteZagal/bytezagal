@@ -1,0 +1,57 @@
+---
+import "../../styles/globals.css";
+import Seo from "../../components/Seo.astro";
+import Footer from "../../components/Footer.astro";
+
+const title = "TxoriON — PWA cívica de Vitoria-Gasteiz";
+const description =
+  "PWA ciudadana en Vitoria-Gasteiz: agenda de eventos, comercios y recursos municipales.";
+---
+
+<html lang="es">
+  <head>
+    <Seo
+      title={title}
+      description={description}
+      canonicalPath="/proyectos/txorion"
+    />
+  </head>
+  <body class="bg-orbital text-slate-800">
+    <main class="mx-auto max-w-4xl px-4 py-16">
+      <h1 class="text-4xl font-extrabold">
+        TxoriON — PWA cívica en Vitoria-Gasteiz
+      </h1>
+      <p class="mt-4 text-slate-600">
+        Plataforma progresiva pensada para los ciudadanos de Gasteiz. Recoge
+        eventos, comercios y recursos útiles del ayuntamiento y asociaciones.
+      </p>
+
+      <div class="mt-8">
+        <img
+          src="/txorion-eventos.webp"
+          alt="Captura de la app TxoriON mostrando agenda de eventos ciudadanos"
+          class="rounded-xl shadow-lg"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="mt-6">
+        <h2 class="text-2xl font-bold">Tecnologías</h2>
+        <ul class="mt-2 flex flex-wrap gap-2">
+          <li class="chip">React</li>
+          <li class="chip">Supabase</li>
+          <li class="chip">Vercel</li>
+          <li class="chip">Tailwind</li>
+        </ul>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/contratame" class="cta black">
+          Quiero algo así en mi negocio
+        </a>
+        <a href="/proyectos" class="cta white">← Volver a proyectos</a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

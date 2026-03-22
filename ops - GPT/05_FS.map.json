@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "index.astro",
+    "proyectos.astro (si existe) / Projects.astro como sección",
+    "contratame.astro (si existe) / Contacto+Precios desde Contacto.astro",
+    "digitalizacion.astro",
+    "ecommerce.astro",
+    "arreglos.astro",
+    "parrockia.astro",
+    "pisonauta.astro",
+    "txorion.astro",
+    "MiniLab.astro"
+  ],
+  "components": [
+    "BaseLayout.astro",
+    "Seo.astro",
+    "Hero.astro",
+    "SobreMi.astro",
+    "Services.astro",
+    "Process.astro",
+    "Projects.astro",
+    "Contacto.astro",
+    "FaqHome.astro",
+    "Footer.astro",
+    "StickyBar.astro (no importado por defecto)"
+  ],
+  "assets": [
+    "globals.css",
+    "icon.png",
+    "favicon.ico",
+    "yo.webp",
+    "structured.ts",
+    "routes.ts",
+    "astro.config.mjs",
+    "package.json",
+    "tsconfig.json"
+  ]
+}

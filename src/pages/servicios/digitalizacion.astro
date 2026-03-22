@@ -1,0 +1,62 @@
+---
+import "../../styles/globals.css";
+import Seo from "../../components/Seo.astro";
+import Footer from "../../components/Footer.astro";
+import FaqService from "../../components/FaqService.astro";
+
+import { org, website, localBusiness } from "../../seo/structured";
+
+const title = "Digitalización de negocios en Vitoria-Gasteiz — ByteZagal";
+const description =
+  "Web, SEO local, redes y automatizaciones para pymes en Vitoria-Gasteiz.";
+
+const planes = [
+  { name: "Paquete Esencial", price: "165 €", feat: ["One-page profesional", "Google Business Profile", "Analítica básica"] },
+  { name: "Paquete Presencia Online", price: "495 €", feat: ["Web multi-sección", "SEO local + mapas", "Landing de campañas", "Automatizaciones simples"] },
+  { name: "Paquete Todo incluido", price: "890 €", feat: ["Funnels y email marketing", "Redes Sociales", "Automatizaciones avanzadas", "Panel de métricas", "Soporte mensual"] },
+];
+
+const faqs = [
+  { question: "¿Cuánto cuesta digitalizar mi negocio en Vitoria-Gasteiz?", answer: "Desde 165 €, con opciones avanzadas según necesidades." },
+  { question: "¿Qué incluye el paquete de digitalización?", answer: "Web corporativa optimizada, SEO local, Google Business Profile y automatizaciones." },
+  { question: "¿En cuánto tiempo estará lista mi web?", answer: "Entre 3 y 7 días según el paquete elegido." },
+];
+---
+<html lang="es">
+  <head>
+    <Seo title={title} description={description} canonicalPath="/servicios/digitalizacion" jsonLd={[org, website, localBusiness]} />
+  </head>
+  <body class="bg-orbital text-slate-800">
+    <main class="mx-auto max-w-6xl px-4 py-16">
+      <h1 class="text-4xl font-extrabold">Digitalización de negocio en Vitoria-Gasteiz</h1>
+      <p class="mt-2 text-slate-600">Desde la web hasta automatizaciones que ahorran tiempo, diseñadas para pymes locales.</p>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {planes.map((p) => (
+          <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
+            <h2 class="text-xl font-semibold">{p.name}</h2>
+            <p class="mt-2 text-3xl font-extrabold">{p.price}</p>
+            <ul class="mt-4 space-y-2 text-slate-700">{p.feat.map((f) => <li>• {f}</li>)}</ul>
+            <div class="mt-6 flex flex-col gap-2">
+              <a href={`https://wa.me/34650850163?text=Hola,%20quiero%20saber%20más%20sobre%20${encodeURIComponent(p.name)}%20(Digitalización)`} target="_blank" rel="noopener noreferrer" class="inline-block bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition hover:bg-green-800 active:scale-95 text-center focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-700">Escribir por WhatsApp</a>
+              <a href="/contratame" class="inline-block cta white">Ver otros paquetes</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <FaqService faqs={faqs} />
+
+      <div class="mt-16">
+        <h2 class="text-2xl font-bold">Proyectos relacionados en Gasteiz</h2>
+        <ul class="mt-4 space-y-2 text-slate-700">
+          <li><a href="/proyectos/txorion" class="underline">TxoriON — PWA cívica local</a></li>
+          <li><a href="/proyectos/pisonauta" class="underline">PisoNauta — PWA de convivencia</a></li>
+        </ul>
+      </div>
+
+      <div class="mt-12 text-center"><a href="/" class="cta white">← Volver al inicio</a></div>
+    </main>
+    <Footer />
+  </body>
+</html>

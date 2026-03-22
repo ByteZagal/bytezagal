@@ -1,0 +1,99 @@
+---
+import { Github, ExternalLink, Info } from "lucide-astro";
+
+const projects = [
+  {
+    slug: "parrockia",
+    title: "ParROCKia",
+    desc: "Web energética para conciertos y eventos en Vitoria-Gasteiz.",
+    img: "/parrockia.webp",
+    site: "https://tabernaparrockia.com",
+    repo: null,
+    tech: ["Astro", "Tailwind", "SEO", "Accesibilidad"],
+    alt: "Captura de la web ParROCKia en Vitoria-Gasteiz, taberna punk-rock"
+  },
+  {
+    slug: "pisonauta",
+    title: "PisoNauta",
+    desc: "PWA para convivencia sin caos: tareas, gastos y rutinas.",
+    img: "/pisonauta.webp",
+    site: null,
+    repo: "https://github.com/ByteZagal/PisoNautaApp",
+    tech: ["Next.js", "Supabase", "PWA", "Zod"],
+    alt: "Captura de la app PisoNauta mostrando gestión de tareas y gastos"
+  },
+  {
+    slug: "txorion",
+    title: "TxoriON",
+    desc: "PWA cívica para conectar negocios y ciudadanos de Vitoria-Gasteiz.",
+    img: "/txorion.webp",
+    site: null,
+    repo: "https://github.com/bytezagal/txorion",
+    tech: ["Next.js", "PWA", "SEO local", "Maps"],
+    alt: "Captura de la app TxoriON mostrando agenda de eventos en Vitoria-Gasteiz"
+  },
+];
+---
+<section id="projects" class="relative py-24">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-3xl font-extrabold text-center">Proyectos destacados</h2>
+    <p class="mt-3 text-center text-slate-600">
+      Ejemplos reales y en desarrollo, con foco en Vitoria-Gasteiz.
+    </p>
+
+    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((p) => (
+        <article
+          class="group rounded-2xl bg-white ring-1 ring-slate-200 shadow-md transition hover:-translate-y-1 hover:shadow-xl flex flex-col overflow-hidden"
+        >
+          <div class="relative aspect-[5/4] w-full overflow-hidden">
+            <img
+              src={p.img}
+              alt={p.alt}
+              class="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-[1.05]"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="flex flex-col gap-3 p-6 flex-1">
+            <h3 class="text-xl font-semibold text-slate-900">{p.title}</h3>
+            <p class="text-slate-600">{p.desc}</p>
+
+            <ul class="mt-1 flex flex-wrap gap-2">
+              {p.tech.map((t) => <li class="chip">{t}</li>)}
+            </ul>
+
+            <div class="mt-auto flex flex-wrap gap-3">
+              {p.site && (
+                <a
+                  href={p.site}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 rounded-lg bg-red-600 text-white px-3 py-1.5 text-sm font-medium hover:bg-red-700 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-600"
+                >
+                  <ExternalLink class="w-4 h-4" /> Ver página
+                </a>
+              )}
+              {p.repo && (
+                <a
+                  href={p.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-400"
+                >
+                  <Github class="w-4 h-4" /> Código
+                </a>
+              )}
+              <a
+                href={`/proyectos/${p.slug}`}
+                class="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-400"
+              >
+                <Info class="w-4 h-4" /> Curiosidades
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

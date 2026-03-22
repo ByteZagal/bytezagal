@@ -1,0 +1,21 @@
+{
+  "kpis": {
+    "search_console": {
+      "clicks_28d": null,
+      "impressions_28d": null,
+      "ctr_28d": null,
+      "avg_position_28d": null
+    },
+    "cwv_crux": {
+      "good_urls_ratio_p75": null,
+      "lcp_p75_ms": null,
+      "inp_p75_ms": null,
+      "cls_p75": null
+    },
+    "conversion": {
+      "whatsapp_clicks_28d": null,
+      "precios_clicks_28d": null
+    }
+  },
+  "notes": "Rellenar con datos de GSC/CrUX/analytics cuando estén disponibles."
+}

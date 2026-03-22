@@ -1,0 +1,51 @@
+{
+  "project_id": "bytezagal-astro",
+  "project_name": "ByteZagal — Portfolio + SEO Local",
+  "timestamp_iso": "2025-09-22T00:00:00Z",
+  "agent_from": "05_Frontend.PWA",
+  "agent_to": ["10_Seo & Growth"],
+  "summary": "Astro SSG + Tailwind + lucide-astro. PWA básica (manifest+SW). SEO técnico: Org/WebSite/LocalBusiness JSON-LD y FAQPage visible en footer. Rutas y budgets CWV p75 definidos. Animaciones CLS-safe con prefers-reduced-motion.",
+  "decisions": [
+    "D-301: Regenerar 05_* para Astro",
+    "D-302: Budgets CWV p75 (LCP<=2.5s, INP<=200ms, CLS<0.1)",
+    "D-303: FAQ visible + JSON-LD global (Footer)",
+    "D-304: Resource hints prudentes (preconnect wa.me, dns-prefetch redes)"
+  ],
+  "files": [
+    "05_ROUTES.map.json",
+    "05_FS.map.json",
+    "05_PWA.manifest.json",
+    "05_SERVICE_WORKER.js",
+    "05_HEAD.tags.md",
+    "05_A11Y.checklist.md",
+    "05_CWV.budgets.json",
+    "05_PLAN.current.md",
+    "05_STATUS.report.md",
+    "05_RISK.register.md",
+    "05_KPIs.json"
+  ],
+  "requested_inputs": [
+    "robots.txt",
+    "sitemap.xml",
+    "FAQs específicas por servicio (para mover el FAQPage del footer a cada ruta)"
+  ],
+  "next_actions": [
+    "Refinar H1/H2+copy para /servicios/* (intención local Vitoria-Gasteiz)",
+    "Añadir FAQPage específico en /servicios/* y desactivar FAQ global en esas rutas",
+    "Configurar robots.txt y sitemap.xml"
+  ],
+  "manifest": {
+    "present": [
+      "JSON-LD Organization/WebSite/LocalBusiness",
+      "FAQPage global visible",
+      "Budgets CWV",
+      "PWA (manifest+SW)"
+    ],
+    "required": [
+      "robots.txt",
+      "sitemap.xml",
+      "FAQPage por servicio (opcional recomendado, si queremos rich results por vertical)"
+    ],
+    "notes": "JSON-LD es el formato recomendado. Evitar marcados duplicados en una misma URL."
+  }
+}

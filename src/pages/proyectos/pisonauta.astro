@@ -1,0 +1,66 @@
+---
+import "../../styles/globals.css";
+import Seo from "../../components/Seo.astro";
+import Footer from "../../components/Footer.astro";
+
+const title = "PisoNauta — App de convivencia en Vitoria-Gasteiz";
+const description =
+  "PWA creada en Vitoria-Gasteiz para gestionar pisos compartidos: tareas, gastos y compras.";
+---
+
+<html lang="es">
+  <head>
+    <Seo
+      title={title}
+      description={description}
+      canonicalPath="/proyectos/pisonauta"
+    />
+  </head>
+  <body class="bg-orbital text-slate-800">
+    <main class="mx-auto max-w-4xl px-4 py-16">
+      <h1 class="text-4xl font-extrabold">
+        PisoNauta — PWA de convivencia en Vitoria-Gasteiz
+      </h1>
+      <p class="mt-4 text-slate-600">
+        Aplicación web progresiva para mejorar la convivencia en pisos
+        compartidos: lista de la compra, tareas, gastos y rutinas. Hecha en la
+        ciudad y pensada para escalar.
+      </p>
+
+      <div class="mt-8">
+        <img
+          src="/pisonauta-movil.webp"
+          alt="Captura de la app PisoNauta mostrando lista de tareas y gastos compartidos"
+          class="rounded-xl shadow-lg"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="mt-6">
+        <h2 class="text-2xl font-bold">Tecnologías</h2>
+        <ul class="mt-2 flex flex-wrap gap-2">
+          <li class="chip">React</li>
+          <li class="chip">Supabase</li>
+          <li class="chip">Vercel</li>
+          <li class="chip">Tailwind</li>
+        </ul>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="https://github.com/ByteZagal/PisoNautaApp"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta black"
+        >
+          Código fuente
+        </a>
+        <a href="/contratame" class="cta white">
+          Quiero algo así en mi negocio
+        </a>
+        <a href="/proyectos" class="cta white">← Volver a proyectos</a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

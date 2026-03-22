@@ -1,0 +1,76 @@
+---
+---
+<div class="flex flex-col gap-4 w-full">
+  <label class="text-sm font-medium">Nombre del negocio</label>
+  <input type="text" class="seo-name border rounded px-3 py-2 text-sm" placeholder="Bar Txoko" />
+
+  <label class="text-sm font-medium">Dirección</label>
+  <input type="text" class="seo-address border rounded px-3 py-2 text-sm" placeholder="Calle Mayor 1, Vitoria-Gasteiz" />
+
+  <label class="text-sm font-medium">Teléfono</label>
+  <input type="text" class="seo-phone border rounded px-3 py-2 text-sm" placeholder="+34 600 000 000" />
+
+  <label class="text-sm font-medium">Web</label>
+  <input type="url" class="seo-url border rounded px-3 py-2 text-sm" placeholder="https://tuweb.com" />
+
+  <label class="text-sm font-medium">Enlace reseñas Google</label>
+  <input type="url" class="seo-reviews border rounded px-3 py-2 text-sm" placeholder="https://g.page/..." />
+
+  <button class="cta black text-sm px-3 py-2 seo-generate">Generar Pack</button>
+
+  <div class="mt-4">
+    <h4 class="font-semibold">JSON-LD LocalBusiness</h4>
+    <pre class="seo-json bg-slate-100 p-2 text-xs overflow-x-auto"></pre>
+  </div>
+
+  <div class="mt-4">
+    <h4 class="font-semibold">Meta OG</h4>
+    <pre class="seo-og bg-slate-100 p-2 text-xs overflow-x-auto"></pre>
+  </div>
+
+  <div class="mt-4 flex flex-col items-center gap-2">
+    <h4 class="font-semibold">QR reseñas</h4>
+    <canvas class="seo-qr hidden"></canvas>
+  </div>
+</div>
+
+<script is:inline>
+(() => {
+  const root = document.currentScript.closest("div");
+  const name = root.querySelector(".seo-name");
+  const address = root.querySelector(".seo-address");
+  const phone = root.querySelector(".seo-phone");
+  const url = root.querySelector(".seo-url");
+  const reviews = root.querySelector(".seo-reviews");
+  const btn = root.querySelector(".seo-generate");
+  const preJson = root.querySelector(".seo-json");
+  const preOg = root.querySelector(".seo-og");
+  const qrCanvas = root.querySelector(".seo-qr");
+
+  btn.addEventListener("click", () => {
+    const business = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: name.value,
+      address: address.value,
+      telephone: phone.value,
+      url: url.value,
+    };
+    preJson.textContent = JSON.stringify(business, null, 2);
+
+    preOg.textContent =
+`<meta property="og:title" content="${name.value}" />
+<meta property="og:description" content="${address.value}" />
+<meta property="og:url" content="${url.value}" />
+<meta property="og:type" content="website" />`;
+
+    if (reviews.value) {
+      import("https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js").then(QR => {
+        QR.toCanvas(qrCanvas, reviews.value, { width: 180 }, (err) => {
+          if (!err) qrCanvas.classList.remove("hidden");
+        });
+      });
+    }
+  });
+})();
+</script>
