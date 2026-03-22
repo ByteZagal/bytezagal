@@ -13,9 +13,9 @@ import FaqHome from "../components/FaqHome.astro";
 
 import { org, website, localBusiness } from "../seo/structured";
 
-const title = "Pedro Aguilar — Desarrollador web en Vitoria-Gasteiz";
+const title = "ByteZagal | Rescate web, desarrollo y SEO técnico en Zaragoza";
 const description =
-  "Webs claras, rápidas y accesibles para pymes en Vitoria-Gasteiz. Tiendas online, digitalización y arreglos de software.";
+  "Rescate web, desarrollo y SEO técnico en Zaragoza y remoto en España. Webs rápidas, accesibles y pensadas para negocio.";
 
 const faqHome = {
   "@context": "https://schema.org",
@@ -23,23 +23,35 @@ const faqHome = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "¿Cuánto cuesta una web básica en Vitoria-Gasteiz?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Desde 149 € con entrega en 3–4 días y soporte inicial." }
+      "name": "¿Trabajas en Zaragoza o también en remoto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Trabajo con foco en Zaragoza y también en remoto para clientes de toda España."
+      }
     },
     {
       "@type": "Question",
-      "name": "¿Cuánto cuesta una tienda online?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Desde 640 €, con catálogo inicial, pagos seguros y SEO básico." }
+      "name": "¿Qué tipo de proyectos haces?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rescate de webs, desarrollo web a medida, SEO técnico, automatización y mejoras de rendimiento y accesibilidad."
+      }
     },
     {
       "@type": "Question",
-      "name": "¿Cuánto cuesta arreglar mi web?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Rescates desde 249 €, incluye auditoría y correcciones críticas." }
+      "name": "¿Puedes arreglar una web ya existente?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Puedo auditar, estabilizar y mejorar webs lentas, rotas o mal planteadas sin rehacerlo todo desde cero."
+      }
     },
     {
       "@type": "Question",
-      "name": "¿En cuánto tiempo tendré mi web?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Entre 3 y 7 días para webs básicas, una semana para tiendas." }
+      "name": "¿Cómo empezamos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cuéntame tu caso y te diré la vía más sensata: parche, refactor controlado o reconstrucción parcial."
+      }
     }
   ]
 };
@@ -47,12 +59,18 @@ const faqHome = {
 <!doctype html>
 <html lang="es" class="h-full">
   <head>
-    <Seo title={title} description={description} canonicalPath="/" jsonLd={[org, website, localBusiness, faqHome]} />
+    <Seo
+      title={title}
+      description={description}
+      canonicalPath="/"
+      jsonLd={[org, website, localBusiness, faqHome]}
+    />
   </head>
   <body class="bg-orbital text-slate-800 antialiased">
     <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
     <Hero />
+
     <main id="contenido">
       <SobreMi />
       <Projects />

@@ -18,7 +18,6 @@ const jsonLdEffective = jsonLd ?? [org, website, localBusiness];
   <head>
     <Seo {title} {description} {canonicalPath} jsonLd={jsonLdEffective} />
 
-    <!-- Resource Hints -->
     <link rel="preconnect" href="https://wa.me" crossorigin />
     <link rel="dns-prefetch" href="//instagram.com" />
     <link rel="dns-prefetch" href="//www.tiktok.com" />
@@ -26,7 +25,6 @@ const jsonLdEffective = jsonLd ?? [org, website, localBusiness];
 
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <!-- Animación global CLS-safe -->
     <style is:inline>
       [data-reveal]{opacity:0;transform:translateY(8px)}
       .reveal-in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
@@ -47,14 +45,12 @@ const jsonLdEffective = jsonLd ?? [org, website, localBusiness];
 
     <Footer />
 
-    <!-- Service Worker -->
     <script is:inline>
       if ('serviceWorker' in navigator) {
         addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
       }
     </script>
 
-    <!-- Script reveal global -->
     <script is:inline>
       (function(){
         const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
