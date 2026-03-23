@@ -1,56 +1,90 @@
 ---
 /**
- * FAQ global para la página principal
- * Visible en Home, con JSON-LD FAQPage
+ * FAQ visible de la Home
+ * ---------------------------------------------------------------------------
+ * Objetivo:
+ * - Resolver objeciones típicas sin meter precios-ancla de bajo valor
+ * - Reforzar Zaragoza + remoto España
+ * - Mantener un bloque claro, escaneable y útil en móvil
+ *
+ * Importante:
+ * - El JSON-LD FAQPage se controla en src/pages/index.astro
+ * - Aquí NO duplicamos schema para evitar incoherencias
  */
-const faqs = [
-  {
-    question: "¿Cuánto cuesta una web básica en Vitoria-Gasteiz?",
-    answer: "Desde 149 € con entrega en 3–4 días y soporte inicial.",
-  },
-  {
-    question: "¿Cuánto cuesta una tienda online?",
-    answer: "Desde 640 €, con catálogo inicial, pagos seguros y SEO básico.",
-  },
-  {
-    question: "¿Cuánto cuesta arreglar mi web?",
-    answer: "Rescates desde 249 €, incluye auditoría y correcciones críticas.",
-  },
-  {
-    question: "¿En cuánto tiempo tendré mi web?",
-    answer: "Entre 3 y 7 días para webs básicas, una semana para tiendas.",
-  },
-];
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map((f) => ({
-    "@type": "Question",
-    "name": f.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": f.answer,
-    },
-  })),
-};
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FaqItem[] = [
+  {
+    question: "¿Trabajas en Zaragoza o también en remoto?",
+    answer:
+      "Trabajo con foco en Zaragoza y también en remoto para clientes de toda España. La idea es resolver bien el problema, no complicar la logística."
+  },
+  {
+    question: "¿Puedes arreglar una web ya existente?",
+    answer:
+      "Sí. Muchas veces no hace falta rehacerlo todo. Primero reviso estructura, rendimiento, accesibilidad, SEO técnico y puntos frágiles; después te propongo la vía más sensata: parche, refactor controlado o reconstrucción parcial."
+  },
+  {
+    question: "¿Qué tipo de proyectos sueles hacer?",
+    answer:
+      "Rescate web, transformo ideas en applicaciones listas para subir a la app store, desarrollo a medida, SEO técnico, mejora de rendimiento, accesibilidad, digitalización y automatización útil para negocio."
+  },
+  {
+    question: "¿Cómo empezamos a trabajar?",
+    answer:
+      "Me cuentas el caso, reviso el contexto y te digo el siguiente paso con criterio: qué conviene tocar, qué no merece la pena mover todavía y cuál sería el alcance más razonable."
+  }
+];
 ---
-<section aria-labelledby="faq-home" class="mx-auto mt-16 max-w-5xl rounded-2xl bg-white p-6 shadow ring-1 ring-slate-200" data-reveal>
-  <h2 id="faq-home" class="text-2xl font-extrabold text-slate-900">
-    Preguntas frecuentes
-  </h2>
-  <div class="mt-6 grid gap-4">
-    {faqs.map((f) => (
-      <details class="rounded-lg border border-slate-200 p-4">
-        <summary class="font-semibold cursor-pointer">{f.question}</summary>
-        <p class="mt-2 text-slate-600">{f.answer}</p>
-      </details>
-    ))}
+
+<section
+  id="faq-home"
+  aria-labelledby="faq-home-title"
+  class="relative py-24"
+>
+  <div class="mx-auto max-w-5xl px-4">
+    <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-xl shadow-slate-200/60 backdrop-blur sm:p-8 lg:p-10">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Preguntas frecuentes
+        </p>
+
+        <h2
+          id="faq-home-title"
+          class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
+        >
+          Dudas habituales antes de empezar
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600 sm:text-lg">
+          Prefiero dejar claras las expectativas desde el principio:
+          menos humo, más criterio y un camino de trabajo entendible.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-4">
+        {faqs.map((faq) => (
+          <details class="group rounded-2xl border border-slate-200 bg-slate-50/70 px-5 py-4 transition hover:border-slate-300 hover:bg-white">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-slate-900">
+              <span>{faq.question}</span>
+              <span
+                aria-hidden="true"
+                class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 transition group-open:rotate-45"
+              >
+                +
+              </span>
+            </summary>
+
+            <p class="mt-4 max-w-4xl pr-10 text-sm leading-7 text-slate-600 sm:text-base">
+              {faq.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
   </div>
 </section>
-
-<script
-  type="application/ld+json"
-  is:inline
-  set:html={JSON.stringify(jsonLd)}
-/>

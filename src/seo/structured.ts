@@ -2,58 +2,84 @@
 
 /**
  * Datos estructurados globales de ByteZagal
- * Incluye Organization, WebSite y ProfessionalService (con NAP en Vitoria-Gasteiz).
+ * ---------------------------------------------------------------------------
+ * Criterios:
+ * - Marca principal: ByteZagal
+ * - Foco geográfico: Zaragoza
+ * - Cobertura: remoto en España
+ * - Sin dirección postal inventada o desactualizada
+ * - Sin priceRange público
+ * - Solo señales que reflejen activos y contenido reales
  */
+
+const SITE_URL = "https://bytezagal.es";
+const LOGO_URL = `${SITE_URL}/icon.png`;
+const EMAIL = "contacto@bytezagal.es";
+const PHONE = "+34 650 850 163";
+
+const SAME_AS = [
+  "https://www.linkedin.com/in/pedro-aguilar-lopez-569533233/",
+  "https://instagram.com/bytezagal",
+  "https://www.tiktok.com/@bytezagal",
+  "https://github.com/ByteZagal",
+  "https://www.malt.es/profile/bytezagal",
+];
 
 export const org = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "ByteZagal",
-  "url": "https://bytezagal.es",
-  "logo": "https://bytezagal.es/icon.png",
-  "sameAs": [
-    "https://www.linkedin.com/in/pedro-aguilar-lopez-569533233/",
-    "https://instagram.com/bytezagal",
-    "https://www.tiktok.com/@bytezagal",
-    "https://github.com/ByteZagal"
-  ]
+  "@id": `${SITE_URL}/#organization`,
+  name: "ByteZagal",
+  url: SITE_URL,
+  logo: LOGO_URL,
+  email: EMAIL,
+  sameAs: SAME_AS,
 };
 
 export const website = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "ByteZagal",
-  "url": "https://bytezagal.es",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://bytezagal.es/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  "@id": `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: "ByteZagal",
+  publisher: {
+    "@id": `${SITE_URL}/#organization`,
+  },
+  inLanguage: "es-ES",
 };
 
 export const localBusiness = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "ByteZagal",
-  "image": "https://bytezagal.es/icon.png",
-  "url": "https://bytezagal.es",
-  "telephone": "+34 650 850 163",
-  "email": "bytezagal.contacto@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Andalucía Kalea",
-    "addressLocality": "Vitoria-Gasteiz",
-    "postalCode": "01003",
-    "addressCountry": "ES"
+  "@id": `${SITE_URL}/#professional-service`,
+  name: "ByteZagal",
+  url: SITE_URL,
+  image: LOGO_URL,
+  description:
+    "Rescate web, desarrollo a medida, SEO técnico, accesibilidad, rendimiento y automatización para negocio con foco en Zaragoza y trabajo remoto en España.",
+  email: EMAIL,
+  telephone: PHONE,
+  areaServed: [
+    {
+      "@type": "City",
+      name: "Zaragoza",
+    },
+    {
+      "@type": "Country",
+      name: "España",
+    },
+  ],
+  availableLanguage: ["es-ES"],
+  sameAs: SAME_AS,
+  parentOrganization: {
+    "@id": `${SITE_URL}/#organization`,
   },
-  "areaServed": {
-    "@type": "City",
-    "name": "Vitoria-Gasteiz"
-  },
-  "sameAs": [
-    "https://www.linkedin.com/in/pedro-aguilar-lopez-569533233/",
-    "https://instagram.com/bytezagal",
-    "https://www.tiktok.com/@bytezagal",
-    "https://github.com/ByteZagal"
-  ]
+  serviceType: [
+    "Rescate web",
+    "Desarrollo web a medida",
+    "SEO técnico",
+    "Mejora de rendimiento web",
+    "Accesibilidad web",
+    "Automatización y digitalización",
+  ],
 };

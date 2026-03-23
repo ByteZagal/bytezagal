@@ -1,52 +1,110 @@
 ---
-import { ShoppingCart, Workflow, Wrench } from "lucide-astro";
+import { ShoppingCart, Workflow, Wrench, ArrowRight } from "lucide-astro";
 
-const services = [
+interface Service {
+  title: string;
+  eyebrow: string;
+  desc: string;
+  points: string[];
+  icon: typeof ShoppingCart;
+  href: string;
+  cta: string;
+}
+
+const services: Service[] = [
   {
-    title: "Tiendas Online",
-    desc: "E-commerce rápidos, seguros y adaptados a móvil.",
-    icon: ShoppingCart,
-    href: "/servicios/ecommerce",
-  },
-  {
-    title: "Digitalización de Negocio",
-    desc: "Web, presencia local, automatizaciones y kit digital.",
-    icon: Workflow,
-    href: "/servicios/digitalizacion",
-  },
-  {
-    title: "Arreglos de Software",
-    desc: "Mejoras, migraciones o rescates de proyectos existentes.",
+    title: "Arreglos de software",
+    eyebrow: "Rescate y estabilización",
+    desc: "Cuando una web o aplicación va lenta, falla o está mal planteada, no siempre hace falta tirarla entera. Primero diagnostico, luego reparo con el menor riesgo posible.",
+    points: ["Auditoría técnica", "Refactor controlado", "Mejora de rendimiento"],
     icon: Wrench,
     href: "/servicios/arreglos",
+    cta: "Ver cómo lo abordo"
   },
+  {
+    title: "Digitalización de negocio",
+    eyebrow: "Base digital y visibilidad",
+    desc: "Web, presencia local, automatización y estructura digital con foco en claridad, captación y operación más sencilla para el negocio.",
+    points: ["Web corporativa", "SEO local", "Automatización útil"],
+    icon: Workflow,
+    href: "/servicios/digitalizacion",
+    cta: "Ver servicio"
+  },
+  {
+    title: "Tiendas online",
+    eyebrow: "Venta y experiencia",
+    desc: "E-commerce rápidos, claros y preparados para móvil, pensados para vender sin añadir fricción innecesaria ni complicar la gestión.",
+    points: ["Checkout claro", "Móvil primero", "Base SEO sólida"],
+    icon: ShoppingCart,
+    href: "/servicios/ecommerce",
+    cta: "Ver servicio"
+  }
 ];
 ---
-<section class="section-orbital px-4 py-20">
-  <div class="mx-auto max-w-6xl text-center">
-    <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-      Servicios
-    </h2>
-    <p class="mt-2 text-lg text-slate-600">
-      Soluciones claras y enfocadas para pymes de Vitoria-Gasteiz.
-    </p>
-  </div>
 
-  <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-    {services.map((s) => (
-      <a
-        href={s.href}
-        class="group flex h-full flex-col items-center rounded-2xl bg-white p-8 ring-1 ring-slate-200 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl focus-within:-translate-y-1"
-      >
-        <div class="flex h-14 w-14 items-center justify-center rounded-full bg-orange-50 text-orange-600 group-hover:bg-orange-100">
-          <s.icon class="h-7 w-7" aria-hidden="true" />
-        </div>
-        <h3 class="mt-6 text-xl font-semibold text-slate-900">{s.title}</h3>
-        <p class="mt-3 text-base text-slate-600 text-center">{s.desc}</p>
-        <span class="mt-5 text-sm font-medium text-orange-600 group-hover:underline">
-          Ver paquetes y precios →
-        </span>
-      </a>
-    ))}
+<section id="servicios" class="section-orbital px-4 py-20">
+  <div class="mx-auto max-w-6xl">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Servicios
+      </p>
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+        Qué puedo hacer por tu negocio
+      </h2>
+      <p class="mt-4 text-lg leading-8 text-slate-600">
+        Trabajo con foco en Zaragoza y también en remoto para toda España. La idea no es vender humo:
+        es elegir la solución sensata para mejorar captación, rendimiento y capacidad de crecimiento.
+      </p>
+    </div>
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-3">
+      {services.map((service) => (
+        <article class="group flex h-full flex-col rounded-[1.75rem] bg-white p-7 shadow-lg ring-1 ring-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-2xl">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-slate-100 text-slate-900 transition group-hover:bg-slate-900 group-hover:text-white">
+              <service.icon class="h-7 w-7" aria-hidden="true" />
+            </div>
+
+            <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+              {service.eyebrow}
+            </span>
+          </div>
+
+          <div class="mt-6">
+            <h3 class="text-xl font-semibold text-slate-900">
+              {service.title}
+            </h3>
+            <p class="mt-3 text-base leading-7 text-slate-600">
+              {service.desc}
+            </p>
+          </div>
+
+          <ul class="mt-5 flex flex-wrap gap-2">
+            {service.points.map((point) => (
+              <li class="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-700">
+                {point}
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-auto pt-7">
+            <a
+              href={service.href}
+              class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+            >
+              {service.cta}
+              <ArrowRight class="h-4 w-4 transition group-hover:translate-x-0.5" />
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mx-auto mt-10 max-w-4xl rounded-[1.5rem] border border-slate-200 bg-white/80 px-6 py-5 text-center shadow-sm backdrop-blur">
+      <p class="text-sm leading-7 text-slate-600 sm:text-base">
+        Si no tienes claro si tu caso encaja en una categoría, no pasa nada. Muchas veces la mejor solución
+        no es “hacer una web nueva”, sino arreglar bien la base que ya existe y construir desde ahí.
+      </p>
+    </div>
   </div>
 </section>

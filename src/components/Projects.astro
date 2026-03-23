@@ -1,99 +1,398 @@
 ---
-import { Github, ExternalLink, Info } from "lucide-astro";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-astro";
 
-const projects = [
+type ProjectStatus = "En producción" | "Próximamente" | "Privado" | "En piloto";
+
+interface Project {
+  id: string;
+  title: string;
+  kicker: string;
+  description: string;
+  image: string;
+  alt: string;
+  status: ProjectStatus;
+  tech: string[];
+  liveHref?: string;
+  note: string;
+}
+
+const projects: Project[] = [
   {
-    slug: "parrockia",
+    id: "parrockia",
     title: "ParROCKia",
-    desc: "Web energética para conciertos y eventos en Vitoria-Gasteiz.",
-    img: "/parrockia.webp",
-    site: "https://tabernaparrockia.com",
-    repo: null,
-    tech: ["Astro", "Tailwind", "SEO", "Accesibilidad"],
-    alt: "Captura de la web ParROCKia en Vitoria-Gasteiz, taberna punk-rock"
+    kicker: "Caso real · Hostelería",
+    description:
+      "Web para hostelería y eventos con mejor estructura, navegación clara y una presencia digital con más carácter que ruido.",
+    image: "/parrockia.webp",
+    alt: "Proyecto ParROCKia, web para hostelería y eventos",
+    status: "En producción",
+    tech: ["Astro", "SEO local", "Rendimiento", "Accesibilidad"],
+    liveHref: "https://tabernaparrockia.com",
+    note: "Caso publicado y visible. Buen ejemplo de presencia local con personalidad propia."
   },
   {
-    slug: "pisonauta",
-    title: "PisoNauta",
-    desc: "PWA para convivencia sin caos: tareas, gastos y rutinas.",
-    img: "/pisonauta.webp",
-    site: null,
-    repo: "https://github.com/ByteZagal/PisoNautaApp",
-    tech: ["Next.js", "Supabase", "PWA", "Zod"],
-    alt: "Captura de la app PisoNauta mostrando gestión de tareas y gastos"
+    id: "foconauta",
+    title: "FocoNauta",
+    kicker: "Producto propio · Roadmap activo",
+    description:
+      "Producto orientado a foco, organización y flujo de trabajo. Está en evolución, con criterio de producto y despliegue progresivo.",
+    image: "/focoNauta.webp",
+    alt: "FocoNauta, producto propio en evolución",
+    status: "Próximamente",
+    tech: ["Next.js", "Supabase", "PWA", "UX"],
+    note: "Próximamente en Play Store. Prefiero enseñar producto maduro antes que humo."
   },
   {
-    slug: "txorion",
-    title: "TxoriON",
-    desc: "PWA cívica para conectar negocios y ciudadanos de Vitoria-Gasteiz.",
-    img: "/txorion.webp",
-    site: null,
-    repo: "https://github.com/bytezagal/txorion",
+    id: "offilab",
+    title: "OffiLab",
+    kicker: "Sistema interno · No público",
+    description:
+      "Sistema interno orientado a operativa y orden digital. Lo muestro como señal de criterio técnico, no como escaparate prematuro.",
+    image: "/offilab.webp",
+    alt: "OffiLab, sistema interno de operativa digital",
+    status: "Privado",
+    tech: ["Automatización", "Flujos", "Operaciones", "Negocio"],
+    note: "Activo privado. Se enseña con criterio, no antes de tiempo."
+  },
+  {
+    id: "txorion",
+    title: "TxoriOn",
+    kicker: "Producto publicado · Utilidad local",
+    description:
+      "Plataforma local para conectar información, negocio y utilidad práctica. Buen ejemplo de producto con capa territorial y recorrido.",
+    image: "/txorion.webp",
+    alt: "TxoriOn, plataforma local orientada a utilidad práctica",
+    status: "En producción",
     tech: ["Next.js", "PWA", "SEO local", "Maps"],
-    alt: "Captura de la app TxoriON mostrando agenda de eventos en Vitoria-Gasteiz"
+    liveHref: "https://txorion.es",
+    note: "Producto publicado. Enseña enfoque, utilidad y capacidad de ejecución."
   },
+  {
+    id: "turbolin",
+    title: "Turbolin",
+    kicker: "Producto en preparación",
+    description:
+      "Producto en preparación con enfoque pragmático: resolver una necesidad concreta antes de enseñar fuegos artificiales.",
+    image: "/turbolin.webp",
+    alt: "Turbolin, producto en preparación",
+    status: "En piloto",
+    tech: ["Producto", "Iteración", "Validación", "Negocio"],
+    note: "En piloto. Todavía no lo saco a paseo sin correa."
+  }
 ];
+
+const statusClassMap: Record<ProjectStatus, string> = {
+  "En producción": "bg-emerald-50 text-emerald-700 ring-emerald-200",
+  "Próximamente": "bg-blue-50 text-blue-700 ring-blue-200",
+  "Privado": "bg-slate-100 text-slate-700 ring-slate-200",
+  "En piloto": "bg-amber-50 text-amber-700 ring-amber-200"
+};
 ---
+
 <section id="projects" class="relative py-24">
   <div class="mx-auto max-w-6xl px-4">
-    <h2 class="text-3xl font-extrabold text-center">Proyectos destacados</h2>
-    <p class="mt-3 text-center text-slate-600">
-      Ejemplos reales y en desarrollo, con foco en Vitoria-Gasteiz.
-    </p>
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Prueba real
+      </p>
+      <h2 class="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
+        Casos y productos seleccionados
+      </h2>
+      <p class="mt-4 text-balance text-lg text-slate-600">
+        No enseño por enseñar. Aquí dejo piezas que sí aportan señal de criterio, ejecución y producto:
+        trabajo real, producto propio y activos con sentido comercial.
+      </p>
+    </div>
 
-    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      {projects.map((p) => (
-        <article
-          class="group rounded-2xl bg-white ring-1 ring-slate-200 shadow-md transition hover:-translate-y-1 hover:shadow-xl flex flex-col overflow-hidden"
-        >
-          <div class="relative aspect-[5/4] w-full overflow-hidden">
-            <img
-              src={p.img}
-              alt={p.alt}
-              class="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-[1.05]"
-              loading="lazy"
-            />
-          </div>
-
-          <div class="flex flex-col gap-3 p-6 flex-1">
-            <h3 class="text-xl font-semibold text-slate-900">{p.title}</h3>
-            <p class="text-slate-600">{p.desc}</p>
-
-            <ul class="mt-1 flex flex-wrap gap-2">
-              {p.tech.map((t) => <li class="chip">{t}</li>)}
-            </ul>
-
-            <div class="mt-auto flex flex-wrap gap-3">
-              {p.site && (
-                <a
-                  href={p.site}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 rounded-lg bg-red-600 text-white px-3 py-1.5 text-sm font-medium hover:bg-red-700 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-600"
-                >
-                  <ExternalLink class="w-4 h-4" /> Ver página
-                </a>
-              )}
-              {p.repo && (
-                <a
-                  href={p.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-400"
-                >
-                  <Github class="w-4 h-4" /> Código
-                </a>
-              )}
-              <a
-                href={`/proyectos/${p.slug}`}
-                class="inline-flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-400"
+    <div
+      class="mt-14 rounded-[2rem] border border-slate-200 bg-white/90 p-5 shadow-xl shadow-slate-200/70 backdrop-blur sm:p-7"
+      data-projects-showcase
+    >
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-center">
+        <div>
+          <div class="relative mx-auto h-[15.5rem] w-full max-w-[16rem] overflow-hidden sm:h-[18rem] sm:max-w-[19rem] lg:h-[20rem] lg:max-w-[20rem]">
+            {projects.map((project, index) => (
+              <button
+                type="button"
+                class="absolute left-1/2 top-0 flex h-full w-[13.75rem] origin-center flex-col overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-xl shadow-slate-300/35 transition-[transform,opacity,box-shadow] duration-500 ease-out sm:w-[16rem] lg:w-[16.5rem]"
+                data-project-card
+                data-index={index}
+                data-project-title={project.title}
+                aria-label={`Mostrar ${project.title}`}
+                aria-pressed={index === 0 ? "true" : "false"}
               >
-                <Info class="w-4 h-4" /> Curiosidades
-              </a>
-            </div>
+                <div class="relative h-[66%] w-full overflow-hidden bg-slate-50">
+                  <img
+                    src={project.image}
+                    alt={project.alt}
+                    class="h-full w-full object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                  />
+                </div>
+
+                <div class="flex flex-1 items-center justify-between gap-3 px-4 py-3 text-left">
+                  <div class="min-w-0">
+                    <p class="truncate text-base font-semibold text-slate-900">
+                      {project.title}
+                    </p>
+                    <p class="truncate text-sm text-slate-500">
+                      {project.kicker}
+                    </p>
+                  </div>
+
+                  <span class={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${statusClassMap[project.status]}`}>
+                    {project.status}
+                  </span>
+                </div>
+              </button>
+            ))}
           </div>
-        </article>
-      ))}
+
+          <div class="mt-5 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+              data-project-prev
+              aria-label="Proyecto anterior"
+            >
+              <ChevronLeft class="h-5 w-5" />
+            </button>
+
+            <div class="flex flex-wrap items-center justify-center gap-2" aria-label="Selector de proyectos">
+              {projects.map((project, index) => (
+                <button
+                  type="button"
+                  class="inline-flex min-h-10 items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+                  data-project-indicator
+                  data-index={index}
+                  aria-label={`Ir a ${project.title}`}
+                  aria-current={index === 0 ? "true" : "false"}
+                >
+                  {project.title}
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+              data-project-next
+              aria-label="Proyecto siguiente"
+            >
+              <ChevronRight class="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:pl-2">
+          {projects.map((project, index) => (
+            <article
+              class:list={[
+                "rounded-[1.75rem] border border-slate-200 bg-slate-50/70 p-6 shadow-inner shadow-white/80",
+                index !== 0 && "hidden"
+              ]}
+              data-project-panel
+              data-index={index}
+              aria-live="polite"
+            >
+              <div class="flex flex-wrap items-center gap-3">
+                <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ${statusClassMap[project.status]}`}>
+                  {project.status}
+                </span>
+                <span class="text-sm font-medium text-slate-500">
+                  {project.kicker}
+                </span>
+              </div>
+
+              <h3 class="mt-4 text-2xl font-bold tracking-tight text-slate-900">
+                {project.title}
+              </h3>
+
+              <p class="mt-4 text-base leading-7 text-slate-600">
+                {project.description}
+              </p>
+
+              <ul class="mt-5 flex flex-wrap gap-2">
+                {project.tech.map((item) => (
+                  <li class="rounded-full bg-white px-3 py-1 text-sm text-slate-700 ring-1 ring-slate-200">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <p class="mt-5 text-sm leading-6 text-slate-500">
+                {project.note}
+              </p>
+
+              <div class="mt-7 flex flex-wrap gap-3">
+                {project.liveHref ? (
+                  <a
+                    href={project.liveHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2"
+                  >
+                    <ExternalLink class="h-4 w-4" />
+                    Ver proyecto en vivo
+                  </a>
+                ) : (
+                  <span class="inline-flex items-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-500">
+                    Ficha detallada en el siguiente paso
+                  </span>
+                )}
+
+                <a
+                  href="/contratame"
+                  class="inline-flex items-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+                >
+                  Quiero algo así
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <p class="mx-auto mt-8 max-w-3xl text-center text-sm text-slate-500">
+        Algunos activos están en despliegue privado o fase piloto. La idea no es inflar el portfolio,
+        sino reforzar confianza con lo que sí tiene sentido enseñar hoy.
+      </p>
     </div>
   </div>
 </section>
+
+<script>
+  const showcaseRoot = document.querySelector("[data-projects-showcase]");
+
+  if (showcaseRoot instanceof HTMLElement) {
+    const cards = Array.from(
+      showcaseRoot.querySelectorAll("[data-project-card]")
+    ).filter((element): element is HTMLButtonElement => element instanceof HTMLButtonElement);
+
+    const panels = Array.from(
+      showcaseRoot.querySelectorAll("[data-project-panel]")
+    ).filter((element): element is HTMLElement => element instanceof HTMLElement);
+
+    const indicators = Array.from(
+      showcaseRoot.querySelectorAll("[data-project-indicator]")
+    ).filter((element): element is HTMLButtonElement => element instanceof HTMLButtonElement);
+
+    const prevButton = showcaseRoot.querySelector("[data-project-prev]");
+    const nextButton = showcaseRoot.querySelector("[data-project-next]");
+
+    const isPrevIndex = (index: number, activeIndex: number, total: number): boolean =>
+      (activeIndex - 1 + total) % total === index;
+
+    const isNextIndex = (index: number, activeIndex: number, total: number): boolean =>
+      (activeIndex + 1) % total === index;
+
+    let activeIndex = 0;
+
+    const applyCardState = (): void => {
+      const desktop = window.matchMedia("(min-width: 1024px)").matches;
+      const total = cards.length;
+
+      cards.forEach((card, index) => {
+        const isActive = index === activeIndex;
+        const isPrev = isPrevIndex(index, activeIndex, total);
+        const isNext = isNextIndex(index, activeIndex, total);
+
+        card.style.left = "50%";
+        card.style.top = "0";
+        card.style.pointerEvents = isActive || desktop ? "auto" : "none";
+        card.style.transition = "transform 500ms ease, opacity 500ms ease, box-shadow 500ms ease";
+
+        if (isActive) {
+          card.style.transform = "translateX(-50%) translateY(0) scale(1)";
+          card.style.opacity = "1";
+          card.style.zIndex = "30";
+          card.style.boxShadow = "0 30px 60px rgba(15, 23, 42, 0.16)";
+          card.setAttribute("aria-pressed", "true");
+          return;
+        }
+
+        if (desktop && isPrev) {
+  card.style.transform = "translateX(calc(-50% - 8.25rem)) translateY(0.8rem) scale(0.9) rotate(-5deg)";
+  card.style.opacity = "0.5";
+  card.style.zIndex = "20";
+  card.style.boxShadow = "0 16px 34px rgba(15, 23, 42, 0.08)";
+  card.setAttribute("aria-pressed", "false");
+  return;
+}
+
+if (desktop && isNext) {
+  card.style.transform = "translateX(calc(-50% + 8.25rem)) translateY(0.8rem) scale(0.9) rotate(5deg)";
+  card.style.opacity = "0.5";
+  card.style.zIndex = "20";
+  card.style.boxShadow = "0 16px 34px rgba(15, 23, 42, 0.08)";
+  card.setAttribute("aria-pressed", "false");
+  return;
+}
+
+        card.style.transform = "translateX(-50%) translateY(1.5rem) scale(0.8)";
+        card.style.opacity = "0";
+        card.style.zIndex = "10";
+        card.style.boxShadow = "0 10px 25px rgba(15, 23, 42, 0.04)";
+        card.setAttribute("aria-pressed", "false");
+      });
+    };
+
+    const applyPanelState = (): void => {
+      panels.forEach((panel, index) => {
+        panel.classList.toggle("hidden", index !== activeIndex);
+      });
+
+      indicators.forEach((indicator, index) => {
+        const selected = index === activeIndex;
+        indicator.setAttribute("aria-current", selected ? "true" : "false");
+        indicator.classList.toggle("bg-slate-900", selected);
+        indicator.classList.toggle("text-white", selected);
+        indicator.classList.toggle("border-slate-900", selected);
+        indicator.classList.toggle("bg-slate-50", !selected);
+        indicator.classList.toggle("text-slate-700", !selected);
+        indicator.classList.toggle("border-slate-200", !selected);
+      });
+    };
+
+    const render = (): void => {
+      applyCardState();
+      applyPanelState();
+    };
+
+    const goTo = (index: number): void => {
+      activeIndex = index;
+      render();
+    };
+
+    cards.forEach((card, index) => {
+      card.addEventListener("click", () => {
+        goTo(index);
+      });
+    });
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener("click", () => {
+        goTo(index);
+      });
+    });
+
+    if (prevButton instanceof HTMLButtonElement) {
+      prevButton.addEventListener("click", () => {
+        activeIndex = (activeIndex - 1 + cards.length) % cards.length;
+        render();
+      });
+    }
+
+    if (nextButton instanceof HTMLButtonElement) {
+      nextButton.addEventListener("click", () => {
+        activeIndex = (activeIndex + 1) % cards.length;
+        render();
+      });
+    }
+
+    window.addEventListener("resize", render, { passive: true });
+
+    render();
+  }
+</script>

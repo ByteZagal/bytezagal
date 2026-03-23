@@ -8,29 +8,14 @@ interface Props {
 }
 
 const { title, description, canonicalPath, image, jsonLd } = Astro.props;
+
 const canonical = new URL(canonicalPath, Astro.site);
-
-// JSON-LD por defecto para tu negocio (LocalBusiness / ProfessionalService)
-const defaultBusiness = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "ByteZagal",
-  "image": "https://bytezagal.es/icon.png",
-  "url": "https://bytezagal.es/",
-  "telephone": "+34 650 850 163",
-  "email": "bytezagal.contacto@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Andalucía Kalea",
-    "addressLocality": "Vitoria-Gasteiz",
-    "postalCode": "01003",
-    "addressCountry": "ES"
-  },
-  "priceRange": "149-640 EUR"
-};
-
-// Si jsonLd existe, lo usamos; si no, aplicamos defaultBusiness
-const structuredData = jsonLd ?? defaultBusiness;
+const socialImage = image ? new URL(image, Astro.site).href : undefined;
+const structuredData = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
 ---
 <title>{title}</title>
 <meta charset="utf-8" />
@@ -47,14 +32,20 @@ const structuredData = jsonLd ?? defaultBusiness;
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical.href} />
 <meta property="og:type" content="website" />
-{image && <meta property="og:image" content={image} />}
+<meta property="og:site_name" content="ByteZagal" />
+{socialImage && <meta property="og:image" content={socialImage} />}
+
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-{image && <meta name="twitter:image" content={image} />}
+{socialImage && <meta name="twitter:image" content={socialImage} />}
 
-<script
-  type="application/ld+json"
-  is:inline
-  set:html={JSON.stringify(Array.isArray(structuredData) ? structuredData : [structuredData])}
-/>
+{
+  structuredData.length > 0 && (
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
+  )
+}

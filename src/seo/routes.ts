@@ -1,30 +1,50 @@
 export const seoByPath = {
-  '/': {
-    title: 'Pedro Aguilar — Diseño web en Vitoria-Gasteiz',
-    description: 'Webs y tiendas online rápidas y accesibles para pymes de Vitoria-Gasteiz. Pide presupuesto por email.',
+  "/": {
+    title: "ByteZagal | Rescate web, desarrollo y SEO técnico en Zaragoza",
+    description:
+      "Rescate web, desarrollo a medida y SEO técnico en Zaragoza y remoto en España. Webs rápidas, accesibles y pensadas para negocio.",
   },
-  '/vitoria-gasteiz': {
-    title: 'Diseño web en Vitoria-Gasteiz | ByteZagal',
-    description: 'Proveedor local. SEO, tiendas online y mantenimiento con trato cercano.'
+
+  "/contratame": {
+    title:
+      "Contrátame | Diagnóstico, rescate web y desarrollo serio | ByteZagal",
+    description:
+      "Cuéntame tu caso. Trabajo con foco en Zaragoza y en remoto para España en rescate web, desarrollo a medida, SEO técnico y mejora de rendimiento.",
   },
-  '/servicios': {
-    title: 'Servicios web para pymes en Vitoria',
-    description: 'SEO local, tienda online y mantenimiento. Procesos simples y plazos claros.'
+
+  "/proyectos": {
+    title: "Casos y productos seleccionados | ByteZagal",
+    description:
+      "Selección de trabajos y productos con criterio técnico, ejecución real y sentido comercial. Menos escaparate, más señal útil.",
   },
-  '/proyectos': {
-    title: 'Proyectos — ByteZagal',
-    description: 'Casos reales: ParROCKia, TxoriON y PisoNauta. Resultados y aprendizajes.'
+
+  "/proyectos/parrockia": {
+    title: "ParROCKia | Caso real de web para hostelería | ByteZagal",
+    description:
+      "Caso real de presencia digital para hostelería y eventos: estructura, navegación, rendimiento y personalidad sin ruido.",
   },
-  '/sobre-mi': {
-    title: 'Sobre mí — Pedro Aguilar, desarrollador web en Vitoria',
-    description: 'Claridad, rendimiento y accesibilidad en cada proyecto.'
+
+  "/proyectos/txorion": {
+    title: "TxoriOn | Producto publicado con utilidad local | ByteZagal",
+    description:
+      "Producto publicado con capa territorial, utilidad práctica y enfoque en ejecución, claridad y recorrido.",
   },
-  '/contacto': {
-    title: 'Contacto — Pide presupuesto por email',
-    description: 'Escríbeme a bytezagal.contacto@gmail.com o MD en Instagram. Respondo en el mismo día laboral.'
+
+  "/servicios/arreglos": {
+    title: "Rescate y arreglos de software | ByteZagal",
+    description:
+      "Auditoría técnica, parche, refactor controlado y mejora de rendimiento para webs o aplicaciones lentas, rotas o mal planteadas.",
   },
-  '/minilab': {
-    title: 'Mini-Lab — utilidades web',
-    description: 'Pequeñas herramientas y experimentos. Versión inicial.'
-  }
+
+  "/servicios/digitalizacion": {
+    title: "Digitalización de negocio y base digital | ByteZagal",
+    description:
+      "Web corporativa, SEO local, automatización útil y estructura digital clara para captar mejor y operar con menos fricción.",
+  },
+
+  "/servicios/ecommerce": {
+    title: "Tiendas online rápidas y claras | ByteZagal",
+    description:
+      "E-commerce pensados para móvil, checkout claro y base SEO sólida para vender sin complicar la gestión.",
+  },
 } as const;

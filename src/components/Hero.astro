@@ -1,26 +1,38 @@
 ---
-const heading = "Pedro Aguilar";
-const avatar = "/yo.webp";
-const WHATSAPP = "https://wa.me/34650850163?text=Hola%20Pedro,%20quiero%20hablar%20sobre%20mi%20web.";
+const eyebrow = "ByteZagal · Zaragoza + remoto en España";
+const heading = "Rescate web, desarrollo serio y SEO técnico";
+const avatar = "/bytezagal-perfil.webp";
+const WHATSAPP =
+  "https://wa.me/34650850163?text=Hola%20ByteZagal,%20quiero%20hablar%20sobre%20mi%20proyecto.";
+
+const primaryCtaClass =
+  "group inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3 font-semibold text-white ring-1 ring-black/5 shadow-[0_10px_24px_rgba(15,23,42,0.16)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-900 hover:shadow-[0_16px_36px_rgba(180,83,9,0.18)] focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/35";
+
+const secondaryCtaClass =
+  "group inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white/90 px-6 py-3 font-semibold text-slate-900 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-amber-300 hover:bg-white hover:shadow-[0_12px_28px_rgba(180,83,9,0.10)] focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-500/25";
+
+const whatsappCtaClass =
+  "inline-flex items-center justify-center rounded-full border border-slate-300 bg-white/90 px-6 py-3 font-semibold text-slate-900 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50/60 hover:text-emerald-700 hover:shadow-[0_12px_28px_rgba(5,150,105,0.14)] focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-500/25";
 ---
 
 <section class="relative pt-20 pb-16 text-center">
-  <!-- Halo suave -->
-  <div class="absolute left-1/2 top-10 -z-10 h-40 w-40 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(247,147,30,0.22),transparent_60%)]" data-reveal></div>
+  <div
+    class="absolute left-1/2 top-10 -z-10 h-40 w-40 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(247,147,30,0.22),transparent_60%)]"
+    data-reveal
+  ></div>
 
-  <!-- Avatar -->
   <button
     id="openAvatar"
     type="button"
     class="mx-auto mb-6 h-24 w-24 overflow-hidden rounded-full ring-4 ring-white shadow-lg focus:outline-none focus-visible:ring-4 focus-visible:ring-orange-500"
     aria-haspopup="dialog"
     aria-controls="heroAvatarModal"
-    aria-label="Ver foto ampliada"
+    aria-label="Ampliar retrato"
     data-reveal
   >
     <img
       src={avatar}
-      alt="Pedro Aguilar, desarrollador web en Vitoria-Gasteiz"
+      alt="Pedro Aguilar, fundador de ByteZagal"
       width="96"
       height="96"
       loading="eager"
@@ -29,44 +41,66 @@ const WHATSAPP = "https://wa.me/34650850163?text=Hola%20Pedro,%20quiero%20hablar
     />
   </button>
 
-  <!-- Título y subtítulo -->
-  <div class="mx-auto max-w-3xl px-4">
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900" data-reveal>
+  <div class="mx-auto max-w-4xl px-4">
+    <p
+      class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500"
+      data-reveal
+    >
+      {eyebrow}
+    </p>
+
+    <h1
+      class="mt-3 text-balance text-4xl font-extrabold tracking-tight text-slate-900 md:text-6xl"
+      data-reveal
+      data-reveal-delay="40"
+    >
       {heading}
     </h1>
 
-    <p class="mt-3 text-lg md:text-xl text-slate-600" data-reveal data-reveal-delay="80">
-      Desarrollo webs <strong>claras</strong>, <strong>rápidas</strong> y <strong>accesibles</strong> para pymes de Vitoria-Gasteiz.
+    <p
+      class="mx-auto mt-4 max-w-3xl text-lg leading-8 text-slate-600 md:text-xl"
+      data-reveal
+      data-reveal-delay="80"
+    >
+      Arreglo webs lentas, rotas o mal planteadas, mejoro rendimiento, accesibilidad y
+      captación, y construyo una base digital preparada para negocio.
     </p>
 
-    <!-- CTAs -->
-    <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row" data-reveal-stagger>
-      <a
-        href="/#contacto"
-        class="inline-flex items-center justify-center rounded-full bg-black px-5 py-3 font-semibold text-white transition hover:opacity-90"
-      >
-        Contrátame
+    <div
+      class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+      data-reveal-stagger
+    >
+      <a href="/#contacto" class={primaryCtaClass}>
+        <span>Cuéntame tu caso</span>
+        <span
+          aria-hidden="true"
+          class="translate-x-0 text-base transition-transform duration-200 group-hover:translate-x-1"
+        >
+          →
+        </span>
       </a>
 
-      <a
-        href="/proyectos"
-        class="inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-3 font-semibold transition hover:bg-slate-50"
-      >
-        Ver proyectos
+      <a href="/proyectos" class={secondaryCtaClass}>
+        <span>Ver casos</span>
+        <span
+          aria-hidden="true"
+          class="translate-x-0 text-base transition-transform duration-200 group-hover:translate-x-1"
+        >
+          →
+        </span>
       </a>
 
       <a
         href={WHATSAPP}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-3 font-semibold transition hover:bg-slate-50"
+        class={whatsappCtaClass}
       >
         WhatsApp
       </a>
     </div>
   </div>
 
-  <!-- Modal circular pequeño -->
   <dialog id="heroAvatarModal" class="rounded-2xl p-0 backdrop:bg-black/50">
     <div class="relative flex items-center justify-center p-6">
       <button
@@ -79,7 +113,7 @@ const WHATSAPP = "https://wa.me/34650850163?text=Hola%20Pedro,%20quiero%20hablar
 
       <img
         src={avatar}
-        alt="Foto de Pedro Aguilar ampliada"
+        alt="Retrato de Pedro Aguilar, fundador de ByteZagal"
         width="320"
         height="320"
         class="aspect-square w-[min(72vw,320px)] rounded-full object-cover ring-4 ring-white shadow-2xl"
