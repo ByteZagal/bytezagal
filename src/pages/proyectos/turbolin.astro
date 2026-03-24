@@ -2,15 +2,15 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectGallery from "../../components/ProjectGallery.astro";
 
-const title = "ParROCKia | Caso real de app y web para hostelería | ByteZagal";
+const title = "Turbolin | App para torneos, ranking y fidelización en hostelería | ByteZagal";
 const description =
-  "Caso real para hostelería: carta visual, eventos, merchandising y panel de gestión con una experiencia más clara, usable y preparada para crecer.";
+  "Caso de app para organizar torneos, recompensas y ranking en locales con futbolín, con una experiencia clara pensada para fidelizar y generar recurrencia.";
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": "https://bytezagal.es/proyectos/parrockia#webpage",
-  url: "https://bytezagal.es/proyectos/parrockia",
+  "@id": "https://bytezagal.es/proyectos/turbolin#webpage",
+  url: "https://bytezagal.es/proyectos/turbolin",
   name: title,
   description,
   isPartOf: {
@@ -18,7 +18,7 @@ const pageSchema = {
   },
   about: {
     "@type": "SoftwareApplication",
-    name: "ParROCKia",
+    name: "Turbolin",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web"
   }
@@ -43,86 +43,80 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "ParROCKia",
-      item: "https://bytezagal.es/proyectos/parrockia"
+      name: "Turbolin",
+      item: "https://bytezagal.es/proyectos/turbolin"
     }
   ]
 };
 
 const slides = [
   {
-    src: "/parroHome.webp",
-    alt: "Pantalla principal de ParROCKia con identidad visual del negocio",
+    src: "/turboHome.webp",
+    alt: "Pantalla principal de Turbolin con acceso a la experiencia de juego y torneos",
     label: "Inicio",
-    caption: "Portada con identidad propia y acceso claro a lo importante."
+    caption: "Entrada clara para activar la experiencia y entender rápido cómo funciona."
   },
   {
-    src: "/parroEventos.webp",
-    alt: "Sección de eventos de ParROCKia",
-    label: "Eventos",
-    caption: "Agenda y próximos eventos presentados de forma rápida y visible."
+    src: "/turboTorneos.webp",
+    alt: "Pantalla de torneos de Turbolin",
+    label: "Torneos",
+    caption: "Gestión de torneos pensada para generar movimiento, participación y recurrencia."
   },
   {
-    src: "/parroJukeBox.webp",
-    alt: "Función JukeBox dentro de ParROCKia",
-    label: "JukeBox",
-    caption: "Funcionalidad diferencial para reforzar experiencia y personalidad."
+    src: "/turboPremios.webp",
+    alt: "Pantalla de recompensas y premios de Turbolin",
+    label: "Premios",
+    caption: "Sistema de premios para reforzar fidelización y motivar la vuelta al local."
   },
   {
-    src: "/parroPanel1.webp",
-    alt: "Panel de administración de ParROCKia para gestionar contenido",
-    label: "Panel 1",
-    caption: "Gestión sencilla de contenidos para actualizar la web sin fricción."
+    src: "/turboCrear.webp",
+    alt: "Pantalla de creación y configuración dentro de Turbolin",
+    label: "Configuración",
+    caption: "Configuración sencilla para lanzar dinámicas sin procesos torpes."
   },
   {
-    src: "/parroPanel2.webp",
-    alt: "Segundo panel de administración de ParROCKia",
-    label: "Panel 2",
-    caption: "Operativa preparada para seguir creciendo sin depender de procesos torpes."
-  },
-  {
-    src: "/parroUbicacion.webp",
-    alt: "Bloque de ubicación e información útil de ParROCKia",
-    label: "Ubicación",
-    caption: "Información útil y localización accesible desde una navegación directa."
+    src: "/turboBar.webp",
+    alt: "Vista de Turbolin orientada al local y su operativa",
+    label: "Local",
+    caption: "Una capa de producto pensada para conectar experiencia de juego y negocio real."
   }
 ] as const;
 
 const chips = [
   "PWA",
+  "Torneos",
+  "Ranking",
+  "Recompensas",
   "Hostelería",
-  "Eventos",
-  "Merchandising",
-  "Panel admin",
-  "UX"
+  "Fidelización"
 ];
 
 const valueCards = [
   {
     title: "Qué es",
-    text: "Una solución digital para mostrar mejor el negocio, sus eventos y su propuesta sin perder personalidad."
+    text: "Una app para organizar torneos, clasificaciones y recompensas alrededor del futbolín en un local."
   },
   {
     title: "Cómo ayuda",
-    text: "Facilita consulta, gestión y actualización de contenido desde una experiencia más clara y práctica."
+    text: "Convierte una actividad social en una experiencia mejor estructurada, más activa y con más retorno."
   },
   {
     title: "Qué transmite",
-    text: "Criterio de producto, identidad visual y capacidad para convertir una web en herramienta real de negocio."
+    text: "Capacidad para diseñar producto con lógica de negocio, comunidad y uso recurrente."
   }
 ];
 
 const fitList = [
-  "Negocios de hostelería con agenda, producto y comunidad.",
-  "Marcas con personalidad que necesitan claridad sin verse genéricas.",
-  "Proyectos que quieren gestionar contenido desde móvil u ordenador con facilidad."
+  "Locales que quieren activar comunidad y crear una razón real para volver.",
+  "Espacios con futbolín u ocio presencial que buscan más movimiento y fidelización.",
+  "Negocios que quieren unir experiencia física, ranking y recompensas en una sola propuesta."
 ];
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  canonicalPath="/proyectos/parrockia"
+  canonicalPath="/proyectos/turbolin"
   jsonLd={[pageSchema, breadcrumbSchema]}
   bodyClass="text-slate-800"
 >
@@ -150,47 +144,43 @@ const fitList = [
             class="inline-flex min-h-10 items-center rounded-full border border-slate-900 bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
             aria-current="page"
           >
-            ParROCKia
+            Turbolin
           </span>
         </li>
       </ol>
     </nav>
 
-    <section class="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+    <section class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
       <div class="max-w-2xl">
         <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
-          Caso publicado
+          Caso privado
         </p>
 
         <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-          ParROCKia
+          Turbolin
         </h1>
 
         <p class="mt-5 text-lg leading-8 text-slate-600">
-          App y web para una taberna con eventos, merchandising e información útil,
-          pensada para enseñar mejor lo importante y facilitar la gestión del día a día.
+          App para crear torneos, rankings y recompensas alrededor del futbolín,
+          pensada para activar comunidad, fidelizar y dar más vida al local.
         </p>
 
         <ul
           class="mt-6 flex flex-wrap gap-2"
-          aria-label="Tecnologías y enfoque de ParROCKia"
+          aria-label="Tecnologías y enfoque de Turbolin"
         >
           {chips.map((item) => (
             <li class="chip">{item}</li>
           ))}
         </ul>
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href="https://tabernaparrockia.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="cta black"
-          >
-            Ver proyecto en vivo
-          </a>
+        <p class="mt-6 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm leading-7 text-slate-600 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+          Proyecto en fase privada. Esta demo visual enseña el enfoque de producto,
+          la experiencia de uso y el potencial de negocio sin exponer operativa sensible.
+        </p>
 
-          <a href="/contratame" class="cta white">
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contratame" class="cta black">
             Quiero algo así
           </a>
 
@@ -202,8 +192,8 @@ const fitList = [
 
       <ProjectGallery
         slides={slides}
-        mode="desktop"
-        ariaLabel="Galería del proyecto ParROCKia"
+        mode="mobile"
+        ariaLabel="Galería del proyecto Turbolin"
       />
     </section>
 
@@ -230,20 +220,20 @@ const fitList = [
 
         <div class="mt-5 space-y-4 text-base leading-8 text-slate-600">
           <p>
-            ParROCKia mezcla identidad, agenda, producto y operativa. La clave aquí
-            no era llenar la pantalla de ruido, sino ordenar la experiencia para que
-            el negocio se entienda rápido y resulte fácil de consultar.
+            Turbolin parte de una idea muy sencilla, pero potente: cuando una actividad
+            presencial se estructura bien, deja de ser un rato suelto y se convierte en
+            una dinámica que trae gente de vuelta.
           </p>
 
           <p>
-            Además de enseñar mejor la propuesta, el proyecto deja una base útil para
-            publicar eventos, mover merchandising y gestionar contenido sin convertir
-            cada cambio en una mini odisea administrativa.
+            Torneos, clasificaciones y recompensas no están aquí como adorno. Están
+            pensados para crear participación, generar conversación y reforzar el vínculo
+            entre experiencia y consumo dentro del local.
           </p>
 
           <p>
-            Es un buen ejemplo de solución digital para hostelería con personalidad,
-            comunidad y necesidad real de visibilidad continua.
+            Es un buen ejemplo de producto con lógica de negocio: una capa digital que
+            ordena el juego, da contexto a la comunidad y abre una vía clara para aumentar recurrencia.
           </p>
         </div>
       </article>
@@ -270,12 +260,12 @@ const fitList = [
         </p>
 
         <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
-          Si tu negocio necesita una presencia útil y fácil de gestionar, hablemos
+          Si quieres activar comunidad y mover más tu local, hablemos
         </h2>
 
         <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
-          Desde hostelería hasta productos con operativa real: la idea es construir
-          una base clara, usable y preparada para crecer sin liarse la guitarra.
+          Desde hostelería hasta espacios con experiencias presenciales: la meta es
+          transformar una actividad puntual en una palanca de fidelización y recurrencia.
         </p>
 
         <div class="mt-6 flex flex-wrap gap-3">

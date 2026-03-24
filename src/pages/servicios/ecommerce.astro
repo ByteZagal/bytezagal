@@ -1,62 +1,275 @@
 ---
-import "../../styles/globals.css";
-import Seo from "../../components/Seo.astro";
-import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import FaqService from "../../components/FaqService.astro";
-
+import { MessageCircle, ShoppingCart, CreditCard, BarChart3 } from "lucide-astro";
 import { org, website, localBusiness } from "../../seo/structured";
 
-const title = "Tienda online en Vitoria-Gasteiz — Diseño y pagos seguros";
+const title = "Tiendas online rápidas y preparadas para vender | ByteZagal";
 const description =
-  "E-commerce rápidos y seguros para pymes en Vitoria-Gasteiz. Catálogo, pagos, SEO y soporte local.";
+  "E-commerce claros, rápidos y preparados para móvil, pagos y crecimiento. Base técnica sólida para vender sin convertir la operativa en un caos.";
+
+const whatsappBase = "https://wa.me/34650850163?text=";
 
 const planes = [
-  { name: "Paquete Básico", price: "640 €", feat: ["Catálogo hasta 50 productos", "Checkout seguro", "Email transaccional", "SEO base"] },
-  { name: "Paquete de Crecimiento", price: "1.140 €", feat: ["Catálogo ilimitado", "Cupones y B2B", "Automatizaciones básicas", "Métricas y eventos"] },
-  { name: "Paquete Completo", price: "1.900 €", feat: ["Marketplace multi-vendedor", "Integraciones avanzadas", "Automatizaciones + CRM", "Auditoría SEO técnica"] },
-];
+  {
+    name: "Starter",
+    price: "Desde 1.290 €",
+    feat: [
+      "Catálogo inicial y estructura clara",
+      "Pagos y emails básicos",
+      "Base SEO y experiencia móvil"
+    ],
+    whatsappLabel: "la tienda online starter"
+  },
+  {
+    name: "Crecimiento",
+    price: "Desde 1.990 €",
+    feat: [
+      "Más catálogo, filtros y operativa",
+      "Métricas, cupones y automatización ligera",
+      "Base más preparada para vender de verdad"
+    ],
+    whatsappLabel: "la tienda online de crecimiento"
+  },
+  {
+    name: "A medida",
+    price: "Desde 2.990 €",
+    feat: [
+      "Integraciones y necesidades específicas",
+      "Flujos de compra más avanzados",
+      "Proyecto planteado para escalar sin improvisar"
+    ],
+    whatsappLabel: "una tienda online a medida"
+  }
+] as const;
 
 const faqs = [
-  { question: "¿Cuánto cuesta una tienda online en Vitoria-Gasteiz?", answer: "Desde 640 €, catálogo inicial y pagos seguros incluidos." },
-  { question: "¿Qué medios de pago puedo integrar?", answer: "Bizum, PayPal y transferencia, con pasarela segura y factura." },
-  { question: "¿Cuánto tarda en estar operativa la tienda?", answer: "Una semana aprox. para el plan básico." },
-];
----
-<html lang="es">
-  <head>
-    <Seo title={title} description={description} canonicalPath="/servicios/ecommerce" jsonLd={[org, website, localBusiness]} />
-  </head>
-  <body class="bg-orbital text-slate-800">
-    <main class="mx-auto max-w-6xl px-4 py-16">
-      <h1 class="text-4xl font-extrabold">Tiendas online en Vitoria-Gasteiz</h1>
-      <p class="mt-2 text-slate-600">Implementación cuidando rendimiento, accesibilidad y conversión, con soporte cercano en la ciudad.</p>
+  {
+    question: "¿Cuánto cuesta una tienda online?",
+    answer:
+      "Como referencia pública, la entrada está desde 1.290 €. El presupuesto final depende del catálogo, pagos, integraciones, automatización y complejidad real del negocio."
+  },
+  {
+    question: "¿Qué medios de pago se pueden integrar?",
+    answer:
+      "Depende del proyecto, pero se puede trabajar con pasarelas habituales como Stripe, PayPal, transferencia, Bizum u otras opciones según el caso."
+  },
+  {
+    question: "¿Se puede empezar pequeño y crecer después?",
+    answer:
+      "Sí. De hecho, suele ser la vía más sensata: una base clara para vender y una arquitectura que permita crecer sin rehacer la tienda entera."
+  }
+] as const;
 
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
-        {planes.map((p) => (
-          <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
-            <h2 class="text-xl font-semibold">{p.name}</h2>
-            <p class="mt-2 text-3xl font-extrabold">{p.price}</p>
-            <ul class="mt-4 space-y-2 text-slate-700">{p.feat.map((f) => <li>• {f}</li>)}</ul>
-            <div class="mt-6 flex flex-col gap-2">
-              <a href={`https://wa.me/34650850163?text=Hola,%20quiero%20saber%20más%20sobre%20${encodeURIComponent(p.name)}%20(Ecommerce)`} target="_blank" rel="noopener noreferrer" class="inline-block bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition hover:bg-green-800 active:scale-95 text-center focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-700">Escribir por WhatsApp</a>
-              <a href="/contratame" class="inline-block cta white">Ver otros paquetes</a>
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-ecommerce",
+  url: "https://bytezagal.es/servicios/ecommerce",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Desarrollo de tiendas online",
+  serviceType: "Desarrollo de tienda online",
+  areaServed: ["Zaragoza", "España"],
+  provider: { "@id": "https://bytezagal.es/#professional-service" },
+  url: "https://bytezagal.es/servicios/ecommerce",
+  description
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Servicios",
+      item: "https://bytezagal.es/contratame"
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Tiendas online",
+      item: "https://bytezagal.es/servicios/ecommerce"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer
+    }
+  }))
+};
+
+const relatedProjects = [
+  {
+    title: "ParROCKia",
+    description: "Caso real con producto, contenido y operativa orientada a negocio.",
+    href: "/proyectos/parrockia"
+  },
+  {
+    title: "TxoriOn",
+    description: "Producto publicado con lógica clara, uso repetido y foco en experiencia.",
+    href: "/proyectos/txorion"
+  }
+] as const;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/servicios/ecommerce"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, serviceSchema, breadcrumbSchema, faqSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <header class="mx-auto max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Tiendas online
+      </p>
+
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Tiendas online preparadas para vender
+      </h1>
+
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        Para vender con una base seria: catálogo, pagos, experiencia móvil,
+        estructura clara y una operativa que no se convierta en castigo. Trabajo
+        desde Zaragoza y también en remoto para toda España.
+      </p>
+    </header>
+
+    <section class="mt-10 grid gap-6 md:grid-cols-3">
+      {planes.map((plan) => (
+        <article class="rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+          <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+            {plan.name}
+          </h2>
+
+          <p class="mt-4 text-3xl font-extrabold text-slate-900">
+            {plan.price}
+          </p>
+
+          <ul class="mt-5 space-y-3 text-sm leading-6 text-slate-600">
+            {plan.feat.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+
+          <div class="mt-6 flex flex-col gap-3">
+            <a
+              href={`${whatsappBase}${encodeURIComponent(`Hola ByteZagal, quiero hablar sobre ${plan.whatsappLabel}.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2"
+            >
+              <MessageCircle class="h-4 w-4" />
+              Escribir por WhatsApp
+            </a>
+
+            <a href="/contratame" class="cta white text-center">
+              Ver otras vías
+            </a>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Qué resuelvo aquí
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          Vender sin convertir la gestión en un caos
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          La tienda no tiene que ser solo bonita. Tiene que cargar bien, comprarse bien
+          y poder mantenerse sin que cada cambio se convierta en una pelea.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+          <ShoppingCart class="h-6 w-6 text-slate-900" />
+          <h3 class="mt-4 text-xl font-bold tracking-tight text-slate-900">
+            Catálogo claro
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Estructura entendible para que el usuario encuentre rápido lo que busca y no se pierda.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+          <CreditCard class="h-6 w-6 text-slate-900" />
+          <h3 class="mt-4 text-xl font-bold tracking-tight text-slate-900">
+            Compra sin fricción
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Pagos, checkout y emails pensados para vender más y generar menos abandono.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+          <BarChart3 class="h-6 w-6 text-slate-900" />
+          <h3 class="mt-4 text-xl font-bold tracking-tight text-slate-900">
+            Base para crecer
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Métricas, SEO técnico y una base que no obligue a reconstruir todo cuando el negocio suba de nivel.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <FaqService faqs={[...faqs]} />
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+        Casos relacionados
+      </h2>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        {relatedProjects.map((project) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-white/95 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+            <h3 class="text-xl font-bold text-slate-900">{project.title}</h3>
+            <p class="mt-3 leading-7 text-slate-600">{project.description}</p>
+            <div class="mt-5">
+              <a href={project.href} class="cta white">
+                Ver proyecto
+              </a>
             </div>
           </article>
         ))}
       </div>
+    </section>
 
-      <FaqService faqs={faqs} />
-
-      <div class="mt-16">
-        <h2 class="text-2xl font-bold">Proyectos relacionados en Gasteiz</h2>
-        <ul class="mt-4 space-y-2 text-slate-700">
-          <li><a href="/proyectos/parrockia" class="underline">ParROCKia — Web local optimizada</a></li>
-          <li><a href="/proyectos/pisonauta" class="underline">PisoNauta — PWA de convivencia</a></li>
-        </ul>
-      </div>
-
-      <div class="mt-12 text-center"><a href="/" class="cta white">← Volver al inicio</a></div>
-    </main>
-    <Footer />
-  </body>
-</html>
+    <div class="mt-12 text-center">
+      <a href="/" class="cta white">← Volver al inicio</a>
+    </div>
+  </section>
+</BaseLayout>

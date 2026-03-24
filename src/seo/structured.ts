@@ -1,18 +1,7 @@
 // src/seo/structured.ts
 
-/**
- * Datos estructurados globales de ByteZagal
- * ---------------------------------------------------------------------------
- * Criterios:
- * - Marca principal: ByteZagal
- * - Foco geográfico: Zaragoza
- * - Cobertura: remoto en España
- * - Sin dirección postal inventada o desactualizada
- * - Sin priceRange público
- * - Solo señales que reflejen activos y contenido reales
- */
-
 const SITE_URL = "https://bytezagal.es";
+const BRAND = "ByteZagal";
 const LOGO_URL = `${SITE_URL}/icon.png`;
 const EMAIL = "contacto@bytezagal.es";
 const PHONE = "+34 650 850 163";
@@ -29,10 +18,11 @@ export const org = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${SITE_URL}/#organization`,
-  name: "ByteZagal",
+  name: BRAND,
   url: SITE_URL,
   logo: LOGO_URL,
   email: EMAIL,
+  telephone: PHONE,
   sameAs: SAME_AS,
 };
 
@@ -41,22 +31,21 @@ export const website = {
   "@type": "WebSite",
   "@id": `${SITE_URL}/#website`,
   url: SITE_URL,
-  name: "ByteZagal",
+  name: BRAND,
+  inLanguage: "es-ES",
   publisher: {
     "@id": `${SITE_URL}/#organization`,
   },
-  inLanguage: "es-ES",
 };
 
-export const localBusiness = {
+export const professionalService = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "@id": `${SITE_URL}/#professional-service`,
-  name: "ByteZagal",
+  name: BRAND,
   url: SITE_URL,
   image: LOGO_URL,
-  description:
-    "Rescate web, desarrollo a medida, SEO técnico, accesibilidad, rendimiento y automatización para negocio con foco en Zaragoza y trabajo remoto en España.",
+  logo: LOGO_URL,
   email: EMAIL,
   telephone: PHONE,
   areaServed: [
@@ -71,15 +60,21 @@ export const localBusiness = {
   ],
   availableLanguage: ["es-ES"],
   sameAs: SAME_AS,
+  description:
+    "Desarrollo web, rescate web, desarrollo de apps, SEO técnico, accesibilidad, rendimiento y automatización con foco en Zaragoza y trabajo remoto en España.",
+  serviceType: [
+    "Desarrollo web",
+    "Rescate web",
+    "Desarrollo de apps",
+    "SEO técnico",
+    "Rendimiento web",
+    "Accesibilidad web",
+    "Automatización de procesos",
+    "Digitalización de negocio",
+  ],
   parentOrganization: {
     "@id": `${SITE_URL}/#organization`,
   },
-  serviceType: [
-    "Rescate web",
-    "Desarrollo web a medida",
-    "SEO técnico",
-    "Mejora de rendimiento web",
-    "Accesibilidad web",
-    "Automatización y digitalización",
-  ],
 };
+
+export const localBusiness = professionalService;

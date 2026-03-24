@@ -1,108 +1,198 @@
 ---
-import "../../styles/globals.css";
-import Seo from "../../components/Seo.astro";
-import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { featuredProjects } from "../../data/projects";
+import { org, website, localBusiness } from "../../seo/structured";
 
-const title = "Proyectos web en Vitoria-Gasteiz — ByteZagal";
+const title = "Proyectos web y casos reales | ByteZagal";
 const description =
-  "Showcase de proyectos: webs, PWAs y apps creadas en Vitoria-Gasteiz. Casos reales como ParROCKia, PisoNauta y TxoriON.";
+  "Selección de trabajos y productos con criterio técnico, ejecución real y sentido comercial. Menos escaparate, más señal útil.";
+
+const projects = featuredProjects;
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://bytezagal.es/#collection-proyectos",
+  url: "https://bytezagal.es/proyectos",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Proyectos",
+      item: "https://bytezagal.es/proyectos"
+    }
+  ]
+};
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: projects.map((project, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    url: `https://bytezagal.es${project.detailHref}`,
+    name: project.title,
+    description: project.description
+  }))
+};
 ---
 
-<html lang="es">
-  <head>
-    <Seo title={title} description={description} canonicalPath="/proyectos" />
-  </head>
-  <body class="bg-orbital text-slate-800">
-    <main class="mx-auto max-w-6xl px-4 py-16">
-      <h1 class="text-4xl font-extrabold text-center">
-        Proyectos realizados en Vitoria-Gasteiz
-      </h1>
-      <p class="mt-3 text-center text-slate-600 max-w-2xl mx-auto">
-        Selección de proyectos que muestran mi trabajo real y en desarrollo:
-        webs vivas, apps cívicas y experimentos creativos.
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/proyectos"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, breadcrumbSchema, itemListSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <header class="mx-auto max-w-3xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Casos seleccionados
       </p>
 
-      <!-- Carrusel -->
-      <section class="relative mt-12 overflow-x-auto snap-x snap-mandatory flex gap-8 pb-6">
-        {[
-          {
-            slug: "parrockia",
-            title: "ParROCKia",
-            desc:
-              "Web de la taberna punk-rock de la Kutxi en Gasteiz. Optimizada para SEO local y lista para crecer.",
-            img: "/parrockia.webp",
-            tech: ["React", "Tailwind", "PHP (API)"],
-            link: "https://tabernaparrockia.com",
-            repo: null,
-          },
-          {
-            slug: "pisonauta",
-            title: "PisoNauta",
-            desc:
-              "PWA para mejorar la convivencia en pisos compartidos: tareas, lista de la compra, gastos y rutinas.",
-            img: "/pisonauta-movil.webp",
-            tech: ["React", "Supabase", "Vercel", "Tailwind"],
-            link: null,
-            repo: "https://github.com/ByteZagal/PisoNautaApp",
-          },
-          {
-            slug: "txorion",
-            title: "TxoriON",
-            desc:
-              "PWA cívica para Vitoria-Gasteiz: agenda de eventos, comercios y recursos municipales.",
-            img: "/txorion-eventos.webp",
-            tech: ["React", "Supabase", "Vercel", "Tailwind"],
-            link: null,
-            repo: null,
-          },
-          {
-            slug: "twilight-reborn",
-            title: "Twilight Reborn",
-            desc:
-              "Videojuego RPG multijugador 2.5D pixelado en fase de planteamiento.",
-            img: "/twilight.webp",
-            tech: ["Unity", "C#"],
-            link: null,
-            repo: null,
-          },
-        ].map((p) => (
-          <article
-            class="min-w-[90%] md:min-w-[70%] lg:min-w-[60%] snap-center bg-white rounded-2xl shadow-lg ring-1 ring-slate-200 p-6 flex flex-col transition hover:-translate-y-1 hover:shadow-2xl"
-          >
-            <div class="relative w-full aspect-[16/9] overflow-hidden rounded-xl">
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Trabajo real, producto útil y criterio técnico
+      </h1>
+
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        Aquí reúno casos reales, producto propio y demos privadas que sí aportan
+        contexto sobre cómo trabajo: menos escaparate, más criterio, ejecución y
+        capacidad para resolver problemas de negocio.
+      </p>
+    </header>
+
+    <section aria-labelledby="cases-list-title" class="mt-12">
+      <h2 id="cases-list-title" class="sr-only">Listado de proyectos</h2>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        {projects.map((project) => (
+          <article class="rounded-[2rem] border border-slate-200 bg-white/90 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+            <figure class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 shadow-sm">
               <img
-                src={p.img}
-                alt={p.title}
-                class="absolute inset-0 w-full h-full object-cover transition duration-300 group-hover:scale-[1.05]"
+                src={project.image}
+                alt={project.alt}
+                class="h-auto w-full object-cover"
                 loading="lazy"
+                decoding="async"
+                width="1600"
+                height="900"
               />
+            </figure>
+
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <span class="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-semibold text-slate-700">
+                {project.status}
+              </span>
+              <p class="text-sm text-slate-500">{project.kicker}</p>
             </div>
 
-            <h2 class="mt-4 text-2xl font-bold">{p.title}</h2>
-            <p class="mt-2 text-slate-600">{p.desc}</p>
+            <h2 class="mt-4 text-2xl font-bold tracking-tight text-slate-900">
+              {project.title}
+            </h2>
 
-            <ul class="mt-3 flex flex-wrap gap-2">
-              {p.tech.map((t) => <li class="chip">{t}</li>)}
+            <p class="mt-3 leading-8 text-slate-600">
+              {project.description}
+            </p>
+
+            <ul
+              class="mt-4 flex flex-wrap gap-2"
+              aria-label={`Tecnologías y enfoque de ${project.title}`}
+            >
+              {project.tech.map((item) => (
+                <li class="chip">{item}</li>
+              ))}
             </ul>
 
-            <div class="mt-4 flex flex-wrap gap-3">
-              {p.link && (
-                <a href={p.link} target="_blank" rel="noopener noreferrer" class="cta black">
-                  Ver página
+            <p class="mt-4 text-sm leading-7 text-slate-500">
+              {project.note}
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href={project.detailHref} class="cta black">
+                Ver detalle del proyecto
+              </a>
+
+              {project.liveHref && (
+                <a
+                  href={project.liveHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="cta white"
+                >
+                  Ver proyecto en vivo
                 </a>
               )}
-              {p.repo && (
-                <a href={p.repo} target="_blank" rel="noopener noreferrer" class="cta white">
-                  Código
-                </a>
-              )}
-              <a href="/contratame" class="cta black">Quiero algo así</a>
-              <a href="/" class="cta white">Inicio</a>
+
+              <a href="/contratame" class="cta white">
+                Hablar sobre un proyecto parecido
+              </a>
             </div>
           </article>
         ))}
-      </section>
-    </main>
-    <Footer />
-  </body>
-</html>
+      </div>
+    </section>
+
+    <section class="mt-16 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Puertas de entrada
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          Si vienes por un problema concreto, entra por aquí
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          Estos casos sirven para ver criterio y ejecución. Si ya sabes lo que
+          necesitas, te será más útil entrar por el servicio adecuado.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <a href="/servicios/arreglos" class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5 transition hover:border-slate-300 hover:bg-white">
+          <h3 class="text-xl font-bold tracking-tight text-slate-900">
+            Rescate web
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Para proyectos lentos, rotos o mal planteados.
+          </p>
+        </a>
+
+        <a href="/servicios/digitalizacion" class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5 transition hover:border-slate-300 hover:bg-white">
+          <h3 class="text-xl font-bold tracking-tight text-slate-900">
+            Digitalización
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Para montar una base más seria y captar mejor.
+          </p>
+        </a>
+
+        <a href="/servicios/ecommerce" class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5 transition hover:border-slate-300 hover:bg-white">
+          <h3 class="text-xl font-bold tracking-tight text-slate-900">
+            Tiendas online
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Para vender con estructura clara y una operativa sostenible.
+          </p>
+        </a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

@@ -1,0 +1,418 @@
+---
+export type GalleryMode = "mobile" | "desktop" | "mixed";
+export type SlideKind = "mobile" | "desktop";
+
+export interface GallerySlide {
+  src: string;
+  alt: string;
+  label: string;
+  caption: string;
+  width?: number;
+  height?: number;
+  kind?: SlideKind;
+}
+
+interface Props {
+  slides: readonly GallerySlide[];
+  mode?: GalleryMode;
+  ariaLabel?: string;
+}
+
+const {
+  slides,
+  mode = "desktop",
+  ariaLabel = "Galería del proyecto"
+} = Astro.props;
+
+const hasSlides = slides.length > 0;
+const hasMultipleSlides = slides.length > 1;
+
+const resolveKind = (slide: GallerySlide): SlideKind => {
+  if (slide.kind) return slide.kind;
+  return mode === "mobile" ? "mobile" : "desktop";
+};
+---
+
+{
+  hasSlides && (
+    <section
+      class:list={[
+        "project-gallery",
+        mode === "mobile" && "project-gallery--mobile",
+        mode === "desktop" && "project-gallery--desktop",
+        mode === "mixed" && "project-gallery--mixed"
+      ]}
+      aria-label={ariaLabel}
+      data-project-gallery
+      tabindex="0"
+    >
+      <div class="project-gallery__shell">
+        <div class="project-gallery__stage">
+          {slides.map((slide, index) => {
+            const kind = resolveKind(slide);
+
+            return (
+              <figure
+                class:list={[
+                  "project-gallery__slide",
+                  index === 0 && "is-active"
+                ]}
+                data-project-gallery-slide
+                data-index={index}
+                data-caption={slide.caption}
+                aria-hidden={index === 0 ? "false" : "true"}
+              >
+                <div class="project-gallery__media" data-kind={kind}>
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    class="project-gallery__image"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    width={slide.width ?? 1600}
+                    height={slide.height ?? 900}
+                  />
+                </div>
+              </figure>
+            );
+          })}
+        </div>
+
+        {
+          hasMultipleSlides && (
+            <div class="project-gallery__controls" aria-label="Controles de la galería">
+              <button
+                type="button"
+                class="project-gallery__arrow"
+                data-project-gallery-prev
+                aria-label="Imagen anterior"
+              >
+                <span aria-hidden="true">‹</span>
+              </button>
+
+              <div class="project-gallery__pills" aria-label="Selector de capturas">
+                {slides.map((slide, index) => (
+                  <button
+                    type="button"
+                    class:list={[
+                      "project-gallery__pill",
+                      index === 0 && "is-active"
+                    ]}
+                    data-project-gallery-indicator
+                    data-index={index}
+                    aria-label={`Ver captura: ${slide.label}`}
+                    aria-current={index === 0 ? "true" : "false"}
+                  >
+                    {slide.label}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                class="project-gallery__arrow"
+                data-project-gallery-next
+                aria-label="Imagen siguiente"
+              >
+                <span aria-hidden="true">›</span>
+              </button>
+            </div>
+          )
+        }
+
+        <p class="project-gallery__caption" data-project-gallery-caption aria-live="polite">
+          {slides[0].caption}
+        </p>
+      </div>
+    </section>
+  )
+}
+
+<script src="../scripts/project-gallery.ts"></script>
+
+<style>
+  .project-gallery {
+    position: relative;
+  }
+
+  .project-gallery__shell {
+    height: 100%;
+    border: 1px solid rgba(203, 213, 225, 0.95);
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(14px);
+    border-radius: 2rem;
+    padding: 1rem;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  }
+
+  .project-gallery__stage {
+    position: relative;
+    min-height: clamp(24rem, 48vw, 34rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(203, 213, 225, 0.95);
+    background:
+      radial-gradient(
+        circle at top,
+        rgba(241, 245, 249, 0.95),
+        rgba(248, 250, 252, 0.92) 42%,
+        rgba(255, 255, 255, 0.96) 100%
+      );
+  }
+
+.project-gallery--mobile .project-gallery__stage {
+  min-height: clamp(24rem, 50vw, 34rem);
+  padding: 1rem 0.85rem;
+}
+
+  .project-gallery--desktop .project-gallery__stage {
+    min-height: clamp(22rem, 42vw, 30rem);
+    padding: 1rem;
+  }
+
+  .project-gallery--mixed .project-gallery__stage {
+    min-height: clamp(25rem, 52vw, 36rem);
+    padding: 1rem;
+  }
+
+  .project-gallery__slide {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    transform: translateX(32px) scale(0.985);
+    pointer-events: none;
+    transition:
+      opacity 0.32s ease,
+      transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-gallery__slide.is-active {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .project-gallery__slide.is-leaving {
+    opacity: 0;
+    transform: translateX(-32px) scale(0.985);
+    z-index: 1;
+  }
+
+  .project-gallery__slide.is-entering {
+    opacity: 0;
+    transform: translateX(32px) scale(0.985);
+  }
+
+  .project-gallery__media {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 0.5rem;
+  }
+
+  .project-gallery__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+.project-gallery__media[data-kind="mobile"] .project-gallery__image {
+  width: min(100%, clamp(13.5rem, 26vw, 18rem));
+  max-height: min(68vh, 34rem);
+  border-radius: 1.6rem;
+  border: 1px solid rgba(203, 213, 225, 0.95);
+  background: white;
+  box-shadow:
+    0 20px 42px rgba(15, 23, 42, 0.10),
+    0 8px 18px rgba(15, 23, 42, 0.05);
+}
+
+  .project-gallery__media[data-kind="desktop"] .project-gallery__image {
+    width: min(100%, 100%);
+    max-width: min(100%, 56rem);
+    max-height: min(72vh, 32rem);
+    border-radius: 1.25rem;
+    border: 1px solid rgba(203, 213, 225, 0.95);
+    background: white;
+    box-shadow:
+      0 24px 50px rgba(15, 23, 42, 0.08),
+      0 8px 20px rgba(15, 23, 42, 0.04);
+  }
+
+.project-gallery--mixed .project-gallery__media[data-kind="mobile"] .project-gallery__image {
+  width: min(100%, clamp(13rem, 24vw, 17rem));
+  max-height: min(66vh, 31rem);
+}
+
+  .project-gallery--mixed .project-gallery__media[data-kind="desktop"] .project-gallery__image {
+    max-width: min(100%, 52rem);
+    max-height: min(68vh, 29rem);
+  }
+
+  .project-gallery__controls {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .project-gallery__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.85rem;
+    height: 2.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    background: rgba(255, 255, 255, 0.98);
+    color: rgb(51 65 85);
+    font-size: 1.5rem;
+    line-height: 1;
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  .project-gallery__arrow:hover {
+    transform: translateY(-1px);
+    border-color: rgba(100, 116, 139, 0.5);
+    background: white;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+  }
+
+  .project-gallery__pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .project-gallery__pill {
+    min-height: 2.5rem;
+    padding: 0.55rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid rgba(203, 213, 225, 0.95);
+    background: white;
+    color: rgb(51 65 85);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition:
+      border-color 0.18s ease,
+      background-color 0.18s ease,
+      color 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .project-gallery__pill:hover {
+    transform: translateY(-1px);
+    border-color: rgba(100, 116, 139, 0.5);
+    background: rgb(248 250 252);
+  }
+
+  .project-gallery__pill.is-active {
+    border-color: rgb(15 23 42);
+    background: rgb(15 23 42);
+    color: white;
+  }
+
+  .project-gallery__caption {
+    margin-top: 0.95rem;
+    border-top: 1px solid rgba(226, 232, 240, 0.95);
+    padding-top: 0.95rem;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgb(100 116 139);
+  }
+
+  @media (max-width: 1023px) {
+  .project-gallery--mobile .project-gallery__stage {
+    min-height: clamp(25rem, 70vw, 36rem);
+  }
+
+    .project-gallery--desktop .project-gallery__stage {
+      min-height: clamp(21rem, 58vw, 27rem);
+    }
+
+    .project-gallery--mixed .project-gallery__stage {
+      min-height: clamp(23rem, 64vw, 31rem);
+    }
+
+
+      .project-gallery__media[data-kind="mobile"] .project-gallery__image {
+    width: min(100%, 19rem);
+    max-height: 64vh;
+  }
+}
+
+  @media (max-width: 640px) {
+    .project-gallery__shell {
+      padding: 0.85rem;
+      border-radius: 1.5rem;
+    }
+
+    .project-gallery__stage {
+      min-height: 24rem;
+      border-radius: 1.15rem;
+      padding: 0.85rem 0.65rem;
+    }
+
+      .project-gallery--mobile .project-gallery__stage {
+    min-height: 27rem;
+  }
+
+    .project-gallery--desktop .project-gallery__stage,
+    .project-gallery--mixed .project-gallery__stage {
+      min-height: 22rem;
+    }
+
+    .project-gallery__media[data-kind="mobile"] .project-gallery__image {
+    width: min(100%, 16.5rem);
+    max-height: 60vh;
+    border-radius: 1.3rem;
+  }
+
+    .project-gallery__media[data-kind="desktop"] .project-gallery__image {
+      max-height: 48vh;
+      border-radius: 1rem;
+    }
+
+    .project-gallery__controls {
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
+    }
+
+    .project-gallery__arrow {
+      display: none;
+    }
+
+    .project-gallery__pills {
+      justify-content: flex-start;
+    }
+
+    .project-gallery__caption {
+      text-align: left;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-gallery__slide,
+    .project-gallery__arrow,
+    .project-gallery__pill {
+      transition: none;
+    }
+  }
+</style>

@@ -1,66 +1,336 @@
 ---
-import "../../styles/globals.css";
-import Seo from "../../components/Seo.astro";
-import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  MessageCircle,
+  CheckCircle2
+} from "lucide-astro";
+import { org, website, localBusiness } from "../../seo/structured";
 
-const title = "Contrátame — Desarrollo web en Vitoria-Gasteiz";
+const title =
+  "Contratar desarrollador web en Zaragoza | Auditoría y presupuesto | ByteZagal";
 const description =
-  "Elige un paquete inicial o pide una propuesta a medida. Conoce precios base y accede a todos los detalles de cada servicio.";
+  "Cuéntame tu caso y te diré la vía más sensata para tu proyecto: rescate web, digitalización o tienda online. Trabajo con foco en Zaragoza y remoto para toda España.";
+
+const serviceCards = [
+  {
+    title: "Rescate web",
+    eyebrow: "Diagnóstico y estabilización",
+    fromPrice: "Desde 290 €",
+    summary:
+      "Para webs lentas, rotas o mal planteadas que necesitan orden, criterio técnico y una hoja de ruta sensata.",
+    points: [
+      "Auditoría técnica y quick wins",
+      "Fixes críticos con bajo riesgo",
+      "Plan de mejora y priorización"
+    ],
+    href: "/servicios/arreglos",
+    hrefLabel: "Ver rescate web",
+    whatsappLabel: "rescate web"
+  },
+  {
+    title: "Digitalización",
+    eyebrow: "Base digital y captación",
+    fromPrice: "Desde 690 €",
+    summary:
+      "Para negocios que necesitan una presencia más seria, clara y útil: web, estructura, SEO técnico y automatización razonable.",
+    points: [
+      "Web corporativa o landing útil",
+      "Base SEO y analítica",
+      "Automatización ligera para negocio"
+    ],
+    href: "/servicios/digitalizacion",
+    hrefLabel: "Ver digitalización",
+    whatsappLabel: "digitalización"
+  },
+  {
+    title: "Tienda online",
+    eyebrow: "Venta y operativa",
+    fromPrice: "Desde 1.290 €",
+    summary:
+      "Para vender con una base sólida: catálogo, pagos, experiencia móvil y una operativa que no se convierta en castigo.",
+    points: [
+      "Checkout claro y pagos seguros",
+      "Base SEO técnica y conversión",
+      "Preparada para crecer"
+    ],
+    href: "/servicios/ecommerce",
+    hrefLabel: "Ver tienda online",
+    whatsappLabel: "tienda online"
+  }
+] as const;
+
+const processSteps = [
+  {
+    title: "Reviso el contexto",
+    text: "Qué falla, qué objetivo tienes y qué merece tocar ahora sin liarla más."
+  },
+  {
+    title: "Propongo la vía sensata",
+    text: "Parche, refactor controlado o proyecto nuevo, según riesgo, tiempo e impacto."
+  },
+  {
+    title: "Ejecuto con criterio",
+    text: "Trabajo limpio, foco en móvil, base SEO sólida y decisiones entendibles."
+  }
+] as const;
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-contratame",
+  url: "https://bytezagal.es/contratame",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Contrátame",
+      item: "https://bytezagal.es/contratame"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Trabajas solo en Zaragoza?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Trabajo con foco en Zaragoza y también en remoto para clientes de toda España."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "¿Los precios publicados son cerrados?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. Son precios orientativos de entrada para que puedas ubicar el tipo de proyecto. El presupuesto real depende del alcance, el estado actual y el riesgo técnico."
+      }
+    },
+    {
+      "@type": "Question",
+      name: "¿Puedes arreglar una web ya hecha?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí. Muchas veces no hace falta rehacerlo todo. Primero reviso estructura, rendimiento, accesibilidad, SEO técnico y puntos frágiles; después planteo la vía más sensata."
+      }
+    }
+  ]
+};
 ---
-<html lang="es">
-  <head>
-    <Seo title={title} description={description} canonicalPath="/contratame" />
-  </head>
-  <body class="bg-orbital text-slate-800">
-    <main class="mx-auto max-w-6xl px-4 py-16">
-      <h1 class="text-4xl font-extrabold text-center">Contrátame</h1>
-      <p class="mt-4 text-slate-600 text-center max-w-2xl mx-auto">
-        Elige un paquete inicial o accede a los detalles completos de cada servicio.
-        Precios base claros y accesibles para empezar a trabajar juntos.
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/contratame"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, breadcrumbSchema, faqSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <header class="mx-auto max-w-3xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Contratación
       </p>
 
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        <!-- Digitalización -->
-        <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
-          <h2 class="text-xl font-semibold">Lanzamiento</h2>
-          <p class="mt-2 text-3xl font-extrabold">149 €</p>
-          <p class="mt-2 text-slate-600">Landing + SEO básico + analítica.</p>
-          <div class="mt-6">
-            <a href="/servicios/digitalizacion" class="cta black w-full text-center">Ver paquetes</a>
-          </div>
-        </article>
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Elige la vía más sensata para tu proyecto
+      </h1>
 
-        <!-- Ecommerce -->
-        <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
-          <h2 class="text-xl font-semibold">Tienda Starter</h2>
-          <p class="mt-2 text-3xl font-extrabold">640 €</p>
-          <p class="mt-2 text-slate-600">Catálogo hasta 50 productos, pagos, emails.</p>
-          <div class="mt-6">
-            <a href="/servicios/ecommerce" class="cta black w-full text-center">Ver paquetes</a>
-          </div>
-        </article>
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        Trabajo con foco en Zaragoza y también en remoto para toda España.
+        Aquí no cierro presupuestos a ciegas: enseño rangos de entrada para que
+        puedas ubicar el proyecto sin convertir esta página en una tómbola.
+      </p>
+    </header>
 
-        <!-- Arreglos -->
-        <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
-          <h2 class="text-xl font-semibold">Rescate / Arreglo</h2>
-          <p class="mt-2 text-3xl font-extrabold">249 €</p>
-          <p class="mt-2 text-slate-600">Auditoría + fixes críticos + plan de mejora.</p>
-          <div class="mt-6">
-            <a href="/servicios/arreglos" class="cta black w-full text-center">Ver paquetes</a>
-          </div>
-        </article>
+    <section class="mt-12 grid gap-6 lg:grid-cols-3">
+      {serviceCards.map((service) => {
+        const whatsappHref = `https://wa.me/34650850163?text=${encodeURIComponent(
+          `Hola ByteZagal, quiero hablar sobre ${service.whatsappLabel}.`
+        )}`;
+
+        return (
+          <article class="flex h-full flex-col rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+              {service.eyebrow}
+            </p>
+
+            <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-slate-900">
+              {service.title}
+            </h2>
+
+            <p class="mt-4 text-3xl font-extrabold text-slate-900">
+              {service.fromPrice}
+            </p>
+
+            <p class="mt-4 leading-8 text-slate-600">
+              {service.summary}
+            </p>
+
+            <ul class="mt-6 space-y-3 text-sm leading-6 text-slate-600">
+              {service.points.map((point) => (
+                <li class="flex items-start gap-3">
+                  <CheckCircle2 class="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-auto flex flex-col gap-3 pt-8">
+              <a href={service.href} class="cta black text-center">
+                {service.hrefLabel}
+              </a>
+
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+              >
+                <MessageCircle class="h-4 w-4" />
+                Hablar por WhatsApp
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Cómo trabajo
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          Menos humo, más criterio técnico y decisiones claras
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          No me interesa encajar tu caso a martillazos en un paquete bonito.
+          Primero entiendo el problema y luego propongo la vía razonable.
+        </p>
       </div>
 
-      <div class="mt-12 flex justify-center gap-6">
-        <a href="/servicios/ecommerce" class="underline">Ver Ecommerce</a>
-        <a href="/servicios/digitalizacion" class="underline">Ver Digitalización</a>
-        <a href="/servicios/arreglos" class="underline">Ver Arreglos</a>
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {processSteps.map((step, index) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+              Paso {index + 1}
+            </p>
+            <h3 class="mt-3 text-xl font-bold tracking-tight text-slate-900">
+              {step.title}
+            </h3>
+            <p class="mt-3 leading-7 text-slate-600">
+              {step.text}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Antes de escribir
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          Cuanto más claro venga el contexto, mejor afinamos
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          Si me contactas, intenta contarme qué objetivo tienes, qué falla ahora,
+          qué tecnología usas y si necesitas rescate, una web nueva o una tienda
+          online. Así podré decirte más rápido por dónde conviene empezar.
+        </p>
       </div>
 
-      <div class="mt-12 text-center">
-        <a href="/" class="cta white">← Volver al inicio</a>
+      <div class="mt-8 grid gap-4 md:grid-cols-3">
+        <a href="/servicios/arreglos" class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5 transition hover:border-slate-300 hover:bg-white">
+          <h3 class="text-xl font-bold tracking-tight text-slate-900">
+            Ver rescate web
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Para webs lentas, rotas o mal planteadas.
+          </p>
+        </a>
+
+        <a href="/servicios/digitalizacion" class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5 transition hover:border-slate-300 hover:bg-white">
+          <h3 class="text-xl font-bold tracking-tight text-slate-900">
+            Ver digitalización
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Para negocios que necesitan una base más seria.
+          </p>
+        </a>
+
+        <a href="/servicios/ecommerce" class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5 transition hover:border-slate-300 hover:bg-white">
+          <h3 class="text-xl font-bold tracking-tight text-slate-900">
+            Ver tiendas online
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Para vender con una operativa clara y escalable.
+          </p>
+        </a>
       </div>
-    </main>
-    <Footer />
-  </body>
-</html>
+    </section>
+
+    <section class="mt-14">
+      <div class="rounded-[2rem] border border-slate-900 bg-slate-900 px-6 py-8 text-white shadow-[0_18px_50px_rgba(15,23,42,0.16)] md:px-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">
+          Siguiente paso
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
+          Si quieres ordenar tu presencia digital o rescatar una web, hablemos
+        </h2>
+
+        <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+          Te diré rápido por dónde conviene empezar, qué merece tocar primero
+          y qué sería mejor no mover todavía.
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="https://wa.me/34650850163?text=Hola%20ByteZagal,%20quiero%20hablar%20sobre%20mi%20proyecto."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta white"
+          >
+            Escribir por WhatsApp
+          </a>
+
+          <a href="/#contacto" class="cta ghost-light">
+            Ver contacto directo
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="mt-12 text-center">
+      <a href="/" class="cta white">
+        ← Volver al inicio
+      </a>
+    </div>
+  </section>
+</BaseLayout>

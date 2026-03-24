@@ -1,0 +1,252 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaqService from "../../components/FaqService.astro";
+import { org, website, localBusiness } from "../../seo/structured";
+
+const title = "Desarrollo web para hostelería en Zaragoza | Restaurantes, bares y eventos | ByteZagal";
+const description =
+  "Desarrollo web para hostelería en Zaragoza: restaurantes, bares, eventos y proyectos gastronómicos que necesitan una web rápida, clara y útil para móvil, reservas, eventos y presencia local.";
+
+const needs = [
+  {
+    title: "Cartas, horarios y ubicación claras",
+    text: "La información básica tiene que encontrarse rápido, sobre todo en móvil y sin hacer perder paciencia."
+  },
+  {
+    title: "Eventos y actividad viva",
+    text: "Si hay eventos, música, sesiones o agenda, la web tiene que ayudar a comunicarlo y no convertirse en un tablón caótico."
+  },
+  {
+    title: "Presencia local coherente",
+    text: "La web tiene que apoyar la visibilidad local, reforzar confianza y facilitar el siguiente paso sin fricción."
+  }
+] as const;
+
+const whatMatters = [
+  {
+    title: "Móvil primero",
+    text: "En hostelería, buena parte del tráfico llega desde el móvil. La experiencia ahí pesa mucho más que cualquier adorno."
+  },
+  {
+    title: "Claridad y actualización",
+    text: "Una estructura sencilla, fácil de mantener y capaz de mostrar cambios sin depender de rehacer media web."
+  },
+  {
+    title: "Identidad sin ruido",
+    text: "La personalidad importa, pero al servicio de la experiencia, no a costa de volver la web lenta o confusa."
+  }
+] as const;
+
+const relatedLinks = [
+  {
+    title: "Ver caso ParROCKia",
+    text: "Caso relacionado con hostelería, eventos y personalidad de marca.",
+    href: "/proyectos/parrockia"
+  },
+  {
+    title: "Ver desarrollo web Zaragoza",
+    text: "Servicio general para webs de negocio y marca.",
+    href: "/servicios/desarrollo-web-zaragoza"
+  },
+  {
+    title: "Ver contratación",
+    text: "Para valorar si tu caso encaja por web nueva o por mejora.",
+    href: "/contratame"
+  }
+] as const;
+
+const faqs = [
+  {
+    question: "¿Qué tipo de webs de hostelería haces?",
+    answer:
+      "Webs para restaurantes, bares, espacios con eventos y proyectos gastronómicos que necesitan una presencia clara, rápida y orientada a móvil."
+  },
+  {
+    question: "¿Puedes integrar cartas, eventos o reservas?",
+    answer:
+      "Sí, según el caso. La idea es que la web facilite estas tareas sin convertir la gestión en una pelea diaria."
+  },
+  {
+    question: "¿Esto solo sirve para Zaragoza?",
+    answer:
+      "La página está enfocada a Zaragoza por intención local, pero el servicio también puede trabajarse en remoto para otros proyectos."
+  }
+] as const;
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-hosteleria-zaragoza",
+  url: "https://bytezagal.es/servicios/web-hosteleria-zaragoza",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Desarrollo web para hostelería en Zaragoza",
+  serviceType: "Desarrollo web para hostelería",
+  areaServed: ["Zaragoza"],
+  provider: { "@id": "https://bytezagal.es/#professional-service" },
+  url: "https://bytezagal.es/servicios/web-hosteleria-zaragoza",
+  description
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Servicios",
+      item: "https://bytezagal.es/contratame"
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Web hostelería Zaragoza",
+      item: "https://bytezagal.es/servicios/web-hosteleria-zaragoza"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/servicios/web-hosteleria-zaragoza"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, serviceSchema, breadcrumbSchema, faqSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <header class="mx-auto max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Hostelería Zaragoza
+      </p>
+
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Desarrollo web para hostelería en Zaragoza
+      </h1>
+
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        Para restaurantes, bares, eventos y proyectos gastronómicos que necesitan
+        una web rápida, clara y útil en móvil. La idea es que la web ayude a explicar,
+        ubicar, enseñar actividad y facilitar el siguiente paso sin ruido.
+      </p>
+    </header>
+
+    <section class="mt-12 grid gap-6 md:grid-cols-3">
+      {needs.map((item) => (
+        <article class="rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+          <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+            {item.title}
+          </h2>
+          <p class="mt-4 leading-8 text-slate-600">
+            {item.text}
+          </p>
+        </article>
+      ))}
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Lo que pesa de verdad
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          En hostelería, lo útil gana a lo recargado
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          La web tiene que ayudar a decidir rápido. Ver dónde estás, qué ofreces,
+          qué ambiente hay y cómo dar el siguiente paso.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {whatMatters.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+            <h3 class="text-xl font-bold tracking-tight text-slate-900">
+              {item.title}
+            </h3>
+            <p class="mt-3 leading-7 text-slate-600">
+              {item.text}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+        Enlaces relacionados
+      </h2>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {relatedLinks.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-white/95 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+            <h3 class="text-xl font-bold text-slate-900">{item.title}</h3>
+            <p class="mt-3 leading-7 text-slate-600">{item.text}</p>
+            <div class="mt-5">
+              <a href={item.href} class="cta white">
+                Abrir
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <FaqService faqs={[...faqs]} />
+
+    <section class="mt-16 rounded-[2rem] border border-slate-900 bg-slate-900 px-6 py-8 text-white shadow-[0_18px_50px_rgba(15,23,42,0.16)] md:px-8">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">
+        Siguiente paso
+      </p>
+
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
+        Si tu proyecto de hostelería necesita una web más útil, hablemos
+      </h2>
+
+      <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+        Cuéntame si necesitas una web nueva, una mejora clara o una base más seria
+        para móvil, eventos, cartas o presencia local.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/contratame" class="cta white">
+          Ir a contratación
+        </a>
+        <a href="/proyectos/parrockia" class="cta ghost-light">
+          Ver caso relacionado
+        </a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

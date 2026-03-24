@@ -1,14 +1,97 @@
-<footer class="mt-20 border-t bg-white/70 backdrop-blur" data-reveal>
-  <div class="mx-auto max-w-6xl px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-    <div class="flex items-center gap-3">
-      <img src="/favicon.ico" alt="ByteZagal" class="h-6 w-6" />
-      <span class="text-sm text-slate-600">© 2025 ByteZagal</span>
+---
+const currentYear = new Date().getFullYear();
+
+const primaryLinks = [
+  { href: "/", label: "Inicio" },
+  { href: "/proyectos", label: "Proyectos" },
+  { href: "/contratame", label: "Contrátame" },
+  { href: "/#contacto", label: "Contacto" }
+] as const;
+
+const locationLinks = [
+  { href: "/zaragoza", label: "Zaragoza" },
+  { href: "/espana-remoto", label: "España en remoto" }
+] as const;
+
+const serviceLinks = [
+  { href: "/servicios/arreglos", label: "Rescate web" },
+  { href: "/servicios/digitalizacion", label: "Digitalización" },
+  { href: "/servicios/ecommerce", label: "Tiendas online" },
+  { href: "/servicios/desarrollo-web-zaragoza", label: "Desarrollo web Zaragoza" },
+  { href: "/servicios/rescate-web-zaragoza", label: "Rescate web Zaragoza" },
+  { href: "/servicios/desarrollo-apps-zaragoza", label: "Apps Zaragoza" },
+  { href: "/servicios/web-hosteleria-zaragoza", label: "Web hostelería Zaragoza" },
+  { href: "/servicios/automatizacion-negocio-local-zaragoza", label: "Automatización Zaragoza" }
+] as const;
+---
+
+<footer class="mt-20 border-t border-slate-200 bg-white/80 backdrop-blur" data-reveal>
+  <div class="mx-auto max-w-6xl px-4 py-10 md:py-12">
+    <div class="grid gap-10 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.9fr)_minmax(0,1fr)]">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="/favicon.ico" alt="ByteZagal" class="h-7 w-7" />
+          <span class="text-base font-semibold text-slate-900">ByteZagal</span>
+        </div>
+
+        <p class="mt-4 max-w-md text-sm leading-7 text-slate-600">
+          Desarrollo web, rescate técnico, apps y SEO técnico con foco en Zaragoza
+          y también en remoto para toda España.
+        </p>
+
+        <p class="mt-4 text-sm text-slate-500">
+          © {currentYear} ByteZagal
+        </p>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+          Navegación
+        </p>
+
+        <nav class="mt-4 flex flex-col gap-3 text-sm">
+          {primaryLinks.map((link) => (
+            <a
+              class="text-slate-700 transition hover:text-slate-900 hover:underline"
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <p class="mt-8 text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+          Ubicación y alcance
+        </p>
+
+        <nav class="mt-4 flex flex-col gap-3 text-sm">
+          {locationLinks.map((link) => (
+            <a
+              class="text-slate-700 transition hover:text-slate-900 hover:underline"
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+          Servicios y páginas clave
+        </p>
+
+        <nav class="mt-4 grid gap-3 text-sm">
+          {serviceLinks.map((link) => (
+            <a
+              class="text-slate-700 transition hover:text-slate-900 hover:underline"
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
     </div>
-    <nav class="flex gap-4 text-sm">
-      <a class="underline" href="/">Inicio</a>
-      <a class="underline" href="/proyectos">Proyectos</a>
-      <a class="underline" href="/contratame">Contrátame</a>
-      <a class="underline" href="/#contacto">Contacto</a>
-    </nav>
   </div>
 </footer>

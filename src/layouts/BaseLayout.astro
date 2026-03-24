@@ -1,29 +1,49 @@
 ---
-import Seo from '../components/Seo.astro';
-import Footer from '../components/Footer.astro';
-import { org, website, localBusiness } from '../seo/structured';
-import '../styles/globals.css';
+import Seo from "../components/Seo.astro";
+import Footer from "../components/Footer.astro";
+import { org, website, localBusiness } from "../seo/structured";
+import "../styles/globals.css";
 
 interface Props {
   title: string;
   description: string;
   canonicalPath: string;
+  image?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
+  noindex?: boolean;
 }
-const { title, description, canonicalPath, jsonLd, bodyClass } = Astro.props;
+
+const {
+  title,
+  description,
+  canonicalPath,
+  image,
+  jsonLd,
+  bodyClass,
+  noindex = false
+} = Astro.props;
+
 const jsonLdEffective = jsonLd ?? [org, website, localBusiness];
 ---
+
 <html lang="es" class="no-scrollbar">
   <head>
-    <Seo {title} {description} {canonicalPath} jsonLd={jsonLdEffective} />
+    <Seo
+      {title}
+      {description}
+      {canonicalPath}
+      image={image}
+      jsonLd={jsonLdEffective}
+      noindex={noindex}
+    />
 
     <link rel="preconnect" href="https://wa.me" crossorigin />
     <link rel="dns-prefetch" href="//instagram.com" />
     <link rel="dns-prefetch" href="//www.tiktok.com" />
     <link rel="dns-prefetch" href="//github.com" />
-
-    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="dns-prefetch" href="//www.linkedin.com" />
+    <link rel="dns-prefetch" href="//www.malt.es" />
 
     <style is:inline>
       [data-reveal]{opacity:0;transform:translateY(8px)}
@@ -34,7 +54,8 @@ const jsonLdEffective = jsonLd ?? [org, website, localBusiness];
       }
     </style>
   </head>
-  <body class={`bg-orbital ${bodyClass ?? ''}`}>
+
+  <body class={`bg-orbital ${bodyClass ?? ""}`}>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
     <slot name="header" />
@@ -46,44 +67,49 @@ const jsonLdEffective = jsonLd ?? [org, website, localBusiness];
     <Footer />
 
     <script is:inline>
-      if ('serviceWorker' in navigator) {
-        addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(()=>{}));
-      }
-    </script>
+      (function () {
+        const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const single = Array.from(document.querySelectorAll("[data-reveal]"));
+        const groups = Array.from(document.querySelectorAll("[data-reveal-stagger]"));
 
-    <script is:inline>
-      (function(){
-        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const single = Array.from(document.querySelectorAll('[data-reveal]'));
-        const groups = Array.from(document.querySelectorAll('[data-reveal-stagger]'));
-
-        function show(el, delay=0){
-          if(reduce){ el.classList.add('reveal-in'); return; }
-          setTimeout(()=> el.classList.add('reveal-in'), delay);
+        function show(el, delay = 0) {
+          if (reduce) {
+            el.classList.add("reveal-in");
+            return;
+          }
+          setTimeout(() => el.classList.add("reveal-in"), delay);
         }
 
-        if (!('IntersectionObserver' in window)) {
-          single.forEach(el => show(el));
-          groups.forEach(g => Array.from(g.children).forEach((c,i)=>show(c,i*80)));
+        if (!("IntersectionObserver" in window)) {
+          single.forEach((el) => show(el));
+          groups.forEach((group) =>
+            Array.from(group.children).forEach((child, i) => show(child, i * 80))
+          );
           return;
         }
 
-        const io = new IntersectionObserver((entries)=>{
-          entries.forEach(e=>{
-            if(!e.isIntersecting) return;
-            const t = e.target;
-            if (t.hasAttribute('data-reveal-stagger')) {
-              Array.from(t.children).forEach((child,i)=>show(child,i*90));
-            } else {
-              const d = parseInt(t.getAttribute('data-reveal-delay')||'0',10);
-              show(t, d);
-            }
-            io.unobserve(t);
-          });
-        },{threshold:0.12});
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
 
-        single.forEach(el=>io.observe(el));
-        groups.forEach(el=>io.observe(el));
+              const target = entry.target;
+
+              if (target.hasAttribute("data-reveal-stagger")) {
+                Array.from(target.children).forEach((child, i) => show(child, i * 90));
+              } else {
+                const delay = parseInt(target.getAttribute("data-reveal-delay") || "0", 10);
+                show(target, delay);
+              }
+
+              io.unobserve(target);
+            });
+          },
+          { threshold: 0.12 }
+        );
+
+        single.forEach((el) => io.observe(el));
+        groups.forEach((el) => io.observe(el));
       })();
     </script>
   </body>

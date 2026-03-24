@@ -1,0 +1,235 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import FaqService from "../components/FaqService.astro";
+import { org, website, localBusiness } from "../seo/structured";
+
+const title = "Desarrollo web remoto en España | SEO técnico, apps y rescate web | ByteZagal";
+const description =
+  "Trabajo en remoto para proyectos de toda España en desarrollo web, rescate de webs, SEO técnico, apps y mejoras digitales con una base clara y profesional.";
+
+const workModes = [
+  {
+    title: "Proyectos nuevos",
+    text: "Webs corporativas, landings, microsites y bases digitales pensadas para captar mejor y crecer con menos ruido."
+  },
+  {
+    title: "Rescate y mejora",
+    text: "Auditorías, fixes, refactor controlado y orden técnico para proyectos que ya existen pero están frenando más de lo que ayudan."
+  },
+  {
+    title: "Herramientas y apps",
+    text: "Pequeñas apps, paneles y herramientas internas para ahorrar tiempo, ordenar tareas y reducir pasos manuales."
+  }
+] as const;
+
+const remoteFlow = [
+  {
+    title: "Contexto y diagnóstico",
+    text: "Reviso qué objetivo tienes, qué base existe y qué merece tocar ahora para no empeorar el proyecto."
+  },
+  {
+    title: "Propuesta sensata",
+    text: "Defino alcance, prioridades y vía de trabajo: parche, mejora progresiva o solución nueva."
+  },
+  {
+    title: "Ejecución clara",
+    text: "Trabajo por bloques, con entregables entendibles y una base técnica que no se rompa con cada cambio."
+  }
+] as const;
+
+const relatedLinks = [
+  {
+    title: "Ver Zaragoza",
+    text: "Si tu proyecto sí está en Zaragoza, aquí está la puerta local.",
+    href: "/zaragoza"
+  },
+  {
+    title: "Ver rescate web",
+    text: "Para proyectos lentos, rotos o mal planteados.",
+    href: "/servicios/arreglos"
+  },
+  {
+    title: "Ver contratación",
+    text: "Para explicarme tu caso y ver la vía adecuada.",
+    href: "/contratame"
+  }
+] as const;
+
+const faqs = [
+  {
+    question: "¿Trabajas solo con clientes de Zaragoza?",
+    answer:
+      "No. Trabajo con foco en Zaragoza, pero también en remoto para proyectos de toda España."
+  },
+  {
+    question: "¿Qué tipo de trabajo encaja mejor en remoto?",
+    answer:
+      "Desarrollo web, rescate técnico, SEO técnico, pequeñas apps, automatización y mejoras de estructura suelen encajar muy bien en remoto."
+  },
+  {
+    question: "¿Cómo nos coordinamos si estamos en ciudades distintas?",
+    answer:
+      "Con una primera toma de contexto, mensajes claros, documentación mínima útil y revisiones por bloques. La idea es reducir fricción, no crear más."
+  }
+] as const;
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-remoto",
+  url: "https://bytezagal.es/espana-remoto",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "España remoto",
+      item: "https://bytezagal.es/espana-remoto"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/espana-remoto"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, breadcrumbSchema, faqSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <header class="mx-auto max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Remoto España
+      </p>
+
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Trabajo en remoto para proyectos de toda España
+      </h1>
+
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        Si tu proyecto no está en Zaragoza, no pasa nada. Trabajo en remoto en
+        desarrollo web, rescate técnico, SEO técnico, apps y mejoras digitales
+        con una dinámica clara, ligera y orientada a resolver problemas reales.
+      </p>
+    </header>
+
+    <section class="mt-12 grid gap-6 md:grid-cols-3">
+      {workModes.map((item) => (
+        <article class="rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+          <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+            {item.title}
+          </h2>
+          <p class="mt-4 leading-8 text-slate-600">
+            {item.text}
+          </p>
+        </article>
+      ))}
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Cómo trabajo en remoto
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          Menos reuniones inútiles, más decisiones claras
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          El objetivo no es meter capas de gestión, sino hacer que el proyecto avance
+          con criterio. Trabajo por contexto, prioridades y entregables útiles.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {remoteFlow.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+            <h3 class="text-xl font-bold tracking-tight text-slate-900">
+              {item.title}
+            </h3>
+            <p class="mt-3 leading-7 text-slate-600">
+              {item.text}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+        Puertas de entrada relacionadas
+      </h2>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {relatedLinks.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-white/95 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+            <h3 class="text-xl font-bold text-slate-900">{item.title}</h3>
+            <p class="mt-3 leading-7 text-slate-600">{item.text}</p>
+            <div class="mt-5">
+              <a href={item.href} class="cta white">
+                Abrir
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <FaqService faqs={[...faqs]} />
+
+    <section class="mt-16 rounded-[2rem] border border-slate-900 bg-slate-900 px-6 py-8 text-white shadow-[0_18px_50px_rgba(15,23,42,0.16)] md:px-8">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">
+        Siguiente paso
+      </p>
+
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
+        Si necesitas avanzar en remoto con una base técnica seria, hablemos
+      </h2>
+
+      <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+        Cuéntame qué problema quieres resolver y te diré si encaja mejor como
+        rescate, mejora progresiva o proyecto nuevo.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/contratame" class="cta white">
+          Ir a contratación
+        </a>
+        <a href="/servicios/digitalizacion" class="cta ghost-light">
+          Ver digitalización
+        </a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

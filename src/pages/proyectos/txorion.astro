@@ -1,57 +1,278 @@
 ---
-import "../../styles/globals.css";
-import Seo from "../../components/Seo.astro";
-import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectGallery from "../../components/ProjectGallery.astro";
 
-const title = "TxoriON — PWA cívica de Vitoria-Gasteiz";
+const title = "TxoriOn | App local de eventos, empleo y recursos | ByteZagal";
 const description =
-  "PWA ciudadana en Vitoria-Gasteiz: agenda de eventos, comercios y recursos municipales.";
+  "Caso de producto digital con enfoque mobile-first para consultar eventos, empleo y recursos útiles desde una experiencia clara, rápida y visual.";
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/proyectos/txorion#webpage",
+  url: "https://bytezagal.es/proyectos/txorion",
+  name: title,
+  description,
+  isPartOf: {
+    "@id": "https://bytezagal.es/#website"
+  },
+  about: {
+    "@type": "SoftwareApplication",
+    name: "TxoriOn",
+    applicationCategory: "TravelApplication",
+    operatingSystem: "Web"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Proyectos",
+      item: "https://bytezagal.es/proyectos"
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "TxoriOn",
+      item: "https://bytezagal.es/proyectos/txorion"
+    }
+  ]
+};
+
+const slides = [
+  {
+    src: "/txoriLogin.webp",
+    alt: "Pantalla de acceso de TxoriOn",
+    label: "Acceso",
+    caption: "Acceso rápido y claro para entrar en la app desde el móvil.",
+    kind: "mobile"
+  },
+  {
+    src: "/txoriDashBoard.webp",
+    alt: "Dashboard principal de TxoriOn",
+    label: "Dashboard",
+    caption: "Pantalla principal con acceso directo a la información más útil.",
+    kind: "mobile"
+  },
+  {
+    src: "/txoriEventos.webp",
+    alt: "Pantalla de eventos de TxoriOn",
+    label: "Eventos",
+    caption: "Exploración de eventos y agenda local con lectura rápida.",
+    kind: "mobile"
+  },
+  {
+    src: "/txoriEmpleo.webp",
+    alt: "Pantalla de empleo de TxoriOn",
+    label: "Empleo",
+    caption: "Consulta de empleo y recursos desde una navegación sencilla.",
+    kind: "mobile"
+  }
+] as const;
+
+const chips = ["Next.js", "PWA", "SEO local", "UX", "Maps", "Rendimiento"];
+
+const valueCards = [
+  {
+    title: "Qué es",
+    text: "Una app pensada para reunir información útil en un solo lugar y hacerla fácil de consultar desde el móvil."
+  },
+  {
+    title: "Cómo ayuda",
+    text: "Reduce fricción al buscar eventos, empleo y recursos con una navegación más clara y directa."
+  },
+  {
+    title: "Qué transmite",
+    text: "Criterio de producto, estructura visual y capacidad de ejecución en una interfaz lista para usarse."
+  }
+];
+
+const fitList = [
+  "Apps locales con contenido vivo y consulta frecuente.",
+  "Plataformas de eventos, noticias, empleo o utilidades.",
+  "Productos que necesitan claridad, orden y buena experiencia móvil."
+];
 ---
 
-<html lang="es">
-  <head>
-    <Seo
-      title={title}
-      description={description}
-      canonicalPath="/proyectos/txorion"
-    />
-  </head>
-  <body class="bg-orbital text-slate-800">
-    <main class="mx-auto max-w-4xl px-4 py-16">
-      <h1 class="text-4xl font-extrabold">
-        TxoriON — PWA cívica en Vitoria-Gasteiz
-      </h1>
-      <p class="mt-4 text-slate-600">
-        Plataforma progresiva pensada para los ciudadanos de Gasteiz. Recoge
-        eventos, comercios y recursos útiles del ayuntamiento y asociaciones.
-      </p>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/proyectos/txorion"
+  jsonLd={[pageSchema, breadcrumbSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-12 md:py-16">
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex flex-wrap items-center gap-2">
+        <li>
+          <a
+            href="/"
+            class="inline-flex min-h-10 items-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+          >
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a
+            href="/proyectos"
+            class="inline-flex min-h-10 items-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+          >
+            Proyectos
+          </a>
+        </li>
+        <li>
+          <span
+            class="inline-flex min-h-10 items-center rounded-full border border-slate-900 bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
+            aria-current="page"
+          >
+            TxoriOn
+          </span>
+        </li>
+      </ol>
+    </nav>
 
-      <div class="mt-8">
-        <img
-          src="/txorion-eventos.webp"
-          alt="Captura de la app TxoriON mostrando agenda de eventos ciudadanos"
-          class="rounded-xl shadow-lg"
-          loading="lazy"
-        />
-      </div>
+    <section class="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Caso publicado
+        </p>
 
-      <div class="mt-6">
-        <h2 class="text-2xl font-bold">Tecnologías</h2>
-        <ul class="mt-2 flex flex-wrap gap-2">
-          <li class="chip">React</li>
-          <li class="chip">Supabase</li>
-          <li class="chip">Vercel</li>
-          <li class="chip">Tailwind</li>
+        <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+          TxoriOn
+        </h1>
+
+        <p class="mt-5 text-lg leading-8 text-slate-600">
+          App local pensada para consultar eventos, empleo y recursos útiles desde
+          una experiencia móvil más clara, directa y agradable de usar.
+        </p>
+
+        <ul
+          class="mt-6 flex flex-wrap gap-2"
+          aria-label="Tecnologías y enfoque de TxoriOn"
+        >
+          {chips.map((item) => (
+            <li class="chip">{item}</li>
+          ))}
         </ul>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="https://txorion.es"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta black"
+          >
+            Ver proyecto en vivo
+          </a>
+
+          <a href="/contratame" class="cta white">
+            Quiero algo así
+          </a>
+
+          <a href="/proyectos" class="cta white">
+            Volver al hub
+          </a>
+        </div>
       </div>
 
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/contratame" class="cta black">
-          Quiero algo así en mi negocio
-        </a>
-        <a href="/proyectos" class="cta white">← Volver a proyectos</a>
+      <ProjectGallery
+        slides={slides}
+        mode="mobile"
+        ariaLabel="Galería del proyecto TxoriOn"
+      />
+    </section>
+
+    <section class="mt-14">
+      <div class="grid gap-6 md:grid-cols-3">
+        {valueCards.map((card) => (
+          <article class="rounded-[1.75rem] border border-slate-200 bg-white/90 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.05)]">
+            <h2 class="text-xl font-bold tracking-tight text-slate-900">
+              {card.title}
+            </h2>
+            <p class="mt-3 leading-7 text-slate-600">
+              {card.text}
+            </p>
+          </article>
+        ))}
       </div>
-    </main>
-    <Footer />
-  </body>
-</html>
+    </section>
+
+    <section class="mt-14 grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+      <article class="rounded-[2rem] border border-slate-200 bg-white/90 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900">
+          Enfoque del proyecto
+        </h2>
+
+        <div class="mt-5 space-y-4 text-base leading-8 text-slate-600">
+          <p>
+            TxoriOn reúne capas de información que suelen consultarse con prisa y
+            las ordena dentro de una experiencia móvil más limpia, rápida y fácil
+            de entender.
+          </p>
+
+          <p>
+            El valor no está solo en mostrar contenido, sino en convertirlo en una
+            experiencia útil: menos ruido, mejor recorrido y acceso más directo a
+            lo que realmente importa.
+          </p>
+
+          <p>
+            Es un buen ejemplo de producto digital orientado a consulta frecuente,
+            visibilidad local y navegación práctica.
+          </p>
+        </div>
+      </article>
+
+      <aside class="rounded-[2rem] border border-slate-200 bg-white/90 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)]">
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900">
+          Dónde encaja bien una solución así
+        </h2>
+
+        <ul class="mt-5 space-y-3 text-slate-600">
+          {fitList.map((item) => (
+            <li class="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 leading-7">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </section>
+
+    <section class="mt-14">
+      <div class="rounded-[2rem] border border-slate-900 bg-slate-900 px-6 py-8 text-white shadow-[0_18px_50px_rgba(15,23,42,0.16)] md:px-8">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">
+          Siguiente paso
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
+          Si buscas una app clara, útil y con recorrido, hablemos
+        </h2>
+
+        <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+          Desde productos locales hasta herramientas con operativa real: el objetivo
+          es construir interfaces que se entiendan rápido, se usen bien y puedan crecer
+          sin volverse un caos.
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/contratame" class="cta white">
+            Cuéntame tu proyecto
+          </a>
+          <a href="/proyectos" class="cta ghost-light">
+            Ver más casos
+          </a>
+        </div>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

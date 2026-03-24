@@ -1,0 +1,252 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaqService from "../../components/FaqService.astro";
+import { org, website, localBusiness } from "../../seo/structured";
+
+const title = "Desarrollo web en Zaragoza para negocios, marcas y proyectos | ByteZagal";
+const description =
+  "Desarrollo web en Zaragoza con foco en rendimiento, claridad, SEO técnico y negocio. Webs corporativas, landings y bases digitales preparadas para captar y crecer.";
+
+const cases = [
+  {
+    title: "Web corporativa clara",
+    text: "Para negocios que necesitan explicar bien lo que hacen, transmitir confianza y facilitar el siguiente paso."
+  },
+  {
+    title: "Landing orientada a captación",
+    text: "Para campañas, servicios concretos o propuestas que necesitan una página más enfocada a conversión."
+  },
+  {
+    title: "Base digital más seria",
+    text: "Para proyectos que ya no pueden seguir con una web improvisada o una estructura que se les ha quedado corta."
+  }
+] as const;
+
+const pillars = [
+  {
+    title: "Rendimiento",
+    text: "Una web lenta te resta claridad, confianza y recorrido. La base tiene que cargar bien desde el principio."
+  },
+  {
+    title: "SEO técnico",
+    text: "Arquitectura, indexación, metadatos, enlazado interno y estructura semántica coherente."
+  },
+  {
+    title: "Mantenimiento sensato",
+    text: "La idea no es hacer una web bonita un día y sufrirla durante años. Tiene que ser entendible y sostenible."
+  }
+] as const;
+
+const relatedLinks = [
+  {
+    title: "Ver Zaragoza",
+    text: "Capa local de marca, servicios y encaje comercial.",
+    href: "/zaragoza"
+  },
+  {
+    title: "Ver digitalización",
+    text: "Si necesitas una base más amplia de presencia y operativa digital.",
+    href: "/servicios/digitalizacion"
+  },
+  {
+    title: "Ver proyectos",
+    text: "Casos reales y producto con criterio técnico.",
+    href: "/proyectos"
+  }
+] as const;
+
+const faqs = [
+  {
+    question: "¿Qué incluye un desarrollo web en Zaragoza?",
+    answer:
+      "Depende del caso, pero suele incluir estructura, diseño funcional, desarrollo, SEO técnico base, rendimiento, accesibilidad y preparación para contacto o captación."
+  },
+  {
+    question: "¿Haces solo diseño o también la parte técnica?",
+    answer:
+      "El foco es desarrollo con criterio técnico. La parte visual importa, pero siempre al servicio de claridad, rendimiento y negocio."
+  },
+  {
+    question: "¿Trabajas también fuera de Zaragoza?",
+    answer:
+      "Sí. Aunque esta página está enfocada a Zaragoza, trabajo también en remoto para clientes de toda España."
+  }
+] as const;
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-desarrollo-web-zaragoza",
+  url: "https://bytezagal.es/servicios/desarrollo-web-zaragoza",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Desarrollo web en Zaragoza",
+  serviceType: "Desarrollo web",
+  areaServed: ["Zaragoza"],
+  provider: { "@id": "https://bytezagal.es/#professional-service" },
+  url: "https://bytezagal.es/servicios/desarrollo-web-zaragoza",
+  description
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Servicios",
+      item: "https://bytezagal.es/contratame"
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Desarrollo web en Zaragoza",
+      item: "https://bytezagal.es/servicios/desarrollo-web-zaragoza"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/servicios/desarrollo-web-zaragoza"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, serviceSchema, breadcrumbSchema, faqSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <header class="mx-auto max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Desarrollo web Zaragoza
+      </p>
+
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Desarrollo web en Zaragoza con base técnica seria
+      </h1>
+
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        Desarrollo webs para negocios, marcas y proyectos que necesitan algo más
+        que una presencia “bonita”. La idea es construir una base clara, rápida
+        y preparada para captar o crecer sin arrastrar deuda técnica desde el día uno.
+      </p>
+    </header>
+
+    <section class="mt-12 grid gap-6 md:grid-cols-3">
+      {cases.map((item) => (
+        <article class="rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+          <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+            {item.title}
+          </h2>
+          <p class="mt-4 leading-8 text-slate-600">
+            {item.text}
+          </p>
+        </article>
+      ))}
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Qué pesa de verdad
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          Una web profesional debería nacer bien conectada, rápida e indexable
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          No se trata solo de publicar una página. Se trata de que tenga una base
+          técnica seria, una estructura clara y sentido comercial.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {pillars.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+            <h3 class="text-xl font-bold tracking-tight text-slate-900">
+              {item.title}
+            </h3>
+            <p class="mt-3 leading-7 text-slate-600">
+              {item.text}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+        Enlaces relacionados
+      </h2>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {relatedLinks.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-white/95 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+            <h3 class="text-xl font-bold text-slate-900">{item.title}</h3>
+            <p class="mt-3 leading-7 text-slate-600">{item.text}</p>
+            <div class="mt-5">
+              <a href={item.href} class="cta white">
+                Abrir
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <FaqService faqs={[...faqs]} />
+
+    <section class="mt-16 rounded-[2rem] border border-slate-900 bg-slate-900 px-6 py-8 text-white shadow-[0_18px_50px_rgba(15,23,42,0.16)] md:px-8">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">
+        Siguiente paso
+      </p>
+
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
+        Si necesitas una web más seria para tu proyecto, hablemos
+      </h2>
+
+      <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+        Cuéntame qué haces, qué objetivo persigues y qué tienes ahora. Te diré si
+        conviene una landing, una web corporativa o una base digital más amplia.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/contratame" class="cta white">
+          Ir a contratación
+        </a>
+        <a href="/zaragoza" class="cta ghost-light">
+          Ver Zaragoza
+        </a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

@@ -1,87 +1,12 @@
 ---
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-astro";
+import { featuredProjects } from "../data/projects";
 
-type ProjectStatus = "En producción" | "Próximamente" | "Privado" | "En piloto";
+const projects = featuredProjects;
 
-interface Project {
-  id: string;
-  title: string;
-  kicker: string;
-  description: string;
-  image: string;
-  alt: string;
-  status: ProjectStatus;
-  tech: string[];
-  liveHref?: string;
-  note: string;
-}
+type StatusKey = (typeof projects)[number]["status"];
 
-const projects: Project[] = [
-  {
-    id: "parrockia",
-    title: "ParROCKia",
-    kicker: "Caso real · Hostelería",
-    description:
-      "Web para hostelería y eventos con mejor estructura, navegación clara y una presencia digital con más carácter que ruido.",
-    image: "/parrockia.webp",
-    alt: "Proyecto ParROCKia, web para hostelería y eventos",
-    status: "En producción",
-    tech: ["Astro", "SEO local", "Rendimiento", "Accesibilidad"],
-    liveHref: "https://tabernaparrockia.com",
-    note: "Caso publicado y visible. Buen ejemplo de presencia local con personalidad propia."
-  },
-  {
-    id: "foconauta",
-    title: "FocoNauta",
-    kicker: "Producto propio · Roadmap activo",
-    description:
-      "Producto orientado a foco, organización y flujo de trabajo. Está en evolución, con criterio de producto y despliegue progresivo.",
-    image: "/focoNauta.webp",
-    alt: "FocoNauta, producto propio en evolución",
-    status: "Próximamente",
-    tech: ["Next.js", "Supabase", "PWA", "UX"],
-    note: "Próximamente en Play Store. Prefiero enseñar producto maduro antes que humo."
-  },
-  {
-    id: "offilab",
-    title: "OffiLab",
-    kicker: "Sistema interno · No público",
-    description:
-      "Sistema interno orientado a operativa y orden digital. Lo muestro como señal de criterio técnico, no como escaparate prematuro.",
-    image: "/offilab.webp",
-    alt: "OffiLab, sistema interno de operativa digital",
-    status: "Privado",
-    tech: ["Automatización", "Flujos", "Operaciones", "Negocio"],
-    note: "Activo privado. Se enseña con criterio, no antes de tiempo."
-  },
-  {
-    id: "txorion",
-    title: "TxoriOn",
-    kicker: "Producto publicado · Utilidad local",
-    description:
-      "Plataforma local para conectar información, negocio y utilidad práctica. Buen ejemplo de producto con capa territorial y recorrido.",
-    image: "/txorion.webp",
-    alt: "TxoriOn, plataforma local orientada a utilidad práctica",
-    status: "En producción",
-    tech: ["Next.js", "PWA", "SEO local", "Maps"],
-    liveHref: "https://txorion.es",
-    note: "Producto publicado. Enseña enfoque, utilidad y capacidad de ejecución."
-  },
-  {
-    id: "turbolin",
-    title: "Turbolin",
-    kicker: "Producto en preparación",
-    description:
-      "Producto en preparación con enfoque pragmático: resolver una necesidad concreta antes de enseñar fuegos artificiales.",
-    image: "/turbolin.webp",
-    alt: "Turbolin, producto en preparación",
-    status: "En piloto",
-    tech: ["Producto", "Iteración", "Validación", "Negocio"],
-    note: "En piloto. Todavía no lo saco a paseo sin correa."
-  }
-];
-
-const statusClassMap: Record<ProjectStatus, string> = {
+const statusClassMap: Record<StatusKey, string> = {
   "En producción": "bg-emerald-50 text-emerald-700 ring-emerald-200",
   "Próximamente": "bg-blue-50 text-blue-700 ring-blue-200",
   "Privado": "bg-slate-100 text-slate-700 ring-slate-200",
@@ -95,12 +20,15 @@ const statusClassMap: Record<ProjectStatus, string> = {
       <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
         Prueba real
       </p>
+
       <h2 class="mt-3 text-3xl font-extrabold text-slate-900 sm:text-4xl">
         Casos y productos seleccionados
       </h2>
+
       <p class="mt-4 text-balance text-lg text-slate-600">
-        No enseño por enseñar. Aquí dejo piezas que sí aportan señal de criterio, ejecución y producto:
-        trabajo real, producto propio y activos con sentido comercial.
+        Aquí enseño trabajo real, producto útil y demos con sentido comercial.
+        La idea no es inflar el portfolio, sino dejar claro cómo pienso, cómo
+        ejecuto y qué tipo de soluciones puedo construir.
       </p>
     </div>
 
@@ -141,7 +69,9 @@ const statusClassMap: Record<ProjectStatus, string> = {
                     </p>
                   </div>
 
-                  <span class={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${statusClassMap[project.status]}`}>
+                  <span
+                    class={`inline-flex shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${statusClassMap[project.status]}`}
+                  >
                     {project.status}
                   </span>
                 </div>
@@ -159,7 +89,10 @@ const statusClassMap: Record<ProjectStatus, string> = {
               <ChevronLeft class="h-5 w-5" />
             </button>
 
-            <div class="flex flex-wrap items-center justify-center gap-2" aria-label="Selector de proyectos">
+            <div
+              class="flex flex-wrap items-center justify-center gap-2"
+              aria-label="Selector de proyectos"
+            >
               {projects.map((project, index) => (
                 <button
                   type="button"
@@ -197,7 +130,9 @@ const statusClassMap: Record<ProjectStatus, string> = {
               aria-live="polite"
             >
               <div class="flex flex-wrap items-center gap-3">
-                <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ${statusClassMap[project.status]}`}>
+                <span
+                  class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ${statusClassMap[project.status]}`}
+                >
                   {project.status}
                 </span>
                 <span class="text-sm font-medium text-slate-500">
@@ -226,7 +161,14 @@ const statusClassMap: Record<ProjectStatus, string> = {
               </p>
 
               <div class="mt-7 flex flex-wrap gap-3">
-                {project.liveHref ? (
+                <a
+                  href={project.detailHref}
+                  class="inline-flex items-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition hover:border-slate-400 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+                >
+                  Información del proyecto
+                </a>
+
+                {project.liveHref && (
                   <a
                     href={project.liveHref}
                     target="_blank"
@@ -236,10 +178,6 @@ const statusClassMap: Record<ProjectStatus, string> = {
                     <ExternalLink class="h-4 w-4" />
                     Ver proyecto en vivo
                   </a>
-                ) : (
-                  <span class="inline-flex items-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-500">
-                    Ficha detallada en el siguiente paso
-                  </span>
                 )}
 
                 <a
@@ -255,8 +193,9 @@ const statusClassMap: Record<ProjectStatus, string> = {
       </div>
 
       <p class="mx-auto mt-8 max-w-3xl text-center text-sm text-slate-500">
-        Algunos activos están en despliegue privado o fase piloto. La idea no es inflar el portfolio,
-        sino reforzar confianza con lo que sí tiene sentido enseñar hoy.
+        Algunos activos están en despliegue privado o fase piloto. La idea no es
+        inflar el portfolio, sino reforzar confianza con lo que sí tiene sentido
+        enseñar hoy.
       </p>
     </div>
   </div>
@@ -313,22 +252,24 @@ const statusClassMap: Record<ProjectStatus, string> = {
         }
 
         if (desktop && isPrev) {
-  card.style.transform = "translateX(calc(-50% - 8.25rem)) translateY(0.8rem) scale(0.9) rotate(-5deg)";
-  card.style.opacity = "0.5";
-  card.style.zIndex = "20";
-  card.style.boxShadow = "0 16px 34px rgba(15, 23, 42, 0.08)";
-  card.setAttribute("aria-pressed", "false");
-  return;
-}
+          card.style.transform =
+            "translateX(calc(-50% - 8.25rem)) translateY(0.8rem) scale(0.9) rotate(-5deg)";
+          card.style.opacity = "0.5";
+          card.style.zIndex = "20";
+          card.style.boxShadow = "0 16px 34px rgba(15, 23, 42, 0.08)";
+          card.setAttribute("aria-pressed", "false");
+          return;
+        }
 
-if (desktop && isNext) {
-  card.style.transform = "translateX(calc(-50% + 8.25rem)) translateY(0.8rem) scale(0.9) rotate(5deg)";
-  card.style.opacity = "0.5";
-  card.style.zIndex = "20";
-  card.style.boxShadow = "0 16px 34px rgba(15, 23, 42, 0.08)";
-  card.setAttribute("aria-pressed", "false");
-  return;
-}
+        if (desktop && isNext) {
+          card.style.transform =
+            "translateX(calc(-50% + 8.25rem)) translateY(0.8rem) scale(0.9) rotate(5deg)";
+          card.style.opacity = "0.5";
+          card.style.zIndex = "20";
+          card.style.boxShadow = "0 16px 34px rgba(15, 23, 42, 0.08)";
+          card.setAttribute("aria-pressed", "false");
+          return;
+        }
 
         card.style.transform = "translateX(-50%) translateY(1.5rem) scale(0.8)";
         card.style.opacity = "0";

@@ -1,0 +1,253 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaqService from "../../components/FaqService.astro";
+import { org, website, localBusiness } from "../../seo/structured";
+
+const title = "Desarrollo de apps y herramientas digitales en Zaragoza | ByteZagal";
+const description =
+  "Desarrollo de apps y herramientas digitales en Zaragoza para ordenar procesos, ahorrar tiempo y crear paneles, backoffices o soluciones útiles para negocio.";
+
+const useCases = [
+  {
+    title: "Paneles internos",
+    text: "Backoffices, paneles de control y pequeñas herramientas para centralizar información y trabajar con menos fricción."
+  },
+  {
+    title: "Procesos repetitivos",
+    text: "Interfaces simples para tareas que se repiten demasiado y acaban consumiendo más tiempo del que deberían."
+  },
+  {
+    title: "Herramientas a medida",
+    text: "Soluciones ligeras para necesidades concretas cuando una web básica ya no es suficiente, pero un software gigante tampoco."
+  }
+] as const;
+
+const fit = [
+  {
+    title: "Sí encaja",
+    text: "Cuando hay una necesidad concreta, un proceso repetido o una operativa que pide una herramienta más clara."
+  },
+  {
+    title: "No siempre encaja",
+    text: "Si todavía no está claro el problema, muchas veces conviene primero ordenar la base y no lanzarse a construir una app por impulso."
+  },
+  {
+    title: "Lo importante",
+    text: "Que la herramienta ahorre tiempo, ordene trabajo o evite errores. No hacer una app por hacer una app."
+  }
+] as const;
+
+const relatedLinks = [
+  {
+    title: "Ver remoto España",
+    text: "Esta línea también encaja muy bien en remoto.",
+    href: "/espana-remoto"
+  },
+  {
+    title: "Ver automatización local",
+    text: "Si el problema está más en el proceso que en la interfaz.",
+    href: "/servicios/automatizacion-negocio-local-zaragoza"
+  },
+  {
+    title: "Ver proyecto TxoriOn",
+    text: "Producto publicado con recorrido y lógica de uso.",
+    href: "/proyectos/txorion"
+  }
+] as const;
+
+const faqs = [
+  {
+    question: "¿Qué entiendes aquí por desarrollo de apps?",
+    answer:
+      "Paneles internos, herramientas de uso diario, pequeñas apps de gestión y soluciones digitales a medida orientadas a una necesidad concreta."
+  },
+  {
+    question: "¿También haces webs o solo apps?",
+    answer:
+      "Trabajo tanto desarrollo web como pequeñas apps y herramientas digitales. La vía correcta depende del problema real que quieras resolver."
+  },
+  {
+    question: "¿Esto es solo para Zaragoza?",
+    answer:
+      "No. Aunque la página está enfocada a Zaragoza, esta clase de proyectos también encaja muy bien en remoto para toda España."
+  }
+] as const;
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-apps-zaragoza",
+  url: "https://bytezagal.es/servicios/desarrollo-apps-zaragoza",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Desarrollo de apps y herramientas digitales en Zaragoza",
+  serviceType: "Desarrollo de apps",
+  areaServed: ["Zaragoza"],
+  provider: { "@id": "https://bytezagal.es/#professional-service" },
+  url: "https://bytezagal.es/servicios/desarrollo-apps-zaragoza",
+  description
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Servicios",
+      item: "https://bytezagal.es/contratame"
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Desarrollo de apps en Zaragoza",
+      item: "https://bytezagal.es/servicios/desarrollo-apps-zaragoza"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/servicios/desarrollo-apps-zaragoza"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, serviceSchema, breadcrumbSchema, faqSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <header class="mx-auto max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Apps Zaragoza
+      </p>
+
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Apps y herramientas digitales en Zaragoza para ahorrar tiempo y ordenar procesos
+      </h1>
+
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        No siempre hace falta un software gigante. A veces lo que hace falta es una
+        herramienta clara, útil y bien pensada para resolver un cuello de botella
+        concreto sin convertir el proyecto en una locura.
+      </p>
+    </header>
+
+    <section class="mt-12 grid gap-6 md:grid-cols-3">
+      {useCases.map((item) => (
+        <article class="rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+          <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+            {item.title}
+          </h2>
+          <p class="mt-4 leading-8 text-slate-600">
+            {item.text}
+          </p>
+        </article>
+      ))}
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Cuándo compensa
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          Una app útil vale más que una idea hinchada
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          La pregunta no es si “mola tener una app”. La pregunta es si ayuda a ordenar
+          operaciones, reducir errores o ahorrar tiempo de verdad.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {fit.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+            <h3 class="text-xl font-bold tracking-tight text-slate-900">
+              {item.title}
+            </h3>
+            <p class="mt-3 leading-7 text-slate-600">
+              {item.text}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+        Enlaces relacionados
+      </h2>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {relatedLinks.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-white/95 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+            <h3 class="text-xl font-bold text-slate-900">{item.title}</h3>
+            <p class="mt-3 leading-7 text-slate-600">{item.text}</p>
+            <div class="mt-5">
+              <a href={item.href} class="cta white">
+                Abrir
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <FaqService faqs={[...faqs]} />
+
+    <section class="mt-16 rounded-[2rem] border border-slate-900 bg-slate-900 px-6 py-8 text-white shadow-[0_18px_50px_rgba(15,23,42,0.16)] md:px-8">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">
+        Siguiente paso
+      </p>
+
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
+        Si necesitas una herramienta más útil que un parche, hablemos
+      </h2>
+
+      <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+        Cuéntame qué proceso quieres mejorar, qué se repite demasiado y dónde se está
+        perdiendo tiempo. A partir de ahí vemos si conviene una app, una automatización
+        o una solución más ligera.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/contratame" class="cta white">
+          Ir a contratación
+        </a>
+        <a href="/espana-remoto" class="cta ghost-light">
+          Ver remoto España
+        </a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

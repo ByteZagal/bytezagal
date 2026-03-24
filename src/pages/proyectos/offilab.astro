@@ -2,15 +2,15 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectGallery from "../../components/ProjectGallery.astro";
 
-const title = "ParROCKia | Caso real de app y web para hostelería | ByteZagal";
+const title = "OffiLab | App privada para gestión de equipos y operativa | ByteZagal";
 const description =
-  "Caso real para hostelería: carta visual, eventos, merchandising y panel de gestión con una experiencia más clara, usable y preparada para crecer.";
+  "Caso de app privada para coordinar oficina y operarios: tareas, fichajes, documentación, automatización y control más claro del día a día.";
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": "https://bytezagal.es/proyectos/parrockia#webpage",
-  url: "https://bytezagal.es/proyectos/parrockia",
+  "@id": "https://bytezagal.es/proyectos/offilab#webpage",
+  url: "https://bytezagal.es/proyectos/offilab",
   name: title,
   description,
   isPartOf: {
@@ -18,7 +18,7 @@ const pageSchema = {
   },
   about: {
     "@type": "SoftwareApplication",
-    name: "ParROCKia",
+    name: "OffiLab",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web"
   }
@@ -43,86 +43,80 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "ParROCKia",
-      item: "https://bytezagal.es/proyectos/parrockia"
+      name: "OffiLab",
+      item: "https://bytezagal.es/proyectos/offilab"
     }
   ]
 };
 
 const slides = [
   {
-    src: "/parroHome.webp",
-    alt: "Pantalla principal de ParROCKia con identidad visual del negocio",
-    label: "Inicio",
-    caption: "Portada con identidad propia y acceso claro a lo importante."
+    src: "/offiDashBoard.webp",
+    alt: "Dashboard principal de OffiLab para gestión de operativa",
+    label: "Dashboard",
+    caption: "Vista central para supervisar operativa, equipo y tareas sin perder tiempo."
   },
   {
-    src: "/parroEventos.webp",
-    alt: "Sección de eventos de ParROCKia",
-    label: "Eventos",
-    caption: "Agenda y próximos eventos presentados de forma rápida y visible."
+    src: "/offiLogin1.webp",
+    alt: "Pantalla de acceso móvil de OffiLab",
+    label: "Acceso móvil",
+    caption: "Entrada rápida para operarios y responsables desde una experiencia clara."
   },
   {
-    src: "/parroJukeBox.webp",
-    alt: "Función JukeBox dentro de ParROCKia",
-    label: "JukeBox",
-    caption: "Funcionalidad diferencial para reforzar experiencia y personalidad."
+    src: "/offiLogin2.webp",
+    alt: "Segunda pantalla de acceso de OffiLab",
+    label: "Acceso 2",
+    caption: "Flujo de acceso pulido para usar la app desde móvil en el día a día."
   },
   {
-    src: "/parroPanel1.webp",
-    alt: "Panel de administración de ParROCKia para gestionar contenido",
-    label: "Panel 1",
-    caption: "Gestión sencilla de contenidos para actualizar la web sin fricción."
+    src: "/offiTrabajadores.webp",
+    alt: "Gestión de trabajadores en OffiLab",
+    label: "Equipo",
+    caption: "Control de personal, estado y organización del trabajo desde una sola vista."
   },
   {
-    src: "/parroPanel2.webp",
-    alt: "Segundo panel de administración de ParROCKia",
-    label: "Panel 2",
-    caption: "Operativa preparada para seguir creciendo sin depender de procesos torpes."
-  },
-  {
-    src: "/parroUbicacion.webp",
-    alt: "Bloque de ubicación e información útil de ParROCKia",
-    label: "Ubicación",
-    caption: "Información útil y localización accesible desde una navegación directa."
+    src: "/offiPendiente.webp",
+    alt: "Pantalla de tareas pendientes de OffiLab",
+    label: "Tareas",
+    caption: "Seguimiento de pendientes y operativa sin depender de mensajes dispersos."
   }
 ] as const;
 
 const chips = [
+  "React",
+  "Node.js",
+  "TypeScript",
+  "OCR",
   "PWA",
-  "Hostelería",
-  "Eventos",
-  "Merchandising",
-  "Panel admin",
-  "UX"
+  "Operativa real"
 ];
 
 const valueCards = [
   {
     title: "Qué es",
-    text: "Una solución digital para mostrar mejor el negocio, sus eventos y su propuesta sin perder personalidad."
+    text: "Una app privada para coordinar oficina y operarios con menos fricción, menos caos y más control."
   },
   {
     title: "Cómo ayuda",
-    text: "Facilita consulta, gestión y actualización de contenido desde una experiencia más clara y práctica."
+    text: "Centraliza tareas, fichajes, documentación y seguimiento para que el trabajo fluya mejor."
   },
   {
     title: "Qué transmite",
-    text: "Criterio de producto, identidad visual y capacidad para convertir una web en herramienta real de negocio."
+    text: "Capacidad para convertir procesos cotidianos en una herramienta clara, útil y fácil de usar."
   }
 ];
 
 const fitList = [
-  "Negocios de hostelería con agenda, producto y comunidad.",
-  "Marcas con personalidad que necesitan claridad sin verse genéricas.",
-  "Proyectos que quieren gestionar contenido desde móvil u ordenador con facilidad."
+  "Empresas de servicios con personal en calle y coordinación desde oficina.",
+  "Equipos que siguen gestionando demasiadas cosas por WhatsApp, papel o memoria.",
+  "Negocios que quieren automatizar documentación y ahorrar tiempo operativo."
 ];
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  canonicalPath="/proyectos/parrockia"
+  canonicalPath="/proyectos/offilab"
   jsonLd={[pageSchema, breadcrumbSchema]}
   bodyClass="text-slate-800"
 >
@@ -150,47 +144,43 @@ const fitList = [
             class="inline-flex min-h-10 items-center rounded-full border border-slate-900 bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
             aria-current="page"
           >
-            ParROCKia
+            OffiLab
           </span>
         </li>
       </ol>
     </nav>
 
-    <section class="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+    <section class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
       <div class="max-w-2xl">
         <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
-          Caso publicado
+          Caso privado
         </p>
 
         <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-          ParROCKia
+          OffiLab
         </h1>
 
         <p class="mt-5 text-lg leading-8 text-slate-600">
-          App y web para una taberna con eventos, merchandising e información útil,
-          pensada para enseñar mejor lo importante y facilitar la gestión del día a día.
+          Doble PWA para coordinar oficina y operarios: tareas, fichajes, seguimiento
+          y documentación en una experiencia más rápida, clara y fácil de mantener.
         </p>
 
         <ul
           class="mt-6 flex flex-wrap gap-2"
-          aria-label="Tecnologías y enfoque de ParROCKia"
+          aria-label="Tecnologías y enfoque de OffiLab"
         >
           {chips.map((item) => (
             <li class="chip">{item}</li>
           ))}
         </ul>
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href="https://tabernaparrockia.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="cta black"
-          >
-            Ver proyecto en vivo
-          </a>
+        <p class="mt-6 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm leading-7 text-slate-600 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+          Proyecto en fase privada. Aquí se muestra una demo visual orientada a enseñar
+          criterio de producto, operativa y experiencia de uso, sin exponer información sensible.
+        </p>
 
-          <a href="/contratame" class="cta white">
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contratame" class="cta black">
             Quiero algo así
           </a>
 
@@ -202,8 +192,8 @@ const fitList = [
 
       <ProjectGallery
         slides={slides}
-        mode="desktop"
-        ariaLabel="Galería del proyecto ParROCKia"
+        mode="mixed"
+        ariaLabel="Galería del proyecto OffiLab"
       />
     </section>
 
@@ -230,20 +220,20 @@ const fitList = [
 
         <div class="mt-5 space-y-4 text-base leading-8 text-slate-600">
           <p>
-            ParROCKia mezcla identidad, agenda, producto y operativa. La clave aquí
-            no era llenar la pantalla de ruido, sino ordenar la experiencia para que
-            el negocio se entienda rápido y resulte fácil de consultar.
+            OffiLab nace para resolver una fricción muy común: lo que pasa en oficina
+            y lo que pasa fuera no siempre viajan bien juntos. Cuando tareas, fichajes,
+            documentos y seguimiento van cada uno por su lado, la operativa se vuelve más lenta.
           </p>
 
           <p>
-            Además de enseñar mejor la propuesta, el proyecto deja una base útil para
-            publicar eventos, mover merchandising y gestionar contenido sin convertir
-            cada cambio en una mini odisea administrativa.
+            La propuesta aquí es reunir esas piezas en una herramienta pensada para trabajar
+            con menos pasos y menos ruido. Que el responsable tenga visibilidad y que el operario
+            encuentre rápido lo que necesita desde el móvil.
           </p>
 
           <p>
-            Es un buen ejemplo de solución digital para hostelería con personalidad,
-            comunidad y necesidad real de visibilidad continua.
+            Además, la capa de automatización documental con OCR apunta justo a donde más duele:
+            ahorrar tiempo en gestiones repetitivas y reducir trabajo manual que no aporta valor.
           </p>
         </div>
       </article>
@@ -270,12 +260,12 @@ const fitList = [
         </p>
 
         <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
-          Si tu negocio necesita una presencia útil y fácil de gestionar, hablemos
+          Si quieres una operativa más clara entre oficina y campo, hablemos
         </h2>
 
         <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
-          Desde hostelería hasta productos con operativa real: la idea es construir
-          una base clara, usable y preparada para crecer sin liarse la guitarra.
+          Desde equipos técnicos hasta negocios con mucha coordinación diaria: la meta
+          es reducir pasos, ordenar procesos y convertir el caos en una herramienta útil.
         </p>
 
         <div class="mt-6 flex flex-wrap gap-3">

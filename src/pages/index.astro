@@ -1,43 +1,5 @@
 ---
-/* ==========================================================================
-   HOME — ByteZagal
-   --------------------------------------------------------------------------
-   Página principal comercial.
-   Objetivo:
-   - Presentar propuesta de valor
-   - Demostrar criterio técnico y casos
-   - Guiar hacia contratación/contacto
-   - Mantener una home limpia, ligera y coherente con Zaragoza + remoto España
-
-   Notas de mantenimiento:
-   - NO meter SEO dentro de componentes visuales (Hero, Projects, etc.)
-   - El JSON-LD de esta página se controla aquí
-   - MiniLab queda fuera de la home comercial para no diluir intención
-   - El Footer va fuera de <main> por semántica
-   ========================================================================== */
-
-/* ==========================================================================
-   ESTILOS GLOBALES
-   ========================================================================== */
-import "../styles/globals.css";
-
-/* ==========================================================================
-   SEO
-   ========================================================================== */
-import Seo from "../components/Seo.astro";
-
-/* ==========================================================================
-   SECCIONES DE HOME
-   --------------------------------------------------------------------------
-   Orden actual del flujo:
-   1. Hero         → propuesta de valor + CTAs principales
-   2. SobreMi      → enfoque y criterio de trabajo
-   3. Projects     → escaparate de casos/productos seleccionados
-   4. Process      → proceso para reducir fricción y aumentar confianza
-   5. Services     → servicios y puertas de entrada comerciales
-   6. Contacto     → CTA de contacto principal
-   7. FaqHome      → objeciones frecuentes y refuerzo SEO semántico
-   ========================================================================== */
+import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import SobreMi from "../components/SobreMi.astro";
 import Projects from "../components/Projects.astro";
@@ -45,34 +7,26 @@ import Process from "../components/Process.astro";
 import Services from "../components/Services.astro";
 import Contacto from "../components/Contacto.astro";
 import FaqHome from "../components/FaqHome.astro";
+import { org, website, localBusiness } from "../seo/structured";
 
-/* ==========================================================================
-   LAYOUT AUXILIAR
-   ========================================================================== */
-import Footer from "../components/Footer.astro";
-
-/* ==========================================================================
-   META PRINCIPAL DE HOME
-   --------------------------------------------------------------------------
-   Mantener alineado con:
-   - Hero
-   - headings visibles
-   - FAQs
-   - arquitectura real del sitio
-   ========================================================================== */
-const title = "ByteZagal | Rescate web, desarrollo y SEO técnico en Zaragoza";
+const title =
+  "Desarrollador web en Zaragoza | Rescate web, apps y SEO técnico | ByteZagal";
 const description =
-  "Rescate web, desarrollo a medida y SEO técnico en Zaragoza y remoto en España. Webs rápidas, accesibles y pensadas para negocio.";
+  "Desarrollador web en Zaragoza. Rescate web, desarrollo a medida, apps, automatización y SEO técnico para negocios que necesitan una web rápida, clara y orientada a resultados.";
 
-/* ==========================================================================
-   JSON-LD ESPECÍFICO DE HOME
-   --------------------------------------------------------------------------
-   De momento dejamos solo FAQPage.
-   Motivo:
-   - structured.ts sigue arrastrando datos de Vitoria-Gasteiz
-   - es mejor no emitir schema erróneo que emitir uno contaminado
-   - el schema global se corregirá en el siguiente bloque SEO
-   ========================================================================== */
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-home",
+  url: "https://bytezagal.es/",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" },
+  primaryImageOfPage: "https://bytezagal.es/bytezagal-og.home.webp"
+};
+
 const faqHome = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -90,7 +44,7 @@ const faqHome = {
       name: "¿Qué tipo de proyectos haces?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Rescate de webs, desarrollo web a medida, SEO técnico, automatización y mejoras de rendimiento y accesibilidad."
+        text: "Rescate de webs, desarrollo web a medida, desarrollo de apps, SEO técnico, automatización y mejoras de rendimiento y accesibilidad."
       }
     },
     {
@@ -113,51 +67,19 @@ const faqHome = {
 };
 ---
 
-<!doctype html>
-<html lang="es" class="h-full">
-  <head>
-    <Seo
-      title={title}
-      description={description}
-      canonicalPath="/"
-      jsonLd={[faqHome]}
-    />
-  </head>
-
-  <body class="bg-orbital text-slate-800 antialiased">
-    <!-- Accesibilidad: permite saltar navegación visual repetitiva -->
-    <a href="#contenido" class="skip-link">Saltar al contenido</a>
-
-    <!--
-      CONTENIDO PRINCIPAL
-      ----------------------------------------------------------------------
-      Todo el contenido útil de la home vive dentro de <main>.
-      El footer queda fuera para mantener semántica más limpia.
-    -->
-    <main id="contenido">
-      <!-- HERO: promesa principal + CTAs -->
-      <Hero />
-
-      <!-- ENFOQUE / SOBRE MÍ: autoridad y criterio -->
-      <SobreMi />
-
-      <!-- CASOS / PRODUCTOS: aquí después meteremos el spinner profesional -->
-      <Projects />
-
-      <!-- PROCESO: reduce incertidumbre y refuerza confianza -->
-      <Process />
-
-      <!-- SERVICIOS: puertas de entrada hacia páginas comerciales -->
-      <Services />
-
-      <!-- CONTACTO: CTA final principal -->
-      <Contacto />
-
-      <!-- FAQ: objeciones + semántica SEO útil -->
-      <FaqHome />
-    </main>
-
-    <!-- Footer fuera del main por estructura semántica -->
-    <Footer />
-  </body>
-</html>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, faqHome]}
+  bodyClass="text-slate-800 antialiased"
+>
+  <Hero />
+  <SobreMi />
+  <Projects />
+  <Process />
+  <Services />
+  <Contacto />
+  <FaqHome />
+</BaseLayout>

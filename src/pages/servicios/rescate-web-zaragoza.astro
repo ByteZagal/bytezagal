@@ -1,0 +1,252 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaqService from "../../components/FaqService.astro";
+import { org, website, localBusiness } from "../../seo/structured";
+
+const title = "Rescate web en Zaragoza | Auditoría, arreglo y mejora técnica | ByteZagal";
+const description =
+  "Rescate web en Zaragoza para proyectos lentos, rotos o mal planteados. Auditoría, fixes críticos, rendimiento, accesibilidad y base SEO técnica más limpia.";
+
+const situations = [
+  {
+    title: "La web carga mal o da problemas",
+    text: "Errores, lentitud, integraciones rotas o comportamientos raros que ya están generando fricción."
+  },
+  {
+    title: "La base está mal planteada",
+    text: "Código difícil de tocar, estructura confusa, SEO técnico flojo o una sensación constante de parche sobre parche."
+  },
+  {
+    title: "No sabes si arreglar o rehacer",
+    text: "Necesitas criterio técnico para decidir qué parte merece rescate y qué parte conviene dejar atrás."
+  }
+] as const;
+
+const deliverables = [
+  {
+    title: "Diagnóstico real",
+    text: "Revisión de rendimiento, accesibilidad, SEO técnico, puntos frágiles y riesgo de tocar según el estado del proyecto."
+  },
+  {
+    title: "Corrección priorizada",
+    text: "Primero lo que más impacto tiene: estabilidad, tiempos de carga, errores críticos y base mínima para no seguir perdiendo tiempo."
+  },
+  {
+    title: "Hoja de ruta sensata",
+    text: "Una vez estabilizado, definimos si compensa seguir mejorando, refactorizar por fases o preparar una reconstrucción parcial."
+  }
+] as const;
+
+const relatedLinks = [
+  {
+    title: "Ver servicio general de rescate",
+    text: "Para una explicación más amplia del servicio fuera del enfoque local.",
+    href: "/servicios/arreglos"
+  },
+  {
+    title: "Ver Zaragoza",
+    text: "Para aterrizar el trabajo desde la capa local de marca y servicio.",
+    href: "/zaragoza"
+  },
+  {
+    title: "Ver caso ParROCKia",
+    text: "Ejemplo real de estructura, criterio y enfoque de negocio.",
+    href: "/proyectos/parrockia"
+  }
+] as const;
+
+const faqs = [
+  {
+    question: "¿Qué incluye un rescate web en Zaragoza?",
+    answer:
+      "Revisión técnica, detección de problemas prioritarios, correcciones clave y una propuesta sensata de siguientes pasos según el estado del proyecto."
+  },
+  {
+    question: "¿Siempre hay que rehacer la web?",
+    answer:
+      "No. Muchas veces no hace falta tirar todo. Primero conviene entender qué se puede salvar sin aumentar el riesgo."
+  },
+  {
+    question: "¿También trabajas este servicio en remoto?",
+    answer:
+      "Sí. Aunque esta página está enfocada a Zaragoza, el servicio también encaja en remoto para toda España."
+  }
+] as const;
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-rescate-zaragoza",
+  url: "https://bytezagal.es/servicios/rescate-web-zaragoza",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Rescate web en Zaragoza",
+  serviceType: "Rescate web",
+  areaServed: ["Zaragoza"],
+  provider: { "@id": "https://bytezagal.es/#professional-service" },
+  url: "https://bytezagal.es/servicios/rescate-web-zaragoza",
+  description
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Servicios",
+      item: "https://bytezagal.es/contratame"
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Rescate web en Zaragoza",
+      item: "https://bytezagal.es/servicios/rescate-web-zaragoza"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/servicios/rescate-web-zaragoza"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, serviceSchema, breadcrumbSchema, faqSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <header class="mx-auto max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Rescate web Zaragoza
+      </p>
+
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Rescate web en Zaragoza para proyectos lentos, rotos o mal planteados
+      </h1>
+
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        Si tu web ya existe pero no está ayudando, el primer paso no siempre es rehacer.
+        Muchas veces hace falta revisar con criterio, estabilizar lo importante y decidir
+        con cabeza qué conviene salvar y qué no.
+      </p>
+    </header>
+
+    <section class="mt-12 grid gap-6 md:grid-cols-3">
+      {situations.map((item) => (
+        <article class="rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+          <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+            {item.title}
+          </h2>
+          <p class="mt-4 leading-8 text-slate-600">
+            {item.text}
+          </p>
+        </article>
+      ))}
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Qué hago aquí
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          Ordenar primero, tocar después
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          En un rescate web la prioridad no es “hacer bonito”, sino entender el problema
+          real, reducir riesgo y corregir lo que está frenando el proyecto.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        {deliverables.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+            <h3 class="text-xl font-bold tracking-tight text-slate-900">
+              {item.title}
+            </h3>
+            <p class="mt-3 leading-7 text-slate-600">
+              {item.text}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+        Enlaces relacionados
+      </h2>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {relatedLinks.map((item) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-white/95 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+            <h3 class="text-xl font-bold text-slate-900">{item.title}</h3>
+            <p class="mt-3 leading-7 text-slate-600">{item.text}</p>
+            <div class="mt-5">
+              <a href={item.href} class="cta white">
+                Abrir
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <FaqService faqs={[...faqs]} />
+
+    <section class="mt-16 rounded-[2rem] border border-slate-900 bg-slate-900 px-6 py-8 text-white shadow-[0_18px_50px_rgba(15,23,42,0.16)] md:px-8">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-300">
+        Siguiente paso
+      </p>
+
+      <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
+        Si tienes una web que ya no da confianza, hablemos antes de tocar a ciegas
+      </h2>
+
+      <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+        Cuéntame qué está fallando y qué tecnología usas. Así podré decirte si merece
+        un rescate controlado, una mejora progresiva o una solución nueva.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="/contratame" class="cta white">
+          Ir a contratación
+        </a>
+        <a href="/servicios/arreglos" class="cta ghost-light">
+          Ver servicio general
+        </a>
+      </div>
+    </section>
+  </section>
+</BaseLayout>

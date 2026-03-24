@@ -2,15 +2,15 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectGallery from "../../components/ProjectGallery.astro";
 
-const title = "ParROCKia | Caso real de app y web para hostelería | ByteZagal";
+const title = "FocoNauta | App de gestión para autónomos y operativa diaria | ByteZagal";
 const description =
-  "Caso real para hostelería: carta visual, eventos, merchandising y panel de gestión con una experiencia más clara, usable y preparada para crecer.";
+  "Caso de app para controlar clientes, gastos, facturas y operativa en menos pasos, con una experiencia clara y pensada para trabajar sin fricción.";
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "@id": "https://bytezagal.es/proyectos/parrockia#webpage",
-  url: "https://bytezagal.es/proyectos/parrockia",
+  "@id": "https://bytezagal.es/proyectos/foconauta#webpage",
+  url: "https://bytezagal.es/proyectos/foconauta",
   name: title,
   description,
   isPartOf: {
@@ -18,7 +18,7 @@ const pageSchema = {
   },
   about: {
     "@type": "SoftwareApplication",
-    name: "ParROCKia",
+    name: "FocoNauta",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Web"
   }
@@ -43,86 +43,80 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "ParROCKia",
-      item: "https://bytezagal.es/proyectos/parrockia"
+      name: "FocoNauta",
+      item: "https://bytezagal.es/proyectos/foconauta"
     }
   ]
 };
 
 const slides = [
   {
-    src: "/parroHome.webp",
-    alt: "Pantalla principal de ParROCKia con identidad visual del negocio",
-    label: "Inicio",
-    caption: "Portada con identidad propia y acceso claro a lo importante."
+    src: "/focoDashBoard.webp",
+    alt: "Dashboard principal de FocoNauta para control de operativa y finanzas",
+    label: "Dashboard",
+    caption: "Vista general para entender el negocio de un vistazo y decidir más rápido."
   },
   {
-    src: "/parroEventos.webp",
-    alt: "Sección de eventos de ParROCKia",
-    label: "Eventos",
-    caption: "Agenda y próximos eventos presentados de forma rápida y visible."
+    src: "/focoClientes.webp",
+    alt: "Pantalla de clientes de FocoNauta",
+    label: "Clientes",
+    caption: "Gestión de clientes ordenada para no perder contexto ni tiempo entre gestiones."
   },
   {
-    src: "/parroJukeBox.webp",
-    alt: "Función JukeBox dentro de ParROCKia",
-    label: "JukeBox",
-    caption: "Funcionalidad diferencial para reforzar experiencia y personalidad."
+    src: "/focoFacturas.webp",
+    alt: "Pantalla de facturas de FocoNauta",
+    label: "Facturas",
+    caption: "Control de facturación en una interfaz clara y orientada a trabajar sin rodeos."
   },
   {
-    src: "/parroPanel1.webp",
-    alt: "Panel de administración de ParROCKia para gestionar contenido",
-    label: "Panel 1",
-    caption: "Gestión sencilla de contenidos para actualizar la web sin fricción."
+    src: "/focoFacturaDetalle.webp",
+    alt: "Detalle de factura dentro de FocoNauta",
+    label: "Detalle",
+    caption: "Acceso rápido al detalle para revisar, corregir o consultar sin laberintos."
   },
   {
-    src: "/parroPanel2.webp",
-    alt: "Segundo panel de administración de ParROCKia",
-    label: "Panel 2",
-    caption: "Operativa preparada para seguir creciendo sin depender de procesos torpes."
-  },
-  {
-    src: "/parroUbicacion.webp",
-    alt: "Bloque de ubicación e información útil de ParROCKia",
-    label: "Ubicación",
-    caption: "Información útil y localización accesible desde una navegación directa."
+    src: "/focoGastos.webp",
+    alt: "Pantalla de gastos de FocoNauta",
+    label: "Gastos",
+    caption: "Seguimiento de gastos para tener una visión más limpia del día a día financiero."
   }
 ] as const;
 
 const chips = [
   "PWA",
-  "Hostelería",
-  "Eventos",
-  "Merchandising",
-  "Panel admin",
-  "UX"
+  "Facturación",
+  "Clientes",
+  "Gastos",
+  "TypeScript",
+  "Operativa real"
 ];
 
 const valueCards = [
   {
     title: "Qué es",
-    text: "Una solución digital para mostrar mejor el negocio, sus eventos y su propuesta sin perder personalidad."
+    text: "Una app para concentrar clientes, facturas y gastos en una sola experiencia más clara y usable."
   },
   {
     title: "Cómo ayuda",
-    text: "Facilita consulta, gestión y actualización de contenido desde una experiencia más clara y práctica."
+    text: "Reduce pasos en gestiones cotidianas y da contexto rápido para trabajar con menos fricción."
   },
   {
     title: "Qué transmite",
-    text: "Criterio de producto, identidad visual y capacidad para convertir una web en herramienta real de negocio."
+    text: "Criterio de producto, orden visual y capacidad para convertir papeleo en una herramienta útil."
   }
 ];
 
 const fitList = [
-  "Negocios de hostelería con agenda, producto y comunidad.",
-  "Marcas con personalidad que necesitan claridad sin verse genéricas.",
-  "Proyectos que quieren gestionar contenido desde móvil u ordenador con facilidad."
+  "Autónomos que quieren controlar mejor su operativa sin perder media mañana en gestión.",
+  "Pequeños equipos que necesitan clientes, facturas y gastos más ordenados.",
+  "Negocios que quieren menos caos administrativo y más claridad para tomar decisiones."
 ];
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  canonicalPath="/proyectos/parrockia"
+  canonicalPath="/proyectos/foconauta"
   jsonLd={[pageSchema, breadcrumbSchema]}
   bodyClass="text-slate-800"
 >
@@ -150,47 +144,43 @@ const fitList = [
             class="inline-flex min-h-10 items-center rounded-full border border-slate-900 bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
             aria-current="page"
           >
-            ParROCKia
+            FocoNauta
           </span>
         </li>
       </ol>
     </nav>
 
-    <section class="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
+    <section class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
       <div class="max-w-2xl">
         <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
-          Caso publicado
+          Caso privado
         </p>
 
         <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-          ParROCKia
+          FocoNauta
         </h1>
 
         <p class="mt-5 text-lg leading-8 text-slate-600">
-          App y web para una taberna con eventos, merchandising e información útil,
-          pensada para enseñar mejor lo importante y facilitar la gestión del día a día.
+          App para gestionar clientes, facturas y gastos con menos pasos, menos ruido
+          y una operativa mucho más clara para el día a día.
         </p>
 
         <ul
           class="mt-6 flex flex-wrap gap-2"
-          aria-label="Tecnologías y enfoque de ParROCKia"
+          aria-label="Tecnologías y enfoque de FocoNauta"
         >
           {chips.map((item) => (
             <li class="chip">{item}</li>
           ))}
         </ul>
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href="https://tabernaparrockia.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="cta black"
-          >
-            Ver proyecto en vivo
-          </a>
+        <p class="mt-6 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 text-sm leading-7 text-slate-600 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+          Proyecto en fase privada. Esta demo visual enseña el criterio de producto,
+          la estructura y la experiencia de uso sin exponer información sensible ni datos reales.
+        </p>
 
-          <a href="/contratame" class="cta white">
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contratame" class="cta black">
             Quiero algo así
           </a>
 
@@ -203,7 +193,7 @@ const fitList = [
       <ProjectGallery
         slides={slides}
         mode="desktop"
-        ariaLabel="Galería del proyecto ParROCKia"
+        ariaLabel="Galería del proyecto FocoNauta"
       />
     </section>
 
@@ -230,20 +220,19 @@ const fitList = [
 
         <div class="mt-5 space-y-4 text-base leading-8 text-slate-600">
           <p>
-            ParROCKia mezcla identidad, agenda, producto y operativa. La clave aquí
-            no era llenar la pantalla de ruido, sino ordenar la experiencia para que
-            el negocio se entienda rápido y resulte fácil de consultar.
+            FocoNauta nace de una fricción muy común: demasiadas gestiones pequeñas,
+            demasiados cambios de contexto y demasiado tiempo perdido entre facturas,
+            clientes, gastos y tareas administrativas.
           </p>
 
           <p>
-            Además de enseñar mejor la propuesta, el proyecto deja una base útil para
-            publicar eventos, mover merchandising y gestionar contenido sin convertir
-            cada cambio en una mini odisea administrativa.
+            La propuesta es reunir esa operativa en una experiencia más limpia y directa,
+            donde consultar, revisar o registrar algo importante no se convierta en una excursión.
           </p>
 
           <p>
-            Es un buen ejemplo de solución digital para hostelería con personalidad,
-            comunidad y necesidad real de visibilidad continua.
+            Es el tipo de producto que no solo ordena pantallas: ordena el trabajo.
+            Y cuando eso pasa, el negocio gana claridad, velocidad y control.
           </p>
         </div>
       </article>
@@ -270,12 +259,12 @@ const fitList = [
         </p>
 
         <h2 class="mt-3 text-3xl font-extrabold tracking-tight">
-          Si tu negocio necesita una presencia útil y fácil de gestionar, hablemos
+          Si quieres menos fricción en tu gestión diaria, hablemos
         </h2>
 
         <p class="mt-4 max-w-3xl text-base leading-8 text-slate-300">
-          Desde hostelería hasta productos con operativa real: la idea es construir
-          una base clara, usable y preparada para crecer sin liarse la guitarra.
+          Desde autónomos hasta pequeños negocios con operativa real: la meta es
+          trabajar con más orden, menos clics inútiles y una base preparada para crecer.
         </p>
 
         <div class="mt-6 flex flex-wrap gap-3">

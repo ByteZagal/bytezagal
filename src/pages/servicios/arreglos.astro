@@ -1,62 +1,275 @@
 ---
-import "../../styles/globals.css";
-import Seo from "../../components/Seo.astro";
-import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import FaqService from "../../components/FaqService.astro";
-
+import { MessageCircle, Wrench, Gauge, ShieldCheck } from "lucide-astro";
 import { org, website, localBusiness } from "../../seo/structured";
 
-const title = "Arreglo y rescate de webs en Vitoria-Gasteiz — Auditoría + fixes";
+const title = "Rescate web y arreglos de software | ByteZagal";
 const description =
-  "Auditoría, fixes críticos y mejoras de webs en Vitoria-Gasteiz. Planes de rescate y soporte continuo.";
+  "Auditoría técnica, fixes críticos, rendimiento, accesibilidad y estabilización para webs o aplicaciones lentas, rotas o mal planteadas.";
+
+const whatsappBase = "https://wa.me/34650850163?text=";
 
 const planes = [
-  { name: "Auditoría Exprés", price: "125 €", feat: ["Revisión de rendimiento/A11y/SEO", "Informe de riesgos y quick-wins"] },
-  { name: "Fix Pack", price: "290 €", feat: ["Hasta 3 incidencias mayores", "Mejoras de rendimiento (CWV)", "Endurecimiento seguridad base"] },
-  { name: "Rescate", price: "a medida", feat: ["Refactor por módulos", "Plan de migración", "Soporte continuo"] },
-];
+  {
+    name: "Auditoría exprés",
+    price: "Desde 290 €",
+    feat: [
+      "Revisión de rendimiento, accesibilidad y SEO técnico",
+      "Diagnóstico de puntos frágiles",
+      "Informe de quick wins y prioridades"
+    ],
+    whatsappLabel: "la auditoría exprés de rescate web"
+  },
+  {
+    name: "Fix pack",
+    price: "Desde 590 €",
+    feat: [
+      "Corrección de incidencias importantes",
+      "Mejoras de rendimiento y estabilidad",
+      "Endurecimiento base y limpieza técnica"
+    ],
+    whatsappLabel: "el fix pack de rescate web"
+  },
+  {
+    name: "Rescate a medida",
+    price: "Desde 1.190 €",
+    feat: [
+      "Refactor por módulos con bajo riesgo",
+      "Plan de migración o saneamiento progresivo",
+      "Base preparada para crecer sin romper lo valioso"
+    ],
+    whatsappLabel: "un rescate web a medida"
+  }
+] as const;
 
 const faqs = [
-  { question: "¿Cuánto cuesta arreglar mi web?", answer: "Auditoría exprés desde 125 €, rescates completos a medida." },
-  { question: "¿Qué tipo de problemas podéis solucionar?", answer: "Errores críticos, rendimiento, accesibilidad, seguridad y caídas." },
-  { question: "¿En qué plazos hacéis los arreglos?", answer: "2–3 días para fixes simples, más tiempo para rescates complejos." },
-];
----
-<html lang="es">
-  <head>
-    <Seo title={title} description={description} canonicalPath="/servicios/arreglos" jsonLd={[org, website, localBusiness]} />
-  </head>
-  <body class="bg-orbital text-slate-800">
-    <main class="mx-auto max-w-6xl px-4 py-16">
-      <h1 class="text-4xl font-extrabold">Arreglos y rescate de webs en Vitoria-Gasteiz</h1>
-      <p class="mt-2 text-slate-600">Rescatamos, optimizamos y dejamos estable tu sistema, con foco en rendimiento, accesibilidad y SEO local.</p>
+  {
+    question: "¿Cuánto cuesta arreglar una web?",
+    answer:
+      "Depende del estado real del proyecto. Como referencia pública, la entrada está desde 290 €, pero el alcance final cambia según deuda técnica, urgencia y riesgo."
+  },
+  {
+    question: "¿Qué tipo de problemas puedes solucionar?",
+    answer:
+      "Errores críticos, lentitud, estructura mal planteada, problemas de accesibilidad, SEO técnico flojo, integraciones rotas y bases difíciles de mantener."
+  },
+  {
+    question: "¿Siempre hace falta rehacer la web?",
+    answer:
+      "No. Muchas veces es mejor estabilizar primero y tocar solo lo que aporta impacto. La decisión depende de riesgo, coste y estado del proyecto."
+  }
+] as const;
 
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
-        {planes.map((p) => (
-          <article class="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow hover:-translate-y-1 hover:shadow-xl transition">
-            <h2 class="text-xl font-semibold">{p.name}</h2>
-            <p class="mt-2 text-3xl font-extrabold">{p.price}</p>
-            <ul class="mt-4 space-y-2 text-slate-700">{p.feat.map((f) => <li>• {f}</li>)}</ul>
-            <div class="mt-6 flex flex-col gap-2">
-              <a href={`https://wa.me/34650850163?text=Hola,%20quiero%20saber%20más%20sobre%20${encodeURIComponent(p.name)}%20(Arreglos)`} target="_blank" rel="noopener noreferrer" class="inline-block bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition hover:bg-green-800 active:scale-95 text-center focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-green-700">Escribir por WhatsApp</a>
-              <a href="/contratame" class="inline-block cta white">Ver otros paquetes</a>
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://bytezagal.es/#webpage-arreglos",
+  url: "https://bytezagal.es/servicios/arreglos",
+  name: title,
+  description,
+  inLanguage: "es-ES",
+  isPartOf: { "@id": "https://bytezagal.es/#website" },
+  about: { "@id": "https://bytezagal.es/#professional-service" }
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Rescate web y arreglos de software",
+  serviceType: "Rescate web",
+  areaServed: ["Zaragoza", "España"],
+  provider: { "@id": "https://bytezagal.es/#professional-service" },
+  url: "https://bytezagal.es/servicios/arreglos",
+  description
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Inicio",
+      item: "https://bytezagal.es/"
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Servicios",
+      item: "https://bytezagal.es/contratame"
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Rescate web y arreglos",
+      item: "https://bytezagal.es/servicios/arreglos"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer
+    }
+  }))
+};
+
+const relatedProjects = [
+  {
+    title: "ParROCKia",
+    description: "Caso real de restructuración digital para hostelería.",
+    href: "/proyectos/parrockia"
+  },
+  {
+    title: "TxoriOn",
+    description: "Producto publicado con enfoque de claridad, móvil y utilidad real.",
+    href: "/proyectos/txorion"
+  }
+] as const;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/servicios/arreglos"
+  image="/bytezagal-og.home.webp"
+  jsonLd={[org, website, localBusiness, pageSchema, serviceSchema, breadcrumbSchema, faqSchema]}
+  bodyClass="text-slate-800"
+>
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <header class="mx-auto max-w-3xl">
+      <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+        Rescate web
+      </p>
+
+      <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        Rescate web y arreglos con criterio técnico
+      </h1>
+
+      <p class="mt-5 text-lg leading-8 text-slate-600">
+        Para webs lentas, rotas o mal planteadas que necesitan orden, estabilidad
+        y una base técnica seria antes de seguir creciendo. Trabajo desde Zaragoza
+        y también en remoto para toda España.
+      </p>
+    </header>
+
+    <section class="mt-10 grid gap-6 md:grid-cols-3">
+      {planes.map((plan) => (
+        <article class="rounded-[2rem] border border-slate-200 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur">
+          <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+            {plan.name}
+          </h2>
+
+          <p class="mt-4 text-3xl font-extrabold text-slate-900">
+            {plan.price}
+          </p>
+
+          <ul class="mt-5 space-y-3 text-sm leading-6 text-slate-600">
+            {plan.feat.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+
+          <div class="mt-6 flex flex-col gap-3">
+            <a
+              href={`${whatsappBase}${encodeURIComponent(`Hola ByteZagal, quiero hablar sobre ${plan.whatsappLabel}.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-700 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2"
+            >
+              <MessageCircle class="h-4 w-4" />
+              Escribir por WhatsApp
+            </a>
+
+            <a href="/contratame" class="cta white text-center">
+              Ver otras vías
+            </a>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section class="mt-14 rounded-[2rem] border border-slate-200 bg-white/95 p-7 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur md:p-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">
+          Qué resuelvo aquí
+        </p>
+
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
+          No todo proyecto roto necesita demolición
+        </h2>
+
+        <p class="mt-4 text-base leading-8 text-slate-600">
+          Primero reviso qué está fallando de verdad. Después priorizo impacto,
+          reduzco riesgo y propongo una vía sensata: parche, refactor o rescate por fases.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+          <Wrench class="h-6 w-6 text-slate-900" />
+          <h3 class="mt-4 text-xl font-bold tracking-tight text-slate-900">
+            Incidencias críticas
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Errores, caídas, integraciones rotas y comportamientos raros que ya están costando negocio.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+          <Gauge class="h-6 w-6 text-slate-900" />
+          <h3 class="mt-4 text-xl font-bold tracking-tight text-slate-900">
+            Rendimiento y UX
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Web lenta, navegación torpe o experiencia que hace perder paciencia y conversiones.
+          </p>
+        </article>
+
+        <article class="rounded-[1.5rem] border border-slate-200 bg-slate-50/90 p-5">
+          <ShieldCheck class="h-6 w-6 text-slate-900" />
+          <h3 class="mt-4 text-xl font-bold tracking-tight text-slate-900">
+            Base técnica
+          </h3>
+          <p class="mt-3 leading-7 text-slate-600">
+            Accesibilidad, estructura, SEO técnico y una base más estable para no seguir parcheando eternamente.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <FaqService faqs={[...faqs]} />
+
+    <section class="mt-16">
+      <h2 class="text-2xl font-extrabold tracking-tight text-slate-900">
+        Casos relacionados
+      </h2>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        {relatedProjects.map((project) => (
+          <article class="rounded-[1.5rem] border border-slate-200 bg-white/95 p-5 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+            <h3 class="text-xl font-bold text-slate-900">{project.title}</h3>
+            <p class="mt-3 leading-7 text-slate-600">{project.description}</p>
+            <div class="mt-5">
+              <a href={project.href} class="cta white">
+                Ver proyecto
+              </a>
             </div>
           </article>
         ))}
       </div>
+    </section>
 
-      <FaqService faqs={faqs} />
-
-      <div class="mt-16">
-        <h2 class="text-2xl font-bold">Proyectos relacionados en Gasteiz</h2>
-        <ul class="mt-4 space-y-2 text-slate-700">
-          <li><a href="/proyectos/parrockia" class="underline">ParROCKia — Web local rescatada</a></li>
-          <li><a href="/proyectos/txorion" class="underline">TxoriON — PWA cívica escalable</a></li>
-        </ul>
-      </div>
-
-      <div class="mt-12 text-center"><a href="/" class="cta white">← Volver al inicio</a></div>
-    </main>
-    <Footer />
-  </body>
-</html>
+    <div class="mt-12 text-center">
+      <a href="/" class="cta white">← Volver al inicio</a>
+    </div>
+  </section>
+</BaseLayout>
