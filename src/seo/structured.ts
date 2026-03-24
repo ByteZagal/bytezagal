@@ -1,6 +1,6 @@
 // src/seo/structured.ts
 
-const SITE_URL = "https://bytezagal.es";
+const SITE_URL = "https://www.bytezagal.es";
 const BRAND = "ByteZagal";
 const LOGO_URL = `${SITE_URL}/icon.png`;
 const EMAIL = "contacto@bytezagal.es";

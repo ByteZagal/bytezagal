@@ -17,7 +17,7 @@ const {
   noindex = false
 } = Astro.props;
 
-const siteUrl = Astro.site ?? new URL("https://bytezagal.es");
+const siteUrl = Astro.site ?? new URL("https://www.bytezagal.es");
 const canonical = new URL(canonicalPath, siteUrl);
 const socialImage = new URL(image, siteUrl).href;
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;

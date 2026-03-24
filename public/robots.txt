@@ -3,4 +3,4 @@ Allow: /
 
 Disallow: /login
 
-Sitemap: https://bytezagal.es/sitemap-index.xml
+Sitemap: https://www.bytezagal.es/sitemap-index.xml

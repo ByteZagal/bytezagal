@@ -12,13 +12,13 @@ const projects = featuredProjects;
 const pageSchema = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "@id": "https://bytezagal.es/#collection-proyectos",
-  url: "https://bytezagal.es/proyectos",
+  "@id": "https://www.bytezagal.es/#collection-proyectos",
+  url: "https://www.bytezagal.es/proyectos",
   name: title,
   description,
   inLanguage: "es-ES",
-  isPartOf: { "@id": "https://bytezagal.es/#website" },
-  about: { "@id": "https://bytezagal.es/#professional-service" }
+  isPartOf: { "@id": "https://www.bytezagal.es/#website" },
+  about: { "@id": "https://www.bytezagal.es/#professional-service" }
 };
 
 const breadcrumbSchema = {
@@ -29,13 +29,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Inicio",
-      item: "https://bytezagal.es/"
+      item: "https://www.bytezagal.es/"
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Proyectos",
-      item: "https://bytezagal.es/proyectos"
+      item: "https://www.bytezagal.es/proyectos"
     }
   ]
 };
@@ -46,7 +46,7 @@ const itemListSchema = {
   itemListElement: projects.map((project, index) => ({
     "@type": "ListItem",
     position: index + 1,
-    url: `https://bytezagal.es${project.detailHref}`,
+    url: `https://www.bytezagal.es${project.detailHref}`,
     name: project.title,
     description: project.description
   }))
