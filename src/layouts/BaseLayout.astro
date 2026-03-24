@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import { org, website, localBusiness } from "../seo/structured";
 import "../styles/globals.css";
 import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from '@vercel/speed-insights/astro'
 
 interface Props {
   title: string;
@@ -66,6 +67,9 @@ const jsonLdEffective = jsonLd ?? [org, website, localBusiness];
     </main>
 
     <Footer />
+
+    <Analytics />
+    <SpeedInsights />
 
     <script is:inline>
       (function () {
